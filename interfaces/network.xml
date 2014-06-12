@@ -1,0 +1,81 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  <tp:enum name="NETWORK_TYPE" type="s">
+    <tp:docstring>Network types.</tp:docstring>
+    <tp:enumvalue suffix="UNKNOWN" value="unknown"/>
+    <tp:enumvalue suffix="WIRED" value="wired"/>
+    <tp:enumvalue suffix="WIFI" value="wifi"/>
+    <tp:enumvalue suffix="MODEM" value="modem"/>
+    <tp:enumvalue suffix="INTERNAL" value="internal"/>
+    <tp:enumvalue suffix="ANY" value="any"/>
+    <tp:enumvalue suffix="VPN" value="vpn"/>
+  </tp:enum>
+
+  <tp:enum name="CONNECTION_TYPE" type="s">
+    <tp:docstring>Connection types.</tp:docstring>
+    <tp:enumvalue suffix="UNKNOWN" value="unknown"/>
+    <tp:enumvalue suffix="SHARED" value="shared"/>
+    <tp:enumvalue suffix="BRIDGED" value="bridged"/>
+  </tp:enum>
+
+  <tp:enum name="ACTIVE_AP" type="s">
+    <tp:docstring>Access point details used in extra_info method.</tp:docstring>
+    <tp:enumvalue suffix="SSID" value="ssid"/>
+    <tp:enumvalue suffix="MODE" value="mode"/>
+    <tp:enumvalue suffix="FREQUENCY" value="frequency"/>
+    <tp:enumvalue suffix="STRENGTH" value="strength"/>
+    <tp:enumvalue suffix="HWADDRESS" value="hwaddress"/>
+    <tp:enumvalue suffix="MAXBITRATE" value="maxbitrate"/>
+    <tp:enumvalue suffix="WPAFLAGS" value="wpaflags"/>
+    <tp:enumvalue suffix="RSNFLAGS" value="rsnflags"/>
+  </tp:enum>
+
+
+  <interface name="com.citrix.xenclient.network">
+
+    <method name="is_configured">
+      <tp:docstring>Returns true if the network is setup.</tp:docstring>
+      <arg type="b" name="is_configured" direction="out" />
+    </method>
+
+    <method name="configure">
+      <tp:docstring>Configure a shared/bridged network.</tp:docstring>
+      <arg type="s" name="subnet" direction="in" />
+    </method>
+
+    <method name="join">
+      <tp:docstring>Join the VIF to this network.</tp:docstring>
+      <arg type="s" name="vif" direction="in" />
+    </method>
+
+    <method name="leave">
+      <tp:docstring>Remove the VIF from this network.</tp:docstring>
+      <arg type="s" name="vif" direction="in" />
+    </method>
+
+  </interface>
+
+  <interface name="com.citrix.xenclient.network.config">
+    <property name="name" type="s" access="read"/>
+    <property name="bridge" type="s" access="read"/>
+    <property name="backend-uuid" type="s" access="read"/>
+    <property name="active" type="b" access="read"/>
+    <property name="interface" type="s" access="read"/>
+    <property name="mac-address" type="s" access="readwrite"/>
+    <property name="driver" type="s" access="read"/>
+    <property name="type" type="s" access="read"/>
+    <property name="connection" type="s" access="read"/>
+    <property name="nm-state" type="u" access="read"/>
+    <property name="extra-info" type="a{ss}" access="read"/>
+    <property name="label" type="s" access="readwrite"/>
+    <property name="nat-prefix" type="s" access="readwrite"/>
+    <property name="nm-managed" type="b" access="read"/>
+  </interface>
+
+  <interface name="com.citrix.xenclient.network.notify">
+    <signal name="state_changed">
+        <tp:docstring>Notifies daemon of network state changes.</tp:docstring>
+        <arg name="state" type="u"/>
+    </signal>
+  </interface>
+</node>

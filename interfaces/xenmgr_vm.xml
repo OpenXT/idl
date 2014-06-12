@@ -1,0 +1,618 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/vm/uuid" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+
+  <interface name="com.citrix.xenclient.xenmgr.vm">
+    <tp:docstring>VM interface. Property access goes through policy checks.</tp:docstring>
+    <property name="state" type="s" access="read"/>
+    <property name="acpi-state" type="i" access="read"/>
+    <property name="domid" type="i" access="read"/>
+    <property name="type" type="s" access="readwrite"/>
+    <property name="name" type="s" access="readwrite"/>
+    <property name="description" type="s" access="readwrite"/>
+    <property name="uuid" type="s" access="read"/>
+    <property name="seamless-id" type="s" access="readwrite"><tp:docstring>Handle seamless uses to reference the VMs.</tp:docstring></property>
+    <property name="slot" type="i" access="readwrite"/>
+    <property name="pv-addons" type="b" access="readwrite"/>
+    <property name="pv-addons-version" type="s" access="readwrite"/>
+    <property name="start-on-boot" type="b" access="readwrite"/>
+    <property name="start-from-suspend-image" type="s" access="readwrite"><tp:docstring>Start VM from suspend image file, if it exists.</tp:docstring></property>
+    <property name="time-offset" type="i" access="readwrite"/>
+    <property name="crypto-user" type="s" access="readwrite"/>
+    <property name="auto-s3-wake" type="b" access="readwrite"/>
+    <property name="os" type="s" access="readwrite"/>
+
+    <property name="image-path" type="s" access="readwrite"/>
+    <property name="wired-network" type="s" access="readwrite"/>
+    <property name="wireless-network" type="s" access="readwrite"/>
+    <property name="gpu" type="s" access="readwrite"/>
+    <property name="cd" type="s" access="readwrite"/>
+    <property name="mac" type="s" access="read"/>
+    <property name="amt-pt" type="b" access="readwrite"/>
+    <property name="portica-enabled" type="i" access="read"/>
+    <property name="portica-installed" type="b" access="read"/>
+    <property name="seamless-traffic" type="b" access="readwrite"/>
+    <property name="autostart-pending" type="b" access="read"/>
+    <property name="hibernated" type="b" access="read"/>
+    <property name="memory-static-max" type="i" access="readwrite"/>
+    <property name="memory-target" type="i" access="read"/>
+    <property name="memory-min" type="i" access="readwrite"/>
+    <property name="memory" type="i" access="readwrite"/>
+    <property name="hidden-in-switcher" type="b" access="readwrite"/>
+    <property name="hidden-in-ui" type="b" access="readwrite"/>
+
+    <property name="notify" type="s" access="readwrite"/>
+    <property name="hvm" type="b" access="readwrite"/>
+    <property name="pae" type="b" access="readwrite"/>
+    <property name="apic" type="b" access="readwrite"/>
+    <property name="viridian" type="b" access="readwrite"/>
+    <property name="hap" type="b" access="readwrite"/>
+    <property name="nx" type="b" access="readwrite"/>
+    <property name="cpuid" type="s" access="readwrite"><tp:docstring>Used to set/unset certain bits in response to CPUID instruction.</tp:docstring></property>
+    <property name="xci-cpuid-signature" type="b" access="readwrite"><tp:docstring>Advertise to guest as XenClient flavour of Xen.</tp:docstring></property>
+    <property name="sound" type="s" access="readwrite"/>
+    <property name="display" type="s" access="readwrite"/>
+    <property name="boot" type="s" access="readwrite"/>
+    <property name="cmd-line" type="s" access="readwrite"/>
+    <property name="kernel-extract" type="s" access="readwrite">
+      <tp:docstring>[disk_number,partition_number:]/path/to/kernel
+	Location of kernel image within the VM's disk(s). Examples:
+	  /boot/vmlinuz (/boot/vmlinuz in unpartitioned disk 0)
+	  2:/boot/vmlinuz (/boot/vmlinuz in unpartitioned disk 2)
+	  0,1:/boot/vmlinuz (/boot/vmlinuz in 1st partitin of disk 0)
+      </tp:docstring>
+    </property>
+    <property name="kernel" type="s" access="readwrite"/>
+    <property name="initrd-extract" type="s" access="readwrite">
+      <tp:docstring>[disk_number,partition_number:]/path/to/initrd
+	Location of initrd image within the VM's disk(s). Examples:
+	  /boot/inird (/boot/inird in unpartitioned disk 0)
+	  2:/boot/inird (/boot/inird in unpartitioned disk 2)
+	  0,1:/boot/inird (/boot/inird in 1st partitin of disk 0)
+      </tp:docstring>
+    </property>
+    <property name="initrd" type="s" access="readwrite"/>
+    <property name="acpi-pt" type="b" access="readwrite">
+      <tp:docstring>Enable OEM windows install by exposing the ACPI SLIC table.</tp:docstring>
+    </property>
+    <property name="smbios-pt" type="b" access="readwrite"/>
+    <property name="vcpus" type="i" access="readwrite"/>
+    <property name="cores-per-socket" type="i" access="readwrite"/>
+    <property name="videoram" type="i" access="readwrite"/>
+    <property name="passthrough-mmio" type="s" access="readwrite"/>
+    <property name="passthrough-io" type="s" access="readwrite"/>
+    <property name="flask-label" type="s" access="readwrite"/>
+    <property name="qemu-dm-path" type="s" access="readwrite"/>
+    <property name="qemu-dm-timeout" type="i" access="readwrite">
+      <tp:docstring>Timeout (in seconds) to wait for qemu response during qemu startup.</tp:docstring>
+    </property>
+    <property name="start-on-boot-priority" type="i" access="readwrite">
+      <tp:docstring>Control priority of start-on-boot VMs, higher priority means earlier start. Defaults to 0 for new VMs.</tp:docstring>
+    </property>
+
+    <property name="shutdown-priority" type="i" access="readwrite">
+      <tp:docstring>Controls the order of VM shutdown, higher priority means earlier shutdown. For new VMs defaults to 0, or -10 in case of PVM. VMs with the same priority are shutdown in parallel.</tp:docstring>
+    </property>
+
+    <property name="keep-alive" type="b" access="readwrite">
+      <tp:docstring>Automatically restart this VM if it shuts down or crashes.</tp:docstring>
+    </property>
+    
+    <property name="provides-network-backend" type="b" access="readwrite">
+      <tp:docstring>Whether this domain is a networking backend and handles the physical NIC devices.</tp:docstring>
+    </property>
+
+    <property name="provides-default-network-backend" type="b" access="readwrite">
+      <tp:docstring>Whether this domain is the primary networking backend and handles the physical NIC devices.</tp:docstring>
+    </property>
+
+    <property name="provides-graphics-fallback" type="b" access="readwrite">
+      <tp:docstring>System will keep this VM on screen when no better candidate is present.</tp:docstring>
+    </property>
+
+    <property name="measured" type="b" access="read">
+      <tp:docstring>If the VM is measured, the hash of the disk image is checked before it is allowed to start.</tp:docstring>
+    </property>
+
+    <property name="extra-xenvm" type="s" access="readwrite">
+      <tp:docstring>Extra xenvm arguments, separated by semicolons.</tp:docstring>
+    </property>
+
+    <property name="extra-hvm" type="s" access="readwrite">
+      <tp:docstring>Extra ioemu arguments, separated by semicolons.</tp:docstring>
+    </property>
+
+    <property name="crypto-key-dirs" type="s" access="readwrite">
+      <tp:docstring>Comma-separated list of disk encryption keys directories.</tp:docstring>
+    </property>
+
+    <property name="dependencies" type="ao" access="read">
+      <tp:docstring>VMs that are required to be running before starting this one.</tp:docstring>
+    </property>
+
+    <property name="track-dependencies" type="b" access="readwrite">
+      <tp:docstring>If true, automatically start required VMs.</tp:docstring>
+    </property>
+
+    <property name="seamless-mouse-left" type="i" access="read">
+      <tp:docstring>Where to move mouse when it goes over the left edge of a surface.</tp:docstring>
+    </property>
+
+    <property name="seamless-mouse-right" type="i" access="read">
+      <tp:docstring>Where to move mouse when it goes over right edge of a surface.</tp:docstring>
+    </property>
+
+    <property name="control-platform-power-state" type="b" access="readwrite">
+      <tp:docstring>If set, the entire platform will go into S3/S4/S5 when this VM goes into S3/S4/S5.</tp:docstring>
+    </property>
+
+    <property name="oem-acpi-features" type="b" access="readwrite">
+      <tp:docstring>Enables access to additional OEM acpi features.</tp:docstring>
+    </property>
+
+    <property name="stubdom" type="b" access="readwrite"> <tp:docstring>Use stub domain to hide the device emulator.</tp:docstring> </property>
+    <property name="usb-enabled" type="b" access="readwrite"><tp:docstring>Enables PV USB support.</tp:docstring></property>
+    <property name="usb-control" type="b" access="readwrite"><tp:docstring>Enables the VM to communicate with the USB daemon.</tp:docstring></property>
+    <property name="usb-grab-devices" type="b" access="readwrite"><tp:docstring>Automatically assign all available USB devices upon this VM start.</tp:docstring></property>
+    <property name="greedy-pciback-bind" type="b" access="readwrite"><tp:docstring>Bind passthrough pci devices to pciback early, to prevent their use by other VMs.</tp:docstring></property>
+
+    <property name="policy-modify-vm-settings" type="b" access="readwrite"><tp:docstring>Allow modification of VM settings.</tp:docstring></property>
+    <property name="policy-cd-access" type="b" access="readwrite"><tp:docstring>Allow VM to read from CD.</tp:docstring></property>
+    <property name="policy-cd-recording" type="b" access="readwrite"><tp:docstring>Allow VM to burn CDs.</tp:docstring></property>
+    <property name="policy-audio-access" type="b" access="readwrite"><tp:docstring>Allow VM to playback audio.</tp:docstring></property>
+    <property name="policy-audio-recording" type="b" access="readwrite"><tp:docstring>Allow VM to record audio.</tp:docstring></property>
+    <property name="policy-wired-networking" type="b" access="readwrite"><tp:docstring>Allow VM to access wired network.</tp:docstring></property>
+    <property name="policy-wireless-networking" type="b" access="readwrite"><tp:docstring>Allow VM to access wireless network.</tp:docstring></property>
+    <property name="policy-print-screen" type="b" access="readwrite"><tp:docstring>Allow VM to use the PrintScreen key.</tp:docstring></property>
+
+    <property name="run-post-create" type="s" access="readwrite"><tp:docstring>Command to run post VM creation.</tp:docstring></property>
+    <property name="run-pre-delete" type="s" access="readwrite"><tp:docstring>Command to run pre VM deletion.</tp:docstring></property>
+    <property name="run-pre-boot" type="s" access="readwrite"><tp:docstring>Command to run synchronously pre VM boot.</tp:docstring></property>
+    <property name="run-insteadof-start" type="s" access="readwrite"><tp:docstring>Command to run instead of VM start</tp:docstring></property>
+
+    <property name="run-on-state-change" type="s" access="readwrite"><tp:docstring>Command to run on VM state change.</tp:docstring></property>
+    <property name="run-on-acpi-state-change" type="s" access="readwrite"><tp:docstring>Command to run on VM acpi state change.</tp:docstring></property>
+
+    <property name="domstore-read-access" type="b" access="readwrite"><tp:docstring>Configure domain read access to domstore.</tp:docstring></property>
+    <property name="domstore-write-access" type="b" access="readwrite"><tp:docstring>Configure domain write access to domstore.</tp:docstring></property>
+
+    <property name="show-switcher" type="b" access="readwrite"><tp:docstring>Hide/show switcher bar inside VM.</tp:docstring></property>
+    <property name="native-experience" type="b" access="readwrite"><tp:docstring>Toggle 'native experience' on/onff.</tp:docstring></property>
+    <property name="wireless-control" type="b" access="readwrite"><tp:docstring>Give VM control over wireless stack.</tp:docstring></property>
+
+    <property name="s3-mode" type="s" access="readwrite"><tp:docstring>Configure how the VM is put to sleep.</tp:docstring></property>
+    <property name="s4-mode" type="s" access="readwrite"><tp:docstring>Configure how the VM is hibernated.</tp:docstring></property>
+    <property name="vsnd" type="b" access="readwrite"><tp:docstring>Use PV audio device.</tp:docstring></property>
+    <property name="vkbd" type="b" access="readwrite"><tp:docstring>Use PV keyboard and mouse.</tp:docstring></property>
+    <property name="vfb" type="b" access="readwrite"><tp:docstring>Use PV framebuffer.</tp:docstring></property>
+    <property name="v4v" type="b" access="readwrite"><tp:docstring>Use V4V.</tp:docstring></property>
+    <property name="private-space" type="i" access="read"><tp:docstring>Private space used (in MiB).</tp:docstring></property>
+    <property name="realm" type="s" access="readwrite"><tp:docstring>Realm ID.</tp:docstring></property>
+    <property name="sync-uuid" type="s" access="readwrite"><tp:docstring>VM UUID in synchroniser space.</tp:docstring></property>
+    <property name="icbinn-path" type="s" access="readwrite"><tp:docstring>Filesystem path exported to the VM via icbinn server.</tp:docstring></property>
+    <property name="ovf-transport-iso" type="b" access="readwrite"><tp:docstring>Transport of OVF configuration via iso enabled yes/no.</tp:docstring></property>
+    <property name="download-progress" type="i" access="readwrite"><tp:docstring>VM download progress.</tp:docstring></property>
+    <property name="ready" type="b" access="readwrite"><tp:docstring>Is VM ready for use?</tp:docstring></property>
+    <property name="restrict-display-depth" type="b" access="readwrite"><tp:docstring>Restrict available display depths. Currently required by emulated VGA in Windows 8.</tp:docstring></property>
+    <property name="restrict-display-res" type="b" access="readwrite"><tp:docstring>Restrict available display resolutions.</tp:docstring></property>   
+    <property name="preserve-on-reboot" type="b" access="readwrite"><tp:docstring>After reboot, keep the vm in rebooted state instead of automatically restarting it</tp:docstring></property>
+    <property name="boot-sentinel" type="s" access="readwrite"><tp:docstring>Name of xenstore node to wait on before completing vm startup from toolstack PoV. Useful if VM exports services which need to be immediately usable by other vms</tp:docstring></property>
+    <property name="hpet" type="b" access="readwrite"><tp:docstring>HPET support</tp:docstring></property>
+    <property name="timer-mode" type="i" access="readwrite"><tp:docstring>Domain timer mode</tp:docstring></property>
+    <property name="nestedhvm" type="b" access="readwrite"><tp:docstring>Enable nested virtualization</tp:docstring></property>
+    <property name="serial" type="s" access="readwrite"><tp:docstring>Serial port specification</tp:docstring></property>
+
+    <method name="get_db_key">
+      <tp:docstring>Get the value of a VM db key.</tp:docstring>
+      <arg name="key" type="s" direction="in"/>
+      <arg name="value" type="s" direction="out"/>
+    </method>
+
+    <method name="set_db_key">
+      <tp:docstring>Set the value of a VM db key.</tp:docstring>
+      <arg name="key" type="s" direction="in"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+
+    <method name="get_domstore_key">
+      <tp:docstring>Get the value of a VM domstore (domain accessible disk-based private storage) key.</tp:docstring>
+      <arg name="key" type="s" direction="in"/>
+      <arg name="value" type="s" direction="out"/>
+    </method>
+
+    <method name="set_domstore_key">
+      <tp:docstring>Set the value of a VM domstore (domain accessible disk-based private storage) key.</tp:docstring>
+      <arg name="key" type="s" direction="in"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+
+    <method name="add_disk">
+      <tp:docstring>Add a new disk to VM.</tp:docstring>
+      <arg name="path" type="o" direction="out"/>
+    </method>
+
+    <method name="list_disks">
+      <tp:docstring>List the disk objects attached to this VM.</tp:docstring>
+      <arg name="" type="ao" direction="out"/>
+    </method>
+
+    <method name="add_nic">
+      <tp:docstring>Add a new NIC to the VM.</tp:docstring>
+      <arg name="path" type="o" direction="out"/>
+    </method>
+
+    <method name="list_nics">
+      <tp:docstring>List the NIC objects attached to the VM.</tp:docstring>
+      <arg name="" type="ao" direction="out"/>
+    </method>
+
+    <method name="delete">
+      <tp:docstring>Remove a VM.</tp:docstring>
+    </method>
+
+    <method name="switch">
+      <tp:docstring>Switch to a VM.</tp:docstring>
+    </method>
+
+    <method name="read_icon">
+      <tp:docstring>Read a byte array representing the VM icon image.</tp:docstring>
+      <arg name="bytes" type="ay" direction="out"/>
+    </method>
+
+    <method name="start">
+      <tp:docstring>Start the VM.</tp:docstring>
+    </method>
+
+    <method name="start_internal">
+      <tp:docstring>Start the VM, for internal use (bypass start hook)</tp:docstring>
+    </method>
+
+    <method name="reboot">
+      <tp:docstring>Reboot the VM.</tp:docstring>
+    </method>
+
+    <method name="shutdown">
+      <tp:docstring>Shutdown the VM.</tp:docstring>
+    </method>
+
+    <method name="destroy">
+      <tp:docstring>Force shutdown the VM.</tp:docstring>
+    </method>
+
+    <method name="sleep">
+      <tp:docstring>s3 the VM.</tp:docstring>
+    </method>
+
+    <method name="hibernate">
+      <tp:docstring>s4 the VM.</tp:docstring>
+    </method>
+
+    <method name="resume">
+      <tp:docstring>Wake the VM from s3.</tp:docstring>
+    </method>
+
+    <method name="pause">
+      <tp:docstring>Pause VM execution</tp:docstring>
+    </method>
+
+    <method name="unpause">
+      <tp:docstring>Resume VM execution from paused state</tp:docstring>
+    </method>
+
+    <method name="suspend_to_file">
+      <tp:docstring>Suspend the  VM to disk.</tp:docstring>
+      <arg name="file" type="s" direction="in"/>
+    </method>
+
+    <method name="resume_from_file">
+      <tp:docstring>Resume the VM from a suspended disk image.</tp:docstring>
+      <arg name="file" type="s" direction="in"/>
+    </method>
+
+    <method name="create_child_service_vm">
+      <tp:docstring>Create a subordinate Service VM.</tp:docstring>
+      <arg name="template" type="s" direction="in"/>
+      <arg name="path" type="o" direction="out"/>
+    </method>
+
+    <method name="list_v4v_firewall_rules"> <arg name="rules" type="as" direction="out"/> </method>
+    <method name="add_v4v_firewall_rule"> <arg name="rule" type="s" direction="in"/> </method>
+    <method name="delete_v4v_firewall_rule"> <arg name="rule" type="s" direction="in"/> </method>
+
+    <method name="add_net_firewall_rule">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="direction" type="s" direction="in"/>
+      <arg name="remoteip" type="s" direction="in"/>
+      <arg name="extra" type="s" direction="in"/>
+    </method>
+    <method name="list_net_firewall_rules">
+      <arg name="rules" type="aa{ss}" direction="out"/>
+    </method>
+    <method name="delete_net_firewall_rule">
+      <arg name="id" type="i" direction="in"/>
+    </method>
+  </interface>
+
+  <interface name="com.citrix.xenclient.xenmgr.vm.unrestricted">
+    <tp:docstring>Allows unrestricted access to VM properties (without policy checks) so daemons in the control domain (dom0) can easily change settings.</tp:docstring>
+
+    <property name="state" type="s" access="read"/>
+    <property name="acpi-state" type="i" access="read"/>
+    <property name="domid" type="i" access="read"/>
+    <property name="type" type="s" access="readwrite"/>
+    <property name="name" type="s" access="readwrite"/>
+    <property name="description" type="s" access="readwrite"/>
+    <property name="uuid" type="s" access="read"/>
+    <property name="seamless-id" type="s" access="readwrite"><tp:docstring>Handle seamless uses to reference the VMs.</tp:docstring></property>
+    <property name="slot" type="i" access="readwrite"/>
+    <property name="pv-addons" type="b" access="readwrite"/>
+    <property name="pv-addons-version" type="s" access="readwrite"/>
+    <property name="start-on-boot" type="b" access="readwrite"/>
+    <property name="start-from-suspend-image" type="s" access="readwrite"><tp:docstring>Start the VM from the suspend image file, if it exists.</tp:docstring></property>
+    <property name="time-offset" type="i" access="readwrite"/>
+    <property name="crypto-user" type="s" access="readwrite"/>
+    <property name="auto-s3-wake" type="b" access="readwrite"/>
+    <property name="os" type="s" access="readwrite"/>
+
+    <property name="image-path" type="s" access="readwrite"/>
+    <property name="wired-network" type="s" access="readwrite"/>
+    <property name="wireless-network" type="s" access="readwrite"/>
+    <property name="gpu" type="s" access="readwrite"/>
+    <property name="cd" type="s" access="readwrite"/>
+    <property name="mac" type="s" access="read"/>
+    <property name="amt-pt" type="b" access="readwrite"/>
+    <property name="portica-enabled" type="i" access="read"/>
+    <property name="portica-installed" type="b" access="read"/>
+    <property name="seamless-traffic" type="b" access="readwrite"/>
+    <property name="autostart-pending" type="b" access="read"/>
+    <property name="hibernated" type="b" access="read"/>
+    <property name="memory-static-max" type="i" access="readwrite"/>
+    <property name="memory-target" type="i" access="read"/>
+    <property name="memory-min" type="i" access="readwrite"/>
+    <property name="memory" type="i" access="readwrite"/>
+    <property name="hidden-in-switcher" type="b" access="readwrite"/>
+    <property name="hidden-in-ui" type="b" access="readwrite"/>
+
+    <property name="notify" type="s" access="readwrite"/>
+    <property name="hvm" type="b" access="readwrite"/>
+    <property name="pae" type="b" access="readwrite"/>
+    <property name="apic" type="b" access="readwrite"/>
+    <property name="viridian" type="b" access="readwrite"/>
+    <property name="cpuid" type="s" access="readwrite"><tp:docstring>Used to set/unset certain bits in response to CPUID instruction.</tp:docstring></property>
+    <property name="xci-cpuid-signature" type="b" access="readwrite"><tp:docstring>Advertise the guest as XenClient flavour of Xen.</tp:docstring></property>
+    <property name="hap" type="b" access="readwrite"/>
+    <property name="nx" type="b" access="readwrite"/>
+    <property name="sound" type="s" access="readwrite"/>
+    <property name="display" type="s" access="readwrite"/>
+    <property name="boot" type="s" access="readwrite"/>
+    <property name="cmd-line" type="s" access="readwrite"/>
+    <property name="kernel-extract" type="s" access="readwrite">
+      <tp:docstring>[disk_number,partition_number:]/path/to/kernel
+	Location of kernel image within the VM's disk(s). Examples:
+	  /boot/vmlinuz (/boot/vmlinuz in unpartitioned disk 0)
+	  2:/boot/vmlinuz (/boot/vmlinuz in unpartitioned disk 2)
+	  0,1:/boot/vmlinuz (/boot/vmlinuz in 1st partitin of disk 0)
+      </tp:docstring>
+    </property>
+    <property name="kernel" type="s" access="readwrite"/>
+    <property name="initrd-extract" type="s" access="readwrite">
+      <tp:docstring>[disk_number,partition_number:]/path/to/initrd
+	Location of initrd image within the VM's disk(s). Examples:
+	  /boot/inird (/boot/inird in unpartitioned disk 0)
+	  2:/boot/inird (/boot/inird in unpartitioned disk 2)
+	  0,1:/boot/inird (/boot/inird in 1st partitin of disk 0)
+      </tp:docstring>
+    </property>
+    <property name="initrd" type="s" access="readwrite"/>
+    <property name="acpi-pt" type="b" access="readwrite">
+      <tp:docstring>Enable OEM windows installation by exposing the ACPI SLIC table.</tp:docstring>
+    </property>
+    <property name="smbios-pt" type="b" access="readwrite"/>
+    <property name="vcpus" type="i" access="readwrite"/>
+    <property name="cores-per-socket" type="i" access="readwrite"/>
+    <property name="videoram" type="i" access="readwrite"/>
+    <property name="passthrough-mmio" type="s" access="readwrite"/>
+    <property name="passthrough-io" type="s" access="readwrite"/>
+    <property name="flask-label" type="s" access="readwrite"/>
+    <property name="qemu-dm-path" type="s" access="readwrite"/>
+    <property name="qemu-dm-timeout" type="i" access="readwrite">
+      <tp:docstring>Timeout (in seconds) to wait for qemu response during its startup.</tp:docstring>
+    </property>
+
+    <property name="oem-acpi-features" type="b" access="readwrite">
+      <tp:docstring>Enables access to additional OEM acpi features.</tp:docstring>
+    </property>
+
+    <property name="start-on-boot-priority" type="i" access="readwrite">
+      <tp:docstring>Control priority of start-on-boot VMs, higher priority means earlier start. For new VMs this defaults to 0.</tp:docstring>
+    </property>
+
+    <property name="shutdown-priority" type="i" access="readwrite">
+      <tp:docstring>Controls order of vm shutdown, higher priority means earlier shutdown. For new VMs defaults to 0, or -10 in case of PVM. VMs with same priority are shutdown in parallel.</tp:docstring>
+    </property>
+
+    <property name="keep-alive" type="b" access="readwrite">
+      <tp:docstring>Automatically restart this VM if it shuts down or crashes.</tp:docstring>
+    </property>
+    
+    <property name="provides-network-backend" type="b" access="readwrite">
+      <tp:docstring>Whether this domain is a networking backend and handles the physical nic devices.</tp:docstring>
+    </property>
+
+    <property name="provides-default-network-backend" type="b" access="readwrite">
+      <tp:docstring>Whether this domain is the primary networking backend and handles the physical NIC devices.</tp:docstring>
+    </property>
+
+    <property name="provides-graphics-fallback" type="b" access="readwrite">
+      <tp:docstring>System will keep this VM on screen when no better candidate is present.</tp:docstring>
+    </property>
+
+    <property name="measured" type="b" access="read">
+      <tp:docstring>if VM is measured, the hash of the disk image is checked before it is allowed to start.</tp:docstring>
+    </property>
+
+    <property name="extra-xenvm" type="s" access="readwrite">
+      <tp:docstring>Extra xenvm arguments separated by semicolon.</tp:docstring>
+    </property>
+
+    <property name="extra-hvm" type="s" access="readwrite">
+      <tp:docstring>Extra ioemu arguments separated by semicolon.</tp:docstring>
+    </property>
+
+    <property name="crypto-key-dirs" type="s" access="readwrite">
+      <tp:docstring>Comma-separated list of disk encryption keys directories.</tp:docstring>
+    </property>
+
+    <property name="dependencies" type="ao" access="read">
+      <tp:docstring>VMs that are required to be running before starting this one.</tp:docstring>
+    </property>
+
+    <property name="track-dependencies" type="b" access="readwrite">
+      <tp:docstring>If true, automatically start required VMs.</tp:docstring>
+    </property>
+
+    <property name="seamless-mouse-left" type="i" access="read">
+      <tp:docstring>Where to move mouse when it goes over left edge.</tp:docstring>
+    </property>
+
+    <property name="seamless-mouse-right" type="i" access="read">
+      <tp:docstring>Where to move mouse when it goes over right edge.</tp:docstring>
+    </property>
+
+    <property name="control-platform-power-state" type="b" access="readwrite">
+      <tp:docstring>If set, whole platform will go into S3/S4/S5 when this VM goes into S3/S4/S5.</tp:docstring>
+    </property>
+
+    <property name="stubdom" type="b" access="readwrite"> <tp:docstring>Use stub domain to hide the device emulator.</tp:docstring> </property>
+    <property name="usb-enabled" type="b" access="readwrite"><tp:docstring>Enables PV USB support.</tp:docstring></property>
+    <property name="usb-control" type="b" access="readwrite"><tp:docstring>Enables VM to talk to USB daemon</tp:docstring></property>
+    <property name="usb-grab-devices" type="b" access="readwrite"><tp:docstring>Automatically assign all available USB devices upon this VM start.</tp:docstring></property>
+    <property name="greedy-pciback-bind" type="b" access="readwrite"><tp:docstring>Bind passthrough pci devices to pciback early, to prevent their use by other VMs.</tp:docstring></property>
+
+    <property name="policy-modify-vm-settings" type="b" access="readwrite"><tp:docstring>Allow modification of VM settings.</tp:docstring></property>
+    <property name="policy-cd-access" type="b" access="readwrite"><tp:docstring>Allow to read from CD.</tp:docstring></property>
+    <property name="policy-cd-recording" type="b" access="readwrite"><tp:docstring>Allow to record CD.</tp:docstring></property>
+    <property name="policy-audio-access" type="b" access="readwrite"><tp:docstring>Allow to playback audio.</tp:docstring></property>
+    <property name="policy-audio-recording" type="b" access="readwrite"><tp:docstring>Allow to record audio.</tp:docstring></property>
+    <property name="policy-wired-networking" type="b" access="readwrite"><tp:docstring>Allow to access wired network.</tp:docstring></property>
+    <property name="policy-wireless-networking" type="b" access="readwrite"><tp:docstring>Allow to access wireless network.</tp:docstring></property>
+    <property name="policy-print-screen" type="b" access="readwrite"><tp:docstring>Allow VM to use the PrintScreen key.</tp:docstring></property>
+
+    <property name="run-post-create" type="s" access="readwrite"><tp:docstring>Command to run post VM creation.</tp:docstring></property>
+    <property name="run-pre-delete" type="s" access="readwrite"><tp:docstring>Command to run pre VM deletion.</tp:docstring></property>
+    <property name="run-pre-boot" type="s" access="readwrite"><tp:docstring>Command to run synchronously pre VM boot.</tp:docstring></property>
+    <property name="run-insteadof-start" type="s" access="readwrite"><tp:docstring>Command to run instead of VM start</tp:docstring></property>
+
+    <property name="run-on-state-change" type="s" access="readwrite"><tp:docstring>Command to run on VM state change.</tp:docstring></property>
+    <property name="run-on-acpi-state-change" type="s" access="readwrite"><tp:docstring>Command to run on VM acpi state change.</tp:docstring></property>
+
+    <property name="domstore-read-access" type="b" access="readwrite"><tp:docstring>Configure domain read access to domstore.</tp:docstring></property>
+    <property name="domstore-write-access" type="b" access="readwrite"><tp:docstring>Configure domain write access to domstore.</tp:docstring></property>
+
+    <property name="show-switcher" type="b" access="readwrite"><tp:docstring>Hide/show switcher bar inside VM.</tp:docstring></property>
+    <property name="native-experience" type="b" access="readwrite"><tp:docstring>Toggle 'native experience' on/off.</tp:docstring></property>
+    <property name="wireless-control" type="b" access="readwrite"><tp:docstring>Give VM control over wireless stack.</tp:docstring></property>
+
+    <property name="s3-mode" type="s" access="readwrite"><tp:docstring>Configure how the VM is put to sleep.</tp:docstring></property>
+    <property name="s4-mode" type="s" access="readwrite"><tp:docstring>Configure how the VM is hibernated.</tp:docstring></property>
+    <property name="vsnd" type="b" access="readwrite"><tp:docstring>Use PV audio device.</tp:docstring></property>
+    <property name="vkbd" type="b" access="readwrite"><tp:docstring>Use PV keyboard and mouse.</tp:docstring></property>
+    <property name="vfb" type="b" access="readwrite"><tp:docstring>Use PV framebuffer.</tp:docstring></property>
+    <property name="v4v" type="b" access="readwrite"><tp:docstring>Use V4V.</tp:docstring></property>
+    <property name="private-space" type="i" access="read"><tp:docstring>Private space used (in MiB).</tp:docstring></property>
+    <property name="realm" type="s" access="readwrite"><tp:docstring>Realm ID.</tp:docstring></property>
+    <property name="sync-uuid" type="s" access="readwrite"><tp:docstring>VM UUID in Synchroniser space.</tp:docstring></property>
+    <property name="icbinn-path" type="s" access="readwrite"><tp:docstring>Filesystem path exported to the VM via icbinn server.</tp:docstring></property>
+    <property name="ovf-transport-iso" type="b" access="readwrite"><tp:docstring>Transport of OVF configuration via iso enabled yes/no.</tp:docstring></property>
+    <property name="download-progress" type="i" access="readwrite"><tp:docstring>VM download progress.</tp:docstring></property>
+    <property name="ready" type="b" access="readwrite"><tp:docstring>Is VM ready for use?</tp:docstring></property>
+    <property name="restrict-display-depth" type="b" access="readwrite"><tp:docstring>Restrict available display depths. Currently required by emulated VGA in Windows 8.</tp:docstring></property>
+    <property name="restrict-display-res" type="b" access="readwrite"><tp:docstring>Restrict available display resolutions.</tp:docstring></property>   
+    <property name="preserve-on-reboot" type="b" access="readwrite"><tp:docstring>After reboot, keep the vm in rebooted state instead of automatically restarting it</tp:docstring></property>
+    <property name="boot-sentinel" type="s" access="readwrite"><tp:docstring>Name of xenstore node to wait on before completing vm startup from toolstack PoV. Useful if VM exports services which need to be immediately usable by other vms</tp:docstring></property>
+    <property name="hpet" type="b" access="readwrite"><tp:docstring>HPET support</tp:docstring></property>
+    <property name="timer-mode" type="i" access="readwrite"><tp:docstring>Domain timer mode</tp:docstring></property>
+    <property name="nestedhvm" type="b" access="readwrite"><tp:docstring>Enable nested virtualization</tp:docstring></property>
+    <property name="serial" type="s" access="readwrite"><tp:docstring>Serial port specification</tp:docstring></property>
+  </interface>
+
+  <interface name="com.citrix.xenclient.xenmgr.vm.product">
+    <tp:docstring>Configuration of products (services) in the VM.</tp:docstring>
+
+    <method name="get_ovf_env_xml">
+      <tp:docstring>Return the OVF environment xml.</tp:docstring>
+      <arg name="value" type="s" direction="out"/>
+    </method>
+
+    <method name="list_product_properties">
+      <tp:docstring>List all product properties for this VM.</tp:docstring>
+      <arg name="product_properties" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="get_product_property">
+      <tp:docstring>Query product property value.</tp:docstring>
+      <arg name="property_id" type="s" direction="in"/>
+      <arg name="value" type="s" direction="out"/>
+    </method>
+
+    <method name="set_product_property">
+      <tp:docstring>Change product property value.</tp:docstring>
+      <arg name="property_id" type="s" direction="in"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+  </interface>
+
+  <interface name="com.citrix.xenclient.xenmgr.vm.auth">
+    <tp:docstring>Authentication Interface</tp:docstring>
+
+    <method name="auth_required">
+      <tp:docstring>Check if authentication to VM is required.</tp:docstring>
+      <arg name="required" type="b" direction="out"/>
+    </method>
+
+    <method name="auth">
+      <tp:docstring>Attempt to authenticate to VM.</tp:docstring>
+    </method>
+
+  </interface>
+
+  <interface name="com.citrix.xenclient.xenmgr.vm.pci">
+    <tp:docstring>Manipulate passthrough lists.</tp:docstring>
+
+    <method name="add_pt_rule">
+      <tp:docstring>Add PCI passthrough rule. Passing empty string in one of the arguments (class,vendor,device) turns off matching on that argument.</tp:docstring>
+
+      <arg name="pciclass" type="s" direction="in"/>
+      <arg name="vendor_id" type="s" direction="in"/>
+      <arg name="device_id" type="s" direction="in"/>
+    </method>
+
+    <method name="add_pt_rule_bdf">
+      <tp:docstring>Add PCI passthrough rule. Specify device using BDF syntax (e.g.: 0000:00:16.0).</tp:docstring>
+      <arg name="bdf" type="s" direction="in"/>
+    </method>
+
+    <method name="delete_pt_rule">
+      <tp:docstring>Remove passthrough rule(s).</tp:docstring>
+      <arg name="pciclass" type="s" direction="in"/>
+      <arg name="vendor_id" type="s" direction="in"/>
+      <arg name="device_id" type="s" direction="in"/>
+    </method>
+
+    <method name="delete_pt_rule_bdf">
+      <tp:docstring>Remove PCI passthrough rule using BDF syntax.</tp:docstring>
+      <arg name="bdf" type="s" direction="in"/>
+    </method>
+
+    <method name="list_pt_rules">
+      <tp:docstring>List current passthrough rules in effect.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_pt_pci_devices">
+      <tp:docstring>List PCI devices which match current passthrough rules.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+  </interface>
+
+</node>

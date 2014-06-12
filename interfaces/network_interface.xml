@@ -1,0 +1,31 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  
+  <interface name="com.citrix.xenclient.networkinterface">
+
+    <method name="name">
+      <tp:docstring>Returns the name of the inteface.</tp:docstring>
+      <arg type="s" name="name" direction="out" />
+    </method>
+
+    <method name="is_wireless">
+      <tp:docstring>Returns true if the interface is wireless.</tp:docstring>
+      <arg type="b" name="is_wireless" direction="out" />
+    </method>
+
+    <method name="mac_address">
+      <tp:docstring>Returns the MAC address of the interface.</tp:docstring>
+      <arg type="s" name="mac" direction="out" />
+    </method>
+
+    <method name="list_bridges">
+      <tp:docstring>Lists the bridges to connect to use this interface.</tp:docstring>
+      <arg type="a{ss}" name="bridges" direction="out" />
+    </method>
+
+  </interface>
+
+  <interface name="com.citrix.xenclient.networkinterface.notify">
+  </interface>
+
+</node>

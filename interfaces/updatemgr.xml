@@ -1,0 +1,131 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">      
+  <interface name="com.citrix.xenclient.updatemgr">
+    <tp:docstring>Primary update manager interface.</tp:docstring>
+
+    <method name="check_update">
+      <tp:docstring>Download update metadata and check update applicability.</tp:docstring>
+      <arg name="url" type="s" direction="in"/>
+      <arg name="version" type="s" direction="out"><tp:docstring>XC version on the server (human-readable).</tp:docstring></arg>
+      <arg name="release" type="s" direction="out"><tp:docstring>XC version on the server (strict format).</tp:docstring></arg>
+      <arg name="status" type="s" direction="out">
+        <tp:docstring><p>Update applicability. Possible values are:</p>
+        <ol>
+          <li>can-upgrade</li>
+          <li>cannot-upgrade</li>
+          <li>up-to-date</li>
+        </ol>
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="check_update_latest">
+      <tp:docstring>Treat URL as a repository with multiple updates.
+      We expect to find a text file with one URL per line at the given
+      URL.  We will treat the lines in reverse order, starting with
+      the latest, and do a check_update on each.  We'll report back on
+      the first update found that is either 'up-to-date' or
+      'can-upgrade'.  If all are 'cannot-upgrade', we return
+      'cannot-upgrade'.
+
+      Report back on latest applicable update, if any.</tp:docstring>
+      <arg name="url" type="s" direction="in"/>
+      <arg name="version" type="s"
+      direction="out"><tp:docstring>Latest applicable (or up-to-date)
+      XC version on the server (human readable), if avaible.  Empty if
+      no version applicable.</tp:docstring></arg>
+      <arg name="release" type="s"
+      direction="out"><tp:docstring>Latest applicable (or up-to-date)
+      XC version on the server (strict format), if avaible.  Empty if
+      no version.</tp:docstring></arg>
+      <arg name="status" type="s" direction="out">
+        <tp:docstring><p>Consolidated update applicability. Possible values are:</p>
+        <ol>
+          <li>can-upgrade</li>
+          <li>cannot-upgrade</li>
+          <li>up-to-date</li>
+        </ol>
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="download_update">
+      <tp:docstring>Start the download of the pending update.</tp:docstring>
+      <arg name="url" type="s" direction="in"/>
+    </method>
+
+    <method name="download_update_latest">
+      <tp:docstring>Start the download of the latest pending update.
+      See documenation for 'check_update_latest' for
+      details.</tp:docstring>
+      <arg name="url" type="s" direction="in"/>
+    </method>
+
+    <method name="apply_update_and_reboot">
+      <tp:docstring>Start the process of applying the update (if update pending, otherwise error). After success, reboot.</tp:docstring>
+    </method>
+
+    <method name="apply_update_and_shutdown">
+      <tp:docstring>Start the process of applying the update (if update pending, otherwise error). After success, shutdown.</tp:docstring>
+    </method>
+
+    <method name="cancel_update">
+      <tp:docstring>Cancel the update in progress (if possible, otherwise error).</tp:docstring>
+    </method>
+
+    <property name="update-url" type="s" access="read">
+      <tp:docstring>Update's URL.</tp:docstring>
+    </property>
+
+    <property name="update-applicable" type="s" access="read">
+      <tp:docstring><p>Whether currently selected update is applicable or not. Possible values:</p>
+      <ol>
+        <li>can-upgrade</li>
+        <li>cannot-upgrade</li>
+        <li>up-to-date</li>
+      </ol>
+      </tp:docstring>
+    </property>
+
+    <property name="update-state" type="s" access="read">
+      <tp:docstring><p>State of pending update. Possible states are:</p>
+      <ol><li>empty string when no update pending/nothing being done</li>
+      <li>downloading-meta</li>
+      <li>downloaded-meta</li>
+      <li>downloading-files</li>
+      <li>downloaded-files</li>
+      <li>applying</li>
+      <li>failed</li>
+      <li>done</li>
+      </ol>
+      </tp:docstring>
+    </property>
+
+    <property name="update-description" type="s" access="read">
+      <tp:docstring>Description of the pending update.</tp:docstring>
+    </property>
+
+    <property name="update-download-percent" type="d" access="read">
+      <tp:docstring>Download percentage complete.</tp:docstring>
+    </property>
+
+    <property name="update-download-speed" type="d" access="read">
+      <tp:docstring>Download speed.</tp:docstring>
+    </property>
+
+    <property name="update-fail-reason" type="s" access="read">
+      <tp:docstring>Reason of failure in case something went wrong, otherwise empty.</tp:docstring>
+    </property>
+
+    <signal name="update_state_change">
+      <tp:docstring>Singal that the update state has changed.</tp:docstring>
+      <arg name="state" type="s"/>
+    </signal>
+
+    <signal name="update_download_progress">
+      <arg name="percent_complete" type="d"/>
+      <arg name="speed" type="d"/>
+    </signal>
+
+  </interface>
+</node>

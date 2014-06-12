@@ -1,0 +1,16 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/vm/uuid/nic/id" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+
+  <interface name="com.citrix.xenclient.vmnic">
+    <tp:docstring>VM Network Interface.</tp:docstring>
+    <property name="backend-uuid" type="s" access="readwrite"> <tp:docstring>UUID of domain holding the driver backend.</tp:docstring> </property>
+    <property name="backend-name" type="s" access="readwrite"> <tp:docstring>Name of domain holding the driver backend. Used only if backend-uuid is not set.</tp:docstring> </property>
+    <property name="network" type="s" access="readwrite"> <tp:docstring>Network identifier.</tp:docstring> </property>
+    <property name="wireless-driver" type="b" access="readwrite"> <tp:docstring>Use wireless driver for this interface.</tp:docstring></property>
+    <property name="mac" type="s" access="readwrite"> <tp:docstring>Specify MAC address, or 'auto'.</tp:docstring> </property>
+    <property name="mac-actual" type="s" access="read"> <tp:docstring>MAC address.</tp:docstring> </property>
+    <property name="enabled" type="b" access="readwrite"> <tp:docstring>Interface enabled/disabled flag.</tp:docstring> </property>
+    <method name="delete"> <tp:docstring>Delete NIC.</tp:docstring> </method>
+  </interface>
+
+</node>

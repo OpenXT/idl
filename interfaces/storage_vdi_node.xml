@@ -1,0 +1,31 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node name="/node/uuid" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  <interface name="com.citrix.xenclient.storehouse.node">
+    <tp:docstring>Nodes interface.</tp:docstring>
+
+    <property name="creation_time" type="t" access="read">
+      <tp:docstring>Creation time of this node.</tp:docstring>
+    </property>
+
+    <property name="immutable" type="b" access="readwrite">
+      <tp:docstring>Node immutability.</tp:docstring>
+    </property>
+
+    <method name="get_parent">
+      <tp:docstring>Return the node's parent if it exists.</tp:docstring>
+      <arg name="uuid" type="s" direction="out"/>
+    </method>
+
+    <method name="delete">
+      <tp:docstring>Delete a node part of a historical chain of a VDI. May result in coalescing.</tp:docstring>
+      <arg name="uuid" type="s" direction="out"/>
+    </method>
+
+    <method name="make_vdi">
+      <tp:docstring>Create a new VDI out of a node and returns the new VDI object.</tp:docstring>
+      <arg name="uuid" type="o" direction="out"/>
+    </method>
+
+  </interface>
+</node>

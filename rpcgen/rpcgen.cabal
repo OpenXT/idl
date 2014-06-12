@@ -1,0 +1,20 @@
+Name:       xc-rpcgen
+Version:    1.0
+Cabal-Version:  >= 1.2
+Author:     Tomasz Wroblewski
+Stability:  experimental
+Build-Type: Simple
+Data-Files: templates/*.h templates/*.c templates/*.hs templates/*.ml templates/*.js templates/*.xsl
+
+Executable xc-rpcgen
+  Build-Depends:
+    base,
+    containers,
+    process,
+    filepath,
+    directory,
+    text,
+    HaXml == 1.20.2,
+    dbus-core == 0.8.*
+  Main-Is: Main.hs
+  GHC-Options: -O2 -fwarn-incomplete-patterns

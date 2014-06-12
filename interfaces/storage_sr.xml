@@ -1,0 +1,93 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node name="/sr/uuid" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  <interface name="com.citrix.xenclient.storehouse.sr">
+    <tp:docstring>Storage repository interface.</tp:docstring>
+
+    <property name="name" type="s" access="readwrite">
+      <tp:docstring>Human readable label.</tp:docstring>
+    </property>
+
+    <method name="get_total_size">
+      <tp:docstring>Total size of the storage repository in megabytes.</tp:docstring>
+      <arg name="size" type="t" direction="out"/>
+    </method>
+
+    <method name="get_free_size">
+      <tp:docstring>Free size of the storage repository in megabytes.</tp:docstring>
+      <arg name="size" type="t" direction="out"/>
+    </method>
+
+    <method name="create_vdi">
+      <tp:docstring>Create a virtual disk in repository.</tp:docstring>
+      <arg name="size" type="t" direction="in"/>
+      <arg name="vdi" type="o" direction="out"/>
+    </method>
+
+    <method name="create_vdi_with">
+      <tp:docstring>Create a virtual disk in repository.</tp:docstring>
+      <arg name="node" type="s" direction="in"/>
+      <arg name="vdi" type="o" direction="out"/>
+    </method>
+
+    <method name="list_vdis">
+      <tp:docstring>List virtual disks in repository.</tp:docstring>
+      <arg name="vdis" type="ao" direction="out"/>
+    </method>
+
+    <method name="list_nodes">
+      <tp:docstring>List nodes in repository. The strings returned should be considered as an opaque blob.</tp:docstring>
+      <arg name="nodes" type="as" direction="out"/>
+    </method>
+
+    <method name="stream_download">
+      <tp:docstring>Open a new stream to put a node in storehouse's grasp.</tp:docstring>
+      <arg name="socket" type="s" direction="out"/>
+    </method>
+
+    <method name="stream_upload">
+      <tp:docstring>Open a new stream to get a node out of storehouse's grasp.</tp:docstring>
+      <arg name="socket" type="s" direction="out"/>
+    </method>
+
+    <method name="stream_close">
+      <tp:docstring>Close a stream.</tp:docstring>
+      <arg name="socket" type="s" direction="in"/>
+    </method>
+
+    <method name="nodeGetChildren">
+      <tp:docstring>Return the node's children if any.</tp:docstring>
+      <arg name="name" type="s" direction="in"/>
+      <arg name="childs" type="as" direction="out"/>
+    </method>
+
+    <method name="nodeGetParent">
+      <tp:docstring>Return the node's parent if it exists.</tp:docstring>
+      <arg name="name" type="s" direction="in"/>
+      <arg name="parent" type="s" direction="out"/>
+    </method>
+
+    <method name="nodeDelete">
+      <tp:docstring>Delete a node part of a historical chain of a VDI. May result in coalescing.</tp:docstring>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+
+    <method name="nodeAddKey">
+      <tp:docstring>Add a key associated with the node.</tp:docstring>
+      <arg name="name" type="s" direction="in"/>
+      <arg name="key" type="ay" direction="in"/>
+    </method>
+
+    <method name="nodeGetKey">
+      <tp:docstring>Get the key associated with the node.</tp:docstring>
+      <arg name="name" type="s" direction="in"/>
+      <arg name="key" type="ay" direction="out"/>
+    </method>
+
+    <method name="nodeDelKey">
+      <tp:docstring>Delete the key associated with the node.</tp:docstring>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+
+  </interface>
+</node>

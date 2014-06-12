@@ -1,0 +1,96 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  <tp:enum name="NDVM_STATUS" type="u">
+    <tp:docstring>NDVM Status.</tp:docstring>
+    <tp:enumvalue suffix="STOPPED" value="0"/>
+    <tp:enumvalue suffix="STARTED" value="1"/>
+  </tp:enum>
+ 
+  <interface name="com.citrix.xenclient.networkdaemon">
+
+    <method name="add_vif">
+      <tp:docstring>Creates the corresponding VIF.</tp:docstring>
+      <arg type="u" name="domid" direction="in" />
+      <arg type="u" name="backend_domid" direction="in" />
+      <arg type="s" name="mac" direction="in" />
+    </method>
+
+    <method name="move_to_network">
+      <tp:docstring>Move VIF to network.</tp:docstring>
+      <arg type="s" name="vif" direction="in" />
+      <arg type="s" name="network" direction="in" />
+    </method>
+
+    <method name="ndvm_status">
+      <tp:docstring>To inform NDVM status.</tp:docstring>
+      <arg type="s" name="uuid" direction="in" />
+      <arg type="i" name="domid" direction="in" />
+      <arg type="u" name="status" direction="in" />
+    </method>
+
+    <method name="shutdown">
+      <tp:docstring>Shuts down the network daemon.</tp:docstring>
+    </method>
+
+     <method name="is_networking_active">
+      <tp:docstring>Returns true if any of the slave networks are up and running.</tp:docstring>
+      <arg type="b" name="is_nw_active" direction="out" />
+    </method>
+
+    <method name="list">
+      <tp:docstring>Lists networks.</tp:docstring>
+      <arg type="aa{ss}" name="networks" direction="out" />
+    </method>
+
+    <method name="list_backends">
+      <tp:docstring>Lists network backend domains.</tp:docstring>
+      <arg type="as" name="backends" direction="out" />
+    </method>
+
+    <method name="is_initialized">
+      <tp:docstring>Returns true if all the slave network configuration is complete.</tp:docstring>
+      <arg type="b" name="is_initialized" direction="out" />
+    </method>
+
+    <method name="get_network_backend">
+      <tp:docstring>Returns network backend for a network.</tp:docstring>
+      <arg type="s" name="network" direction="in" />
+      <arg type="s" name="uuid" direction="out" />
+    </method>
+
+    <method name="create_network">
+      <tp:docstring>Creates network using configuration.</tp:docstring>
+      <arg type="s" name="network_type" direction="in" />
+      <arg type="i" name="id" direction="in" />
+      <arg type="s" name="config" direction="in" />
+      <arg type="s" name="network" direction="out" />
+    </method>
+
+  </interface>
+
+  <interface name="com.citrix.xenclient.networkdaemon.notify">
+    <signal name="networkdaemon_up">
+        <tp:docstring>Notifies that the daemon is up.</tp:docstring>
+    </signal>
+
+    <signal name="network_added">
+        <tp:docstring>Notifies that a new network is added.</tp:docstring>
+        <arg name="network" type="s"/>
+    </signal>
+
+    <signal name="network_removed">
+        <tp:docstring>Notifies that a network is no longer available.</tp:docstring>
+        <arg name="network" type="s"/>
+    </signal>
+
+    <signal name="network_state_changed">
+        <tp:docstring>Notifies that a network is no longer available.</tp:docstring>
+        <arg name="network" type="s"/>
+        <arg name="nm_state" type="s"/>
+        <arg name="backend" type="s"/>
+    </signal>
+
+
+  </interface>
+
+</node>

@@ -1,0 +1,55 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node name="/vdi/uuid" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+
+  <interface name="com.citrix.xenclient.storehouse.vdi">
+    <tp:docstring>Virtual disk interface.</tp:docstring>
+
+    <property name="type" type="s" access="read">
+      <tp:docstring>The type of this VDI: either disk or CD-ROM.</tp:docstring>
+    </property>
+
+    <property name="phys-type" type="s" access="read">
+      <tp:docstring>The type of physical resource that backs this VDI: VHD, file, etc.</tp:docstring>
+    </property>
+
+    <method name="open">
+      <tp:docstring>Opens this VDI, making it accessible through a block device.</tp:docstring>
+      <arg name="blkdev" type="s" direction="out"/>
+    </method>
+
+    <method name="close">
+      <tp:docstring>Closes this VDI, making it inaccessible through a block device.</tp:docstring>
+    </method>
+
+    <method name="fork">
+      <tp:docstring>Forks this VDI, returning a new VDI.</tp:docstring>
+      <arg name="uuid" type="s" direction="out"/>
+    </method>
+
+    <method name="snapshot">
+      <tp:docstring>Takes a snapshot of the contents of this VDI at the current moment in time.</tp:docstring>
+    </method>
+
+    <method name="revert">
+      <tp:docstring>Revert a VDI to an older node in the chain.</tp:docstring>
+      <arg name="uuid" type="s" direction="in"/>
+    </method>
+
+    <method name="check">
+      <tp:docstring>Check that a VDI is valid. returns OK or error name.</tp:docstring>
+      <arg name="status" type="s" direction="out"/>
+    </method>
+
+    <method name="list_nodes">
+      <tp:docstring>Returns a list of all the nodes that constitute this VDI, ordered from newest to oldest.</tp:docstring>
+      <arg name="uuid" type="as" direction="out"/>
+    </method>
+
+    <method name="delete">
+      <tp:docstring>Deletes this VDI.</tp:docstring>
+      <arg name="delNodes" type="b" direction="in"/>
+    </method>
+
+  </interface>
+</node>

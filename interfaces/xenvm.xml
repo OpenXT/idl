@@ -1,0 +1,11 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+
+	<interface name="xenvm.signal.notify">
+		<signal name="notify">
+			<tp:docstring>Signals a VM state change.</tp:docstring>
+			<arg name="vmstate" type="as" />
+		</signal>
+	</interface>
+
+</node>

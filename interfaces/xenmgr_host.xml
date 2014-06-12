@@ -1,0 +1,255 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/host" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+
+  <interface name="com.citrix.xenclient.xenmgr.powersettings">
+    <tp:docstring>Let host object implement the power settings toggles.</tp:docstring>
+    <method name="get_ac_lid_close_action">
+      <tp:docstring>Returns the action to perform when the user closes the laptop lid when the device is attached to a power source.</tp:docstring>
+
+      <arg name="" type="s" direction="out">
+      </arg>
+    </method>
+    <method name="get_battery_lid_close_action">
+      <tp:docstring>Returns the action to perform when the user closes the laptop lid when the device is running on battery power.</tp:docstring>
+
+      <arg name="" type="s" direction="out">
+      </arg>
+    </method>
+    <method name="set_ac_lid_close_action">
+      <tp:docstring>Sets the action to perform when the user closes the laptop lid when the device is attached to a power source.</tp:docstring>
+
+      <arg name="action" type="s" direction="in">
+      </arg>
+    </method>
+    <method name="set_battery_lid_close_action">
+      <tp:docstring>Sets the action to perform when the user closes the laptop lid when the device is running on battery power.</tp:docstring>
+      <arg name="action" type="s" direction="in">
+	<tp:docstring></tp:docstring>
+      </arg>
+    </method>
+  </interface>
+
+  <interface name="com.citrix.xenclient.xenmgr.host">
+    <signal name="state_changed">
+      <tp:docstring>Notify that the host state has changed (sleeping, hibernating etc).</tp:docstring>
+      <arg name="state" type="s"/>
+    </signal>
+
+    <signal name="storage_space_low">
+      <tp:docstring>Notify that the user is running out of storage space.</tp:docstring>
+      <arg name="percent_free" type="i">
+	<tp:docstring>The percentage of free disk space remaining.</tp:docstring>
+      </arg>
+    </signal>
+
+    <signal name="license_changed">
+      <tp:docstring>Notify that licensing evaluation has changed.</tp:docstring>
+    </signal>
+
+    <property name="state" type="s" access="read"/>
+    <property name="total-mem" type="i" access="read">
+      <tp:docstring>Total memory, in megabytes.</tp:docstring>
+    </property>
+    <property name="free-mem" type="i" access="read">
+      <tp:docstring>Free memory, in megabytes.</tp:docstring>
+    </property>
+    <property name="avail-mem" type="i" access="read">
+      <tp:docstring>Available memory, in megabytes. Can be bigger than free memory, since includes balloonable amount.</tp:docstring>
+    </property>
+
+    <property name="total-storage" type="i" access="read"/>
+    <property name="free-storage" type="i" access="read"/>
+
+    <property name="system-amt-pt" type="b" access="read"/>
+    <property name="cpu-count" type="i" access="read"/>
+    <property name="laptop" type="b" access="read"/>
+    <property name="model" type="s" access="read"/>
+    <property name="vendor" type="s" access="read"/>
+    <property name="serial" type="s" access="read"/>
+    <property name="bios-revision" type="s" access="read"/>
+    <property name="amt-capable" type="b" access="read"/>
+    <property name="eth0-mac" type="s" access="read"/>
+    <property name="eth0-model" type="s" access="read"/>
+    <property name="wireless-mac" type="s" access="read"/>
+    <property name="wireless-model" type="s" access="read"/>
+    <property name="physical-cpu-model" type="s" access="read"/>
+    <property name="physical-gpu-model" type="s" access="read"/>
+    <property name="safe-graphics" type="b" access="read"/>
+    <property name="measured-boot-enabled" type="b" access="read"/>
+    <property name="measured-boot-successful" type="b" access="read"/>
+    <property name="is-licensed" type="b" access="read"/>
+
+    <property name="build-info" type="a{ss}" access="read">
+      <tp:docstring>Build number, date and associated information.</tp:docstring>
+    </property>
+
+    <property name="ui-ready" type="b" access="readwrite">
+      <tp:docstring>UI please set this when you are ready. State will be stored in xenstore.</tp:docstring>
+    </property>
+
+    <property name="playback-pcm" type="s" access="readwrite">
+      <tp:docstring>PCM device used for audio playback</tp:docstring>
+    </property>
+
+    <property name="capture-pcm" type="s" access="readwrite">
+      <tp:docstring>PCM device used for audio capture</tp:docstring>
+    </property>
+
+    <method name="list_isos">
+      <tp:docstring>List the contents of the CD image (ISO) directory.</tp:docstring>
+      <arg name="" type="as" direction="out"/>
+    </method>
+
+    <method name="list_pci_devices">
+      <tp:docstring>List the PCI devices on the system. Returns a list of mappings, each including at least the device name, pciclass, vendor and ID.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_gpu_devices">
+      <tp:docstring>Like above, with some logic to filter GPU devices.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_disk_devices">
+      <tp:docstring>List the disk devices on system.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_playback_devices">
+      <tp:docstring>List audio playback devices on system</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_capture_devices">
+      <tp:docstring>List audio capture devices on system</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_sound_cards">
+      <tp:docstring>List sound cards on system</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="list_sound_card_controls">
+      <tp:docstring>List controlable parameters of a sound card</tp:docstring>
+      <arg name="card" type="s" direction="in"/>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="get_sound_card_control">
+      <tp:docstring>Set sound card control parameter value</tp:docstring>
+      <arg name="card" type="s" direction="in"/>
+      <arg name="control" type="s" direction="in"/>
+      <arg name="value" type="s" direction="out"/>
+    </method>
+
+    <method name="set_sound_card_control">
+      <tp:docstring>Set sound card control parameter value</tp:docstring>
+      <arg name="card" type="s" direction="in"/>
+      <arg name="control" type="s" direction="in"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+
+    <method name="list_cd_devices">
+      <tp:docstring>List cdrom devices on system</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
+
+    <method name="assign_cd_device">
+      <tp:docstring>Assign CD device to given VM (or remove assignment if vm param empty)</tp:docstring>
+      <arg name="devid" type="s" direction="in"/>
+      <arg name="sticky" type="b" direction="in"/>
+      <arg name="vm_uuid" type="s" direction="in"/>
+    </method>
+
+    <method name="get_cd_device_assignment">
+      <tp:docstring>Get CD device's assigned VM</tp:docstring>
+      <arg name="devid" type="s" direction="in"/>
+      <arg name="sticky" type="b" direction="out"/>
+      <arg name="vm_uuid" type="s" direction="out"/>
+    </method>
+
+    <method name="eject_cd_device">
+      <tp:docstring>Physically eject media tray</tp:docstring>
+      <arg name="devid" type="s" direction="in"/>
+    </method>
+
+    <method name="list_ui_plugins">
+      <tp:docstring>List UI plugins on system.</tp:docstring>
+      <arg name="subdir" type="s" direction="in"/>
+      <arg name="list" type="as" direction="out"/>
+    </method>
+
+    <method name="is_service_running">
+      <tp:docstring>Tests if a named dbus service is currently running.</tp:docstring>
+      <arg name="service" type="s" direction="in">
+	<tp:docstring>The name of the service to check for.</tp:docstring>
+      </arg>
+      <arg name="running" type="b" direction="out">
+	<tp:docstring>Boolean value indicating whether the service is running.</tp:docstring>
+      </arg>
+    </method>
+
+    <method name="configure_gpu_placement">
+      <tp:docstring>Configures GPU placement for purposes of tracking VM switching when moving the mouse over the monitor edge. 0 = not set.</tp:docstring>
+      <arg name="id" type="s" direction="in"><tp:docstring>GPU id</tp:docstring></arg>
+      <arg name="slot" type="i" direction="in">
+	<tp:docstring>Slot number, from left to right, in ascending order.</tp:docstring>
+      </arg>
+    </method>
+
+    <method name="get_gpu_placement">
+      <tp:docstring>Get the GPU placement slot.</tp:docstring>
+      <arg name="id" type="s" direction="in"><tp:docstring>GPU id</tp:docstring></arg>
+      <arg name="slot" type="i" direction="out"><tp:docstring>GPU placement slot or 0 if not set.</tp:docstring></arg>
+    </method>
+
+    <method name="get_seconds_from_epoch">
+      <tp:docstring>Get number of seconds from epoch.</tp:docstring>
+      <arg name="seconds" type="i" direction="out"/>
+    </method>
+
+    <method name="shutdown">
+      <tp:docstring>Shutdown the host device.</tp:docstring>
+    </method>
+
+    <method name="reboot">
+      <tp:docstring>Reboot the host device.</tp:docstring>
+    </method>
+
+    <method name="sleep">
+      <tp:docstring>Send the host into s3 (sleep).</tp:docstring>
+    </method>
+
+    <method name="hibernate">
+      <tp:docstring>Send the host into s4 (hibernate).</tp:docstring>
+    </method>
+
+    <method name="set_license">
+      <arg name="expiry_date" type="s" direction="in">
+	<tp:docstring>Expiry date in the format yyyy-mm-dd HH:MM.</tp:docstring>
+      </arg>
+      <arg name="device_uuid" type="s" direction="in"/>
+      <arg name="hash" type="s" direction="in"/>
+    </method>
+  </interface>
+
+  <interface name="com.citrix.xenclient.xenmgr.installer">
+    <tp:docstring>Helpers methods for the OEM installer.</tp:docstring>
+    <method name="get_eula">
+      <tp:docstring>Contents of the EULA, or empty string.</tp:docstring>
+      <arg name="eula" type="s" direction="out"/>
+    </method>
+
+    <method name="get_installstate">
+      <tp:docstring>Get progress of the installation bits.</tp:docstring>
+      <arg name="state" type="a{ss}" direction="out"/>
+    </method>
+
+    <method name="progress_installstate">
+      <tp:docstring>Set progress of the installation bits.</tp:docstring>
+      <arg name="action" type="s" direction="in"/>
+    </method>
+
+  </interface>
+</node>

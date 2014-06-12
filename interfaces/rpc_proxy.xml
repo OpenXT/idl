@@ -1,0 +1,62 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+	<interface name="com.citrix.xenclient.rpc_proxy">
+		<tp:docstring></tp:docstring>
+		<method name="validate_call">
+			<arg name="domain" type="i" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="destination" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="interface" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="member" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="r" type="b" direction="out">
+				<tp:docstring></tp:docstring>
+			</arg>
+		</method>
+		<method name="validate_recv_signal">
+			<tp:docstring></tp:docstring>
+			<arg name="domain" type="i" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="interface" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="member" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="r" type="b" direction="out">
+				<tp:docstring></tp:docstring>
+			</arg>
+		</method>
+		<method name="validate_send_signal">
+			<tp:docstring></tp:docstring>
+			<arg name="domain" type="i" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="interface" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="member" type="s" direction="in">
+				<tp:docstring></tp:docstring>
+			</arg>
+			<arg name="r" type="b" direction="out">
+				<tp:docstring></tp:docstring>
+			</arg>
+		</method>
+        <method name="list_rules">
+          <arg name="rules" type="as" direction="out"/>
+        </method>
+        <method name="add_rule">
+          <arg name="rule" type="s" direction="in"/>
+        </method>
+        <method name="delete_rule">
+          <arg name="rule" type="s" direction="in"/>
+        </method>
+	</interface>
+</node>

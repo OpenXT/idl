@@ -1,0 +1,27 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  <interface name="com.citrix.xenclient.guest">
+    <tp:docstring>Interface optionally implemented by the guest VM agent.</tp:docstring>
+	<method name="request_shutdown">
+	  <tp:docstring>Request a clean guest shutdown.</tp:docstring>
+	</method>
+	<method name="request_sleep">
+	  <tp:docstring>Request the s3 state.</tp:docstring>
+	</method>
+	<method name="request_hibernate">
+	  <tp:docstring>Request the s4 state.</tp:docstring>
+	</method>
+	<method name="request_reboot">
+	  <tp:docstring>Request a clean guest reboot.</tp:docstring>
+	</method>
+	<signal name="agent_started">
+	  <tp:docstring>Sent by the guest agent after it starts.</tp:docstring>
+	</signal>
+	<signal name="agent_uninstalled">
+	  <tp:docstring>Sent by the guest agent during the uninstall process.</tp:docstring>
+	</signal>
+	<signal name="xorg_running">
+	  <tp:docstring>Sent by the guest agent when the x server is detected.</tp:docstring>
+	</signal>
+  </interface>
+</node>

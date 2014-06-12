@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<node name="/com/citrix/HelloWorld">
+  <interface name="com.citrix.HelloService.HelloInterface">
+    <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="hello_object"/>
+    <method name="SayHello">
+      <!-- This is optional, and in this case is redunundant -->
+      <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="hello_object_say_hello"/>
+      <arg type="u" name="uint_in" direction="in" /> <!-- uint -->
+      <arg type="s" name="str_in" direction="in" /> <!-- string -->
+      <arg type="d" name="dbl_in" direction="in" /> <!-- double -->
+      <arg type="d" name="dbl_ret" direction="out" /> <!-- double -->
+      <arg type="s" name="str_ret" direction="out" /> <!-- string -->
+    </method>
+  </interface>
+</node>

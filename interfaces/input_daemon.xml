@@ -1,0 +1,273 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+  <interface name="com.citrix.xenclient.input">
+
+    <method name="set_slot">
+        <arg name="domid" type="i" direction="in"></arg>
+        <arg name="slot" type="i" direction="in"></arg>
+    </method>
+
+    <method name="auth_set_context">
+      <arg name="user" type="s" direction="in"></arg>
+      <arg name="title" type="s" direction="in"></arg>
+    </method>
+
+    <method name="auth_set_context_flags">
+      <arg name="user" type="s" direction="in"></arg>
+      <arg name="title" type="s" direction="in"></arg>
+      <arg name="flags" type="i" direction="in"></arg>
+    </method>
+
+    <method name="auth_begin">
+      <tp:docstring>Start authentication process.</tp:docstring>
+      <arg name="started" type="b" direction="out"></arg>
+    </method>
+
+    <method name="auth_remote_login">
+        <arg name="username" type="s" direction="in"></arg>
+        <arg name="password" type="s" direction="in"></arg>
+    </method>
+
+    <method name="auth_collect_password">
+    </method>
+
+    <method name="auth_title">
+      <arg name="title" type="s" direction="out"></arg>
+    </method>
+
+    <method name="auth_get_context">
+      <arg name="user" type="s" direction="out"></arg>
+      <arg name="title" type="s" direction="out"></arg>
+      <arg name="flags" type="i" direction="out"></arg>
+    </method>
+
+    <method name="auth_remote_status">
+      <arg name="auto_started" type="b" direction="in"></arg>
+      <arg name="status" type="i" direction="in"></arg>
+      <arg name="id" type="s" direction="in"></arg>
+      <arg name="username" type="s" direction="in"></arg>
+      <arg name="recovery_key_file" type="s" direction="in"></arg>
+      <arg name="ctx_flags" type="u" direction="in"></arg>
+    </method>
+
+    <method name="auth_get_status">
+      <arg name="clear" type="b" direction="in"></arg>
+      <arg name="status" type="s" direction="out"></arg>
+      <arg name="flags" type="i" direction="out"></arg>
+    </method>
+
+    <method name="auth_clear_status"></method>
+
+    <method name="auth_create_hash">
+      <arg name="fname" type="s" direction="in"></arg>
+      <arg name="password" type="s" direction="in"></arg>
+    </method>
+
+    <method name="get_user_keydir">
+	  <tp:docstring>Get the user crypto keys directory, or empty string if not mounted.</tp:docstring>
+      <arg name="user" type="s" direction="in"></arg>
+      <arg name="dir" type="s" direction="out"></arg>
+    </method>
+
+    <method name="get_remote_user_hash">
+      <tp:docstring>Get the remote user hash of the specified userid.</tp:docstring>
+      <arg name="userid" type="s" direction="in"></arg>
+      <arg name="hashed_userid" type="s" direction="out"></arg>
+    </method>
+
+    <method name="auth_rm_platform_user">
+      <tp:docstring>Used to recover access to platform when user has forgotten local password.</tp:docstring>
+ 	  <arg name="success" type="b" direction="out"></arg>
+      <arg name="error_msg" type="s" direction="out"></arg>
+    </method>
+
+    <method name="get_focus_domid">
+      <tp:docstring>Get currently focussed domain ID.</tp:docstring>
+      <arg name="domid" type="i" direction="out"></arg>
+    </method>
+
+    <method name="get_idle_time">
+      <tp:docstring>Get Idle Time of the Host.</tp:docstring>
+      <arg name="idle_time" type="i" direction="out"></arg>
+    </method>
+
+    <method name="get_last_input_time">
+      <tp:docstring>Returns the number of seconds since the most recent input activity or from start of input server.</tp:docstring>
+      <arg name="idle_time" type="i" direction="out"></arg>
+    </method>
+
+    <method name="switch_focus">
+      <tp:docstring>Move focus to different domain.</tp:docstring>
+      <arg name="domid" type="i" direction="in"></arg>
+      <arg name="force" type="b" direction="in"></arg>
+      <arg name="success" type="b" direction="out"></arg>
+    </method>
+
+    <method name="get_platform_user">
+      <arg name="user" type="s" direction="out"></arg>
+      <arg name="flags" type="i" direction="out"></arg>
+    </method>
+
+    <method name="get_auth_on_boot">
+      <arg name="auth" type="b" direction="out"></arg>
+    </method>
+
+    <method name="set_auth_on_boot">
+      <arg name="auth" type="b" direction="in"></arg>
+    </method>
+
+    <method name="touchpad_get">
+      <arg name="prop" type="s" direction="in"></arg>
+      <arg name="value" type="s" direction="out"></arg>
+    </method>
+
+    <method name="touchpad_set">
+      <arg name="prop" type="s" direction="in"></arg>
+      <arg name="value" type="s" direction="in"></arg>
+    </method>
+
+    <method name="get_mouse_speed">
+      <arg name="mouse_speed" type="i" direction="out"></arg>
+    </method>
+
+    <method name="set_mouse_speed">
+      <arg name="mouse_speed" type="i" direction="in"></arg>
+    </method>
+
+    <method name="lock_timeout_set">
+      <arg name="value" type="i" direction="in"></arg>
+    </method>
+
+    <method name="lock_timeout_get">
+      <arg name="value" type="i" direction="out"></arg>
+    </method>
+
+    <method name="lock">
+      <arg name="can_switch_out" type="b" direction="in"></arg>
+    </method>
+
+    <method name="get_kb_layouts">
+      <arg name="layouts" type="as" direction="out"></arg>
+    </method>
+
+    <method name="get_current_kb_layout">
+      <arg name="layout" type="s" direction="out"></arg>
+    </method>
+
+    <method name="set_current_kb_layout">
+      <arg name="layout" type="s" direction="in"></arg>
+    </method>
+
+    <method name="update_seamless_mouse_settings">
+      <arg name="dom_uuid" type="s" direction="in"></arg>
+    </method>
+
+    <method name="get_lid_state">
+      <tp:docstring>Returns lid state.  A value of one indicates lid is open otherwise closed.</tp:docstring>
+      <arg type="u" name="lid_ret" direction="out" />
+    </method>
+
+
+    <method name="divert_mouse_focus">
+      <tp:docstring>Diverts the mouse focus to the provided VM, for mouse events occurring within the given source frame.  Events outside of this frame continue go to the calling VM.
+       Mouse events are scaled to fit within the destination frame.  Any area outside of the destination frame will not be accessible with the mouse.
+       Coordinates:  0 is always left/top most, 0x1FFF right/bottom most, regardless of screen resolution.</tp:docstring>
+      <arg type="s" name="uuid" direction="in" />
+
+      <arg type="u" name="sframe_x1" direction="in" />
+      <arg type="u" name="sframe_y1" direction="in" />
+      <arg type="u" name="sframe_x2" direction="in" />
+      <arg type="u" name="sframe_y2" direction="in" />
+
+      <arg type="u" name="dframe_x1" direction="in" />
+      <arg type="u" name="dframe_y1" direction="in" />
+      <arg type="u" name="dframe_x2" direction="in" /> 
+      <arg type="u" name="dframe_y2" direction="in" />
+    </method>
+
+    <method name="stop_mouse_divert">
+    <tp:docstring>This method stops a mouse focus divert, which was created using divert_mouse_focus.</tp:docstring>
+    </method>
+
+    <method name="set_divert_keyboard_filter">
+      <tp:docstring>This sets the keyboard filter, used with divert_keyboard_focus.  
+                    Key_filter is an array of null terminated key value sets.
+                    Each key value set consists of a list of key values for any modifer keys,
+                     followed by a final activation key.</tp:docstring>
+      <arg type="au" name="key_filter" direction="in" />
+    </method>
+
+
+    <method name="divert_keyboard_focus">
+      <tp:docstring>Diverts the keyboard focus to the provided VM, filtering provided key strokes, which continue to go to the original VM. 
+                    Key_filter is a null terminated array of key value sets, each of which is itself null terminated.</tp:docstring>
+      <arg type="s" name="uuid" direction="in" />
+    </method>
+
+    <method name="stop_keyboard_divert">
+    <tp:docstring>This method stops a keyboard focus divert, which was created using divert_keyboard_focus.</tp:docstring>
+    </method>
+
+    <method name="touch">
+    <tp:docstring>Introduce an input event, into the given VM, to defer it from sleeping. </tp:docstring>
+    <arg type="s" name="uuid" direction="in" />
+    </method>
+   
+    <method name="focus_mode">
+    <tp:docstring>This bitfield allows the keyboard/mouse focus behaviour to be tweeked.  Bit 1 =KEYFOLLOWMOUSE, Bit 2 = CLICKHOLDFOCUS, Bit 3 = CLONEEVENTS.
+                   The default mode is 0.
+    </tp:docstring>
+    <arg type="i" name="mode" direction="in" />
+    </method>
+
+    <property name="numlock-restore-on-switch" type="b" access="readwrite">
+    <tp:docstring>Restore NumLock status on switch to VM.</tp:docstring>
+    </property>
+ 
+    <signal name="keyboard_focus_change">
+    <tp:docstring>This allows the monitoring of the keyboard focus, by signaling the UUID of the VM gaining focus.</tp:docstring>
+    <arg type="s" name="uuid" />
+    </signal>
+
+
+    <signal name="focus_auth_field">
+	  <tp:docstring>Sent to notify UI to focus the text field in secure mode.</tp:docstring>
+      <arg name="field_id" type="i"></arg>
+    </signal>
+
+    <signal name="sync_auth_username">
+      <tp:docstring>Sent to set the username in the UI in secure mode.</tp:docstring> 
+	  <arg name="username" type="s"></arg>
+    </signal>
+
+	<signal name="auth_status">
+      <tp:docstring>Sent to change the status in the UI in secure mode.</tp:docstring> 
+	  <arg name="status" type="s"></arg>
+	  <arg name="flags" type="i"></arg>
+    </signal>
+
+	<signal name="secure_mode">
+      <tp:docstring>Sent to the UI to enter secure mode.</tp:docstring> 
+	  <arg name="show" type="i"></arg>
+    </signal>
+
+    <signal name="auth_remote_start_login">
+      <tp:docstring>Sent to the BED to kick off Synchronizer auth.</tp:docstring>
+      <arg name="username" type="s"/>
+      <arg name="ctx_flags" type="u"/>
+    </signal>
+
+    <signal name="auth_remote_start_recovery">
+      <tp:docstring>Sent to the BED to get recovery key.</tp:docstring>
+      <arg name="auto_started" type="b"/>
+      <arg name="id" type="s"/>
+      <arg name="username" type="s"/>
+      <arg name="ctx_flags" type="u"/>
+  </signal>
+
+    <signal name="lid_state_changed">
+      <tp:docstring>Signals when a laptop lid is opened or closed.</tp:docstring>      
+    </signal>
+
+  </interface>
+</node>

@@ -1,0 +1,96 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/vm/uuid/disk/id" xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0">
+
+  <interface name="com.citrix.xenclient.vmdisk">
+    <tp:docstring>All disk properties.</tp:docstring>
+    <!-- all disk properties, these are named differently then
+	 the properties in json config (need to change the json config though because names
+	 there are wrong and confusing.
+
+	 list of current properties at the time of writing:
+
+	 backend-uuid     - where the driver lives
+	 phys-path        - path to vhd or /dev/sda1 etc
+	 phys-type        - type: vhd, phy, or others
+	 virt-path        - path the guest sees
+	 mode             - mode
+	 devtype          - either cdrom or disk
+	 snapshot         - snapshot mode
+      -->
+    <property name="backend-uuid" type="s" access="readwrite">
+      <tp:docstring>UUID of the backend VM.</tp:docstring>
+    </property>
+    <property name="backend-name" type="s" access="readwrite">
+      <tp:docstring>Name of the backend VM. Used only if backend-uuid is not set.</tp:docstring>
+    </property>
+    <property name="phys-path" type="s" access="readwrite">
+	  <tp:docstring>Path to VHD or /dev/sda1.</tp:docstring>
+	</property>
+    <property name="phys-type" type="s" access="readwrite">
+	  <tp:docstring>Type: vhd, phy, or others.</tp:docstring>
+	</property>
+    <property name="virt-path" type="s" access="readwrite">
+	  <tp:docstring>Path the guest sees.</tp:docstring>
+	</property>
+    <property name="mode" type="s" access="readwrite">
+	  <tp:docstring>Mode.</tp:docstring>
+	</property>
+    <property name="devtype" type="s" access="readwrite">
+	  <tp:docstring>Either cdrom or disk.</tp:docstring>
+	</property>
+    <property name="snapshot" type="s" access="readwrite">
+	  <tp:docstring>Snapshot mode.</tp:docstring>
+	</property>
+    <property name="shared" type="b" access="readwrite">
+      <tp:docstring>Shared between multiple VMs (circumvents VHD deletion).</tp:docstring>
+    </property>
+    <property name="managed-disktype" type="s" access="readwrite">
+      <tp:docstring>Type of managed disk, if relevant.</tp:docstring>
+    </property>
+    <property name="enabled" type="b" access="readwrite"> <tp:docstring>Disk enabled/disabled flag.</tp:docstring> </property>
+    <property name="encryption-key-set" type="b" access="read"><tp:docstring>Whether this VHD uses encryption key.</tp:docstring></property>
+    <property name="virtual-size-mb" type="i" access="read"><tp:docstring>Virtual size in megabytes.</tp:docstring></property>
+    <property name="utilization-bytes" type="x" access="read"><tp:docstring>Physical utilisation in bytes.</tp:docstring></property>
+
+    <!-- makes this point to VHD image -->
+    <method name="attach_vhd">
+	  <tp:docstring>Makes this point to VHD image.</tp:docstring>
+      <arg name="vhd_path" type="s" direction="in"/>
+    </method>
+
+    <!-- makes this point to physical disk -->
+    <method name="attach_phy">
+	  <tp:docstring>Makes this point to physical disk.</tp:docstring>
+      <arg name="phy_path" type="s" direction="in"/>
+    </method>
+
+    <!-- mount in given directory for easy hacking -->
+    <method name="mount">
+	  <tp:docstring>Mount in given directory for easy hacking.</tp:docstring>
+      <arg name="dirpath" type="s" direction="in"/>
+      <arg name="readonly" type="b" direction="in"/>
+    </method>
+
+    <!-- unmount if mounted -->
+    <method name="umount">
+      <tp:docstring>Unmount if mounted.</tp:docstring>
+    </method>
+
+    <!-- detach disk from vm and possibly remove vhd file -->
+    <method name="delete">
+      <tp:docstring>Detach disk from VM and possibly remove VHD file.</tp:docstring>
+    </method>
+
+    <method name="generate_crypto_key_in">
+      <tp:docstring>Generate VHD's encryption key in specified directory.</tp:docstring>
+      <arg name="keysize" type="i" direction="in"/>
+      <arg name="dirpath" type="s" direction="in"/>
+    </method>
+
+    <method name="generate_crypto_key">
+      <tp:docstring>Generate VHD's encryption key in platform's key directory.</tp:docstring>
+      <arg name="keysize" type="i" direction="in"/>
+    </method>
+  </interface>
+
+</node>
