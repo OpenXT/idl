@@ -253,6 +253,10 @@
     <property name="modify-services" type="b" access="readwrite"/>
     <property name="modify-advanced-vm-settings" type="b" access="readwrite"/>
 
+    <property name="modify-usb-settings" type="b" access="readwrite">
+      <tp:docstring>If false, user will be unable to change vUSB device assignment.</tp:docstring>
+    </property>
+
     <property name="switcher-enabled" type="b" access="readwrite">
       <tp:docstring>True if seamless mouse switching is enabled.</tp:docstring>
     </property>
