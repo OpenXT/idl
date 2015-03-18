@@ -129,6 +129,9 @@
 			</arg>
 		</signal>
 		
+		<signal name="optical_device_detected">
+			<tp:docstring>Signal that we have a new optical device and refresh the host model.</tp:docstring>
+		</signal>
 		<signal name="devices_changed">
 			<tp:docstring>Device list previously given out may be out of date, re-enumerate.</tp:docstring>
 		</signal>
