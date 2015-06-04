@@ -3,6 +3,50 @@
   
   <interface name="com.citrix.xenclient.xcpmd">
 
+    <method name="battery_time_to_empty">
+      <tp:docstring>Returns when bat_n will be empty, in seconds, or 0
+      if the battery is not currently discharging</tp:docstring>
+      <arg type="u" name="bat_n" direction="in">
+	<tp:docstring>The battery ID, most likely 0 or 1</tp:docstring>
+      </arg>
+      <arg type="u" name="time_to_empty" direction="out" />
+    </method>
+
+    <method name="battery_time_to_full">
+      <tp:docstring>Returns when bat_n will be full, in seconds, or 0
+      if the battery is not currently charging</tp:docstring>
+      <arg type="u" name="bat_n" direction="in">
+	<tp:docstring>The battery ID, most likely 0 or 1</tp:docstring>
+      </arg>
+      <arg type="u" name="time_to_full" direction="out" />
+    </method>
+
+    <method name="battery_percentage">
+      <tp:docstring>Returns the remaining charge in percents for
+      bat_n</tp:docstring>
+      <arg type="u" name="bat_n" direction="in">
+	<tp:docstring>The battery ID, most likely 0 or 1</tp:docstring>
+      </arg>
+      <arg type="u" name="percentage" direction="out" />
+    </method>
+
+    <method name="battery_is_present">
+      <tp:docstring>Returns the presence of bat_n</tp:docstring>
+      <arg type="u" name="bat_n" direction="in">
+	<tp:docstring>The battery ID, most likely 0 or 1</tp:docstring>
+      </arg>
+      <arg type="b" name="is_present" direction="out" />
+    </method>
+
+    <method name="battery_state">
+      <tp:docstring>Returns the state of bat_n. For the values, see
+      http://upower.freedesktop.org/docs/Device.html#Device:State</tp:docstring>
+      <arg type="u" name="bat_n" direction="in">
+	<tp:docstring>The battery ID, most likely 0 or 1</tp:docstring>
+      </arg>
+      <arg type="u" name="state" direction="out" />
+    </method>
+
     <method name="get_ac_adapter_state">
       <tp:docstring>Returns AC adapter state.  A value of 1 means AC adapter in use, else 0.</tp:docstring>
       <arg type="u" name="ac_ret" direction="out" />
