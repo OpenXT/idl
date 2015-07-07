@@ -484,6 +484,8 @@
     </property>
 
     <property name="stubdom" type="b" access="readwrite"> <tp:docstring>Use stub domain to hide the device emulator.</tp:docstring> </property>
+    <property name="stubdom-memory" type="i" access="readwrite"> <tp:docstring>Memory given to the stubdomain, in megabytes.</tp:docstring> </property>
+    <property name="stubdom-cmdline" type="s" access="readwrite"> <tp:docstring>Cmdline to be appended to the stubdomain's default cmdline.</tp:docstring> </property>
     <property name="usb-enabled" type="b" access="readwrite"><tp:docstring>Enables PV USB support.</tp:docstring></property>
     <property name="usb-auto-passthrough" type="b" access="readwrite"><tp:docstring>Enables automatic passthrough of new USB devices to VM currently in focus upon plugging in.</tp:docstring></property>
     <property name="usb-control" type="b" access="readwrite"><tp:docstring>Enables VM to talk to USB daemon</tp:docstring></property>
