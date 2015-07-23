@@ -273,6 +273,10 @@
       <tp:docstring>Determines how hard the edges are for mouse-switching.</tp:docstring>
     </property>
 
+    <property name="switcher-status-report-enabled" type="b" access="readwrite">
+      <tp:docstring>If false, CTRL+ALT+R to generate a status report in the UI will be disabled.</tp:docstring>
+    </property>
+
     <property name="idle-time-threshold" type="i" access="readwrite">
       <tp:docstring>Determines the amount of time the host can be idle after which it goes to sleep.</tp:docstring>
     </property>
