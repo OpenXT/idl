@@ -3,6 +3,15 @@
   
   <interface name="com.citrix.xenclient.xcpmd">
 
+    <method name="batteries_present">
+      <tp:docstring>Returns a list of indices of the batteries currently present.
+      </tp:docstring>
+      <arg type="ai" name="batteries" direction="out">
+        <tp:docstring>Indices of the batteries currently present.
+        </tp:docstring>
+      </arg>
+    </method>
+
     <method name="battery_time_to_empty">
       <tp:docstring>Returns when bat_n will be empty, in seconds, or 0
       if the battery is not currently discharging</tp:docstring>
