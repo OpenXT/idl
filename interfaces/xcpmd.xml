@@ -100,6 +100,10 @@
       </arg>
     </method>
 
+    <signal name="num_batteries_changed">
+      <tp:docstring>Signals change in number of batteries present.</tp:docstring>
+    </signal>
+
     <signal name="ac_adapter_state_changed">
       <tp:docstring>Signals change in platform AC adapter status.</tp:docstring>
     </signal>
