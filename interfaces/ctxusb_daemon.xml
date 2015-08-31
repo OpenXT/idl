@@ -119,6 +119,10 @@
 			</arg>
 		</method>
 
+		<method name="reload_policy">
+			<tp:docstring>Reload the policy rules from the database</tp:docstring>
+		</method>
+
 		<signal name="device_rejected">
 			<tp:docstring>A USB device has been rejected due to a policy.</tp:docstring>
 			<arg name="device_name" type="s">
