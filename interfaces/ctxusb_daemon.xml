@@ -20,14 +20,14 @@
 				<tp:docstring>Policy for specified VM, as XML.</tp:docstring>
 			</arg>
 		</method>
-		
+
 		<method name="new_vm">
 			<tp:docstring>Tell daemon a new VM has been started.</tp:docstring>
 			<arg name="dom_id" type="i" direction="in">
 				<tp:docstring>ID of newly started VM.</tp:docstring>
 			</arg>
 		</method>
-		
+
 
 		<method name="vm_stopped">
 			<tp:docstring>Tell daemon a VM is stopping.</tp:docstring>
@@ -42,22 +42,22 @@
 				<tp:docstring>List of IDs of devices in the system.</tp:docstring>
 			</arg>
 		</method>
-		
+
 		<method name="get_device_info">
-		<tp:docstring><p>Connection states are defined as follows:</p> 
+		<tp:docstring><p>Connection states are defined as follows:</p>
 		<ul>
-		<li>-1  Cannot find device</li> 
-		<li>0  Device not in use by any VM</li> 
-		<li>1  Assigned to another VM which is off</li> 
-		<li>2  Assigned to another VM which is running</li> 
+		<li>-1  Cannot find device</li>
+		<li>0  Device not in use by any VM</li>
+		<li>1  Assigned to another VM which is off</li>
+		<li>2  Assigned to another VM which is running</li>
 		<li>3  Blocked by policy for specified VM</li>
-		<li>4  In use by specified VM</li> 
-		<li>5  In use by specified VM and flagged "sticky"</li> 
-		<li>6  Flagged as "sticky" assigned to specified VM, but not currently in use</li> 
-		<li>7  Special platform device, listed purely for information</li> 
-		<li>8  HiD device in use by dom0</li> 
-		<li>9  HiD device in use by dom0, but "sticky" assigned to an off VM</li> 
-		<li>10 External CD drive in use by dom0</li> 
+		<li>4  In use by specified VM</li>
+		<li>5  In use by specified VM and flagged "sticky"</li>
+		<li>6  Flagged as "sticky" assigned to specified VM, but not currently in use</li>
+		<li>7  Special platform device, listed purely for information</li>
+		<li>8  HiD device in use by dom0</li>
+		<li>9  HiD device in use by dom0, but "sticky" assigned to an off VM</li>
+		<li>10 External CD drive in use by dom0</li>
 		<li>11 External CD drive in use by dom0, but "sticky" assigned to an off VM</li>
 		</ul>
 		</tp:docstring>
@@ -65,16 +65,16 @@
 			</arg>
 			<arg name="vm_uuid" type="s" direction="in"> <tp:docstring>UUID of VM to get information relative to.</tp:docstring>
 			</arg>
-			<arg name="name" type="s" direction="out"><tp:docstring>Name of device.</tp:docstring> 
+			<arg name="name" type="s" direction="out"><tp:docstring>Name of device.</tp:docstring>
 			</arg>
-			<arg name="state" type="i" direction="out"><tp:docstring>Connection state of device.</tp:docstring> 
+			<arg name="state" type="i" direction="out"><tp:docstring>Connection state of device.</tp:docstring>
 			</arg>
 			<arg name="vm_assigned" type="s" direction="out"><tp:docstring>UUID of VM device is assigned to (if any).</tp:docstring>
 			</arg>
 			<arg name="detail" type="s" direction="out"><tp:docstring>Name detail, for mouse-over text.</tp:docstring>
 			</arg>
 		</method>
-		
+
 		<method name="assign_device">
 			<tp:docstring>Assign a device to a VM.</tp:docstring>
 			<arg name="dev_id" type="i" direction="in">
@@ -84,7 +84,7 @@
 				<tp:docstring>UUID of VM to assign device to.</tp:docstring>
 			</arg>
 		</method>
-		
+
 		<method name="unassign_device">
 			<tp:docstring>Unassign a device from a VM.</tp:docstring>
 			<arg name="dev_id" type="i" direction="in">
@@ -111,14 +111,18 @@
 				<tp:docstring>name to set for device</tp:docstring>
 			</arg>
 		</method>
-		
+
 		<method name="state">
 			<tp:docstring>Dump daemon state, for debugging only.</tp:docstring>
 			<arg name="state" type="s" direction="out">
 				<tp:docstring>Daemon state in human readable form.</tp:docstring>
 			</arg>
 		</method>
-		
+
+		<method name="reload_policy">
+			<tp:docstring>Reload the policy rules from the database</tp:docstring>
+		</method>
+
 		<signal name="device_rejected">
 			<tp:docstring>A USB device has been rejected due to a policy.</tp:docstring>
 			<arg name="device_name" type="s">
@@ -128,14 +132,14 @@
 				<tp:docstring>Human-readable description of reason for rejection</tp:docstring>
 			</arg>
 		</signal>
-		
+
 		<signal name="optical_device_detected">
 			<tp:docstring>Signal that we have a new optical device and refresh the host model.</tp:docstring>
 		</signal>
 		<signal name="devices_changed">
 			<tp:docstring>Device list previously given out may be out of date, re-enumerate.</tp:docstring>
 		</signal>
-		
+
 		<signal name="device_info_changed">
 			<tp:docstring>Information previously given out regarding device may be out of date, re-query.</tp:docstring>
 			<arg name="dev_id" type="i">
