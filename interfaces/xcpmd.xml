@@ -3,6 +3,125 @@
   
   <interface name="com.citrix.xenclient.xcpmd">
 
+    <method name="add_rule">
+      <tp:docstring>Adds a rule to the policy.</tp:docstring>
+      <arg type="s" name="name" direction="in">
+        <tp:docstring>The name of the rule to be added.
+        </tp:docstring>
+      </arg>
+      <arg type="s" name="conditions" direction="in">
+        <tp:docstring>A space-separated list of conditions,
+          each of the form "condition(arg1 arg2 arg3)"
+        </tp:docstring>
+      </arg>
+      <arg type="s" name="actions" direction="in">
+        <tp:docstring>A space-separated list of actions,
+          each of the form "action(arg1 arg2 arg3)"
+        </tp:docstring>
+      </arg>
+      <arg type="s" name="undo_actions" direction="in">
+        <tp:docstring>A space-separated list of actions,
+          each of the form "action(arg1 arg2 arg3)"
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="remove_rule">
+      <tp:docstring>Removes the rule with the specified name from
+        the policy.
+      </tp:docstring>
+      <arg type="s" name="rule_name" direction="in">
+        <tp:docstring>The name of the rule to be removed.
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="load_policy_from_db">
+      <tp:docstring>Loads the rules and variables available in the DB.
+      </tp:docstring>
+    </method>
+
+    <method name="load_policy_from_file">
+      <tp:docstring>Loads a set of rules and variables from the specified file.
+      </tp:docstring>
+      <arg type="s" name="filename" direction="in">
+        <tp:docstring>Absolute path to the policy file.
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="clear_policy">
+      <tp:docstring>Removes all loaded rules and variables.
+      </tp:docstring>
+    </method>
+
+    <method name="clear_rules">
+      <tp:docstring>Removes all loaded rules.
+      </tp:docstring>
+    </method>
+
+    <method name="clear_vars">
+      <tp:docstring>Removes all loaded variables that are not currently being
+        used by rules.
+      </tp:docstring>
+    </method>
+
+    <method name="add_var">
+      <tp:docstring>Adds or overwrites a variable.</tp:docstring>
+      <arg type="s" name="name" direction="in">
+        <tp:docstring>The name of the variable to be added.
+        </tp:docstring>
+      </arg>
+      <arg type="s" name="value" direction="in">
+        <tp:docstring>The value of the variable to be added.
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="remove_var">
+      <tp:docstring>Removes a variable.</tp:docstring>
+      <arg type="s" name="name" direction="in">
+        <tp:docstring>The name of the variable to be removed.
+        </tp:docstring>
+      </arg>
+    </method>
+
+    <method name="get_conditions">
+      <tp:docstring>Returns the list of currently available 
+        conditions.</tp:docstring>
+      <arg type="as" name="conditions" direction="out">
+        <tp:docstring>An array of human-readable descriptions
+          of currently available conditions.</tp:docstring>
+      </arg>
+    </method>
+
+    <method name="get_actions">
+      <tp:docstring>Returns the list of currently available 
+        actions.</tp:docstring>
+      <arg type="as" name="actions" direction="out">
+        <tp:docstring>An array of human-readable descriptions
+          of currently available actions.</tp:docstring>
+      </arg>
+    </method>
+
+    <method name="get_rules">
+      <tp:docstring>Returns the list of currently loaded rules.
+      </tp:docstring>
+      <arg type="as" name="rules" direction="out">
+        <tp:docstring>An array of human-readable descriptions
+          of currently loaded rules.</tp:docstring>
+      </arg>
+    </method>
+
+    <method name="get_vars">
+      <tp:docstring>Returns the list of currently loaded variables.
+      </tp:docstring>
+      <arg type="as" name="vars" direction="out">
+        <tp:docstring>An array of human-readable descriptions
+          of currently loaded variables.</tp:docstring>
+      </arg>
+    </method>
+              
     <method name="batteries_present">
       <tp:docstring>Returns a list of indices of the batteries currently present.
       </tp:docstring>
