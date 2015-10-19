@@ -134,12 +134,32 @@
     <method name="sleep">
       <tp:docstring>Send the host into s3 (sleep).</tp:docstring>
     </method>
+
+    <method name="set_displayhandler_gpu">
+      <tp:docstring>Set the gpu that displayhandler should use.</tp:docstring>
+      <arg name="gpu" type="s" direction="in"/>
+    </method>
+
+    <method name="get_displayhandler_gpu">
+      <tp:docstring>Query xenmgr for the gpu for displayhandler to use.</tp:docstring>
+      <arg name="gpu" type="s" direction="out"/>
+    </method>
+
+    <method name="list_gpus_for_displayhandler">
+      <tp:docstring>Query xenmgr for all potential gpus for displayhandler.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="license_changed">
       <tp:docstring>Notify that licensing evaluation has changed.</tp:docstring>
     </signal>
+
+    <signal name="displayhandler_gpu_changed">
+      <tp:docstring>Notify that displayhandler gpu changed.</tp:docstring>
+    </signal>
+
     <signal name="state_changed">
       <tp:docstring>Notify that the host state has changed (sleeping, hibernating etc).</tp:docstring>
       <arg name="state" type="s"/>
@@ -245,5 +265,6 @@
         <tp:docstring/>
       </arg>
     </method>
+
   </interface>
 </node>
