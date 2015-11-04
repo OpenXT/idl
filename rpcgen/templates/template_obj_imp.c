@@ -22,6 +22,7 @@ static void
 handle_set_property(GObject *obj, guint propid, const GValue *value, GParamSpec *spec)
 {
     @GLIB_OBJ@ *self = @OBJECT@_OBJECT (obj);
+    (void) self;
     switch (propid) {
     @set_property_body@
     }
@@ -31,6 +32,7 @@ static void
 handle_get_property(GObject *obj, guint propid, GValue *value, GParamSpec *spec)
 {
     @GLIB_OBJ@ *self = @OBJECT@_OBJECT (obj);
+    (void) self;
     switch (propid) {
     @get_property_body@
     }
