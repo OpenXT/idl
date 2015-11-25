@@ -175,6 +175,34 @@
       <arg type="u" name="state" direction="out" />
     </method>
 
+    <method name="aggregate_battery_percentage">
+      <tp:docstring>Returns the remaining charge in percent for the whole system.
+      </tp:docstring>
+      <arg type="u" name="percentage" direction="out" />
+    </method>
+
+    <method name="aggregate_battery_state">
+      <tp:docstring>Returns the charge/discharge state of the whole system, as
+        in http://upower.freedesktop.org/docs/Device.html#Device:State.
+      </tp:docstring>
+      <arg type="u" name="state" direction="out" />
+    </method>
+
+    <method name="aggregate_battery_time_to_empty">
+      <tp:docstring>Returns the number of seconds until all batteries in the
+        system have fully discharged, or 0 if the system isn't currently
+        discharging.
+      </tp:docstring>
+      <arg type="u" name="time_to_empty" direction="out" />
+    </method>
+
+    <method name="aggregate_battery_time_to_full">
+      <tp:docstring>Returns the number of seconds until all batteries in the
+        system have fully charged, or 0 if the system isn't currently charging.
+      </tp:docstring>
+      <arg type="u" name="time_to_full" direction="out" />
+    </method>
+
     <method name="get_ac_adapter_state">
       <tp:docstring>Returns AC adapter state.  A value of 1 means AC adapter in use, else 0.</tp:docstring>
       <arg type="u" name="ac_ret" direction="out" />
