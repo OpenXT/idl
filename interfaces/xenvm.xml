@@ -4,7 +4,15 @@
 	<interface name="xenvm.signal.notify">
 		<signal name="notify">
 			<tp:docstring>Signals a VM state change.</tp:docstring>
-			<arg name="vmstate" type="as" />
+			<arg name="uuid" type="s">
+				<tp:docstring>UUID of VM to signal.</tp:docstring>
+			</arg>
+			<arg name="mem_size" type="i">
+				<tp:docstring>Mem size in pages.</tp:docstring>
+			</arg>
+			<arg name="vmstate" type="s">
+				<tp:docstring>State of the VM.</tp:docstring>
+			</arg>
 		</signal>
 	</interface>
 
