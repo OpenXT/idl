@@ -119,6 +119,13 @@
 			</arg>
 		</method>
 
+		<signal name="device_added">
+			<tp:docstring>A device was just added to the list</tp:docstring>
+			<arg name="dev_id" type="i">
+				<tp:docstring>ID of the new device</tp:docstring>
+			</arg>
+		</signal>
+
 		<method name="reload_policy">
 			<tp:docstring>Reload the policy rules from the database</tp:docstring>
 		</method>
