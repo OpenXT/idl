@@ -131,6 +131,12 @@
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
+	
+	<signal name="notify">
+	  <tp:docstring>Send out generic notification, details inside string arg.</tp:docstring>
+      <arg name="uuid" type="s"/>
+      <arg name="messsage" type="s"/>
+	</signal>
 
     <signal name="vm_state_changed">
       <tp:docstring>Notify that VM state has changed.</tp:docstring>
