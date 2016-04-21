@@ -220,6 +220,16 @@
     <arg type="i" name="mode" direction="in" />
     </method>
 
+    <method name="attach_vkbd">
+    <tp:docstring>Attach a VKBD (mouse and keyboard) to the given domain.</tp:docstring>
+    <arg type="i" name="domid" direction="in" />
+    </method>
+
+    <method name="detach_vkbd">
+    <tp:docstring>Detach a VKBD (mouse and keyboard) from the given domain.</tp:docstring>
+    <arg type="i" name="domid" direction="in" />
+    </method>
+
     <property name="numlock-restore-on-switch" type="b" access="readwrite">
     <tp:docstring>Restore NumLock status on switch to VM.</tp:docstring>
     </property>
