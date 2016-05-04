@@ -65,7 +65,7 @@
     </method>
 
     <method name="set_visible">
-      <arg name="domids" type="ai" direction="in"></arg>
+      <arg name="domid" type="i" direction="in"></arg>
       <arg name="timeout" type="i" direction="in"></arg>
       <arg name="force" type="b" direction="in"></arg>
     </method>
