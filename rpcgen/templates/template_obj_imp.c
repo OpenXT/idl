@@ -48,7 +48,8 @@ static void @object@_object_class_init (@GLIB_CLASS@ *klass)
     @init_properties@
     gc->set_property = handle_set_property;
     gc->get_property = handle_get_property;
-    g_object_class_install_properties(gc, N_PROPERTIES, obj_properties);
+    if (N_PROPERTIES > 1)
+      g_object_class_install_properties(gc, N_PROPERTIES, obj_properties);
 }
 
 @GLIB_OBJ@ *@object@_create_glib_obj()
