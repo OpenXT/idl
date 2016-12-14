@@ -134,8 +134,8 @@
 	
 	<signal name="notify">
 	  <tp:docstring>Send out generic notification, details inside string arg.</tp:docstring>
-      <arg name="uuid" type="s"/>
-      <arg name="messsage" type="s"/>
+	  <arg name="uuid" type="s"/>
+	  <arg name="messsage" type="s"/>
 	</signal>
 
     <signal name="vm_state_changed">
