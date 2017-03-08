@@ -72,10 +72,9 @@
       </tp:docstring>
     </property>
     <property name="initrd" type="s" access="readwrite"/>
-    <property name="acpi-path" type="s" access="readwrite">
+    <property name="acpi-table" type="b" access="readwrite">
       <tp:docstring>Enable OEM windows install by exposing the ACPI SLIC table.</tp:docstring>
     </property>
-    <property name="smbios" type="s" access="readwrite"/>
     <property name="vcpus" type="i" access="readwrite"/>
     <property name="cores-per-socket" type="i" access="readwrite"/>
     <property name="videoram" type="i" access="readwrite"/>
@@ -406,10 +405,9 @@
       </tp:docstring>
     </property>
     <property name="initrd" type="s" access="readwrite"/>
-    <property name="acpi-path" type="s" access="readwrite">
+    <property name="acpi-table" type="b" access="readwrite">
       <tp:docstring>Enable OEM windows installation by exposing the ACPI SLIC table.</tp:docstring>
     </property>
-    <property name="smbios" type="s" access="readwrite"/>
     <property name="vcpus" type="i" access="readwrite"/>
     <property name="cores-per-socket" type="i" access="readwrite"/>
     <property name="videoram" type="i" access="readwrite"/>
