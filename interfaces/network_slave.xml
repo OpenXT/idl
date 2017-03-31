@@ -76,6 +76,12 @@
       <arg type="u" name="nm_state" direction="out" />
     </method>
 
+    <method name="vif_added">
+      <tp:docstring>Returns whether the vif has been added to a bridge</tp:docstring>
+      <arg type="s" name="vif" direction="in" />
+      <arg type="b" name="added" direction="out" />
+    </method>
+
   </interface>
 
   <interface name="com.citrix.xenclient.networkslave.notify">

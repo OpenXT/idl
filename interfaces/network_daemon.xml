@@ -52,6 +52,13 @@
       <arg type="b" name="is_initialized" direction="out" />
     </method>
 
+    <method name="vif_connected">
+      <tp:docstring>Returns true if the vif is connected in the appropriate network slave.</tp:docstring>
+      <arg type="s" name="vif" direction="in" />
+      <arg type="i" name="domid" direction="in" />
+      <arg type="b" name="connected" direction="out" />
+    </method>
+
     <method name="get_network_backend">
       <tp:docstring>Returns network backend for a network.</tp:docstring>
       <arg type="s" name="network" direction="in" />
