@@ -10,6 +10,7 @@
     <property name="mac" type="s" access="readwrite"> <tp:docstring>Specify MAC address, or 'auto'.</tp:docstring> </property>
     <property name="mac-actual" type="s" access="read"> <tp:docstring>MAC address.</tp:docstring> </property>
     <property name="enabled" type="b" access="readwrite"> <tp:docstring>Interface enabled/disabled flag.</tp:docstring> </property>
+    <property name="model" type="s" access="readwrite"> <tp:docstring>Model for emulated nic.</tp:docstring> </property>
     <method name="delete"> <tp:docstring>Delete NIC.</tp:docstring> </method>
   </interface>
 
