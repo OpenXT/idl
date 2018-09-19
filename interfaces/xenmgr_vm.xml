@@ -102,7 +102,7 @@
     <property name="keep-alive" type="b" access="readwrite">
       <tp:docstring>Automatically restart this VM if it shuts down or crashes.</tp:docstring>
     </property>
-    
+
     <property name="provides-network-backend" type="b" access="readwrite">
       <tp:docstring>Whether this domain is a networking backend and handles the physical NIC devices.</tp:docstring>
     </property>
@@ -200,13 +200,14 @@
     <property name="download-progress" type="i" access="readwrite"><tp:docstring>VM download progress.</tp:docstring></property>
     <property name="ready" type="b" access="readwrite"><tp:docstring>Is VM ready for use?</tp:docstring></property>
     <property name="restrict-display-depth" type="b" access="readwrite"><tp:docstring>Restrict available display depths. Currently required by emulated VGA in Windows 8.</tp:docstring></property>
-    <property name="restrict-display-res" type="b" access="readwrite"><tp:docstring>Restrict available display resolutions.</tp:docstring></property>   
+    <property name="restrict-display-res" type="b" access="readwrite"><tp:docstring>Restrict available display resolutions.</tp:docstring></property>
     <property name="preserve-on-reboot" type="b" access="readwrite"><tp:docstring>After reboot, keep the vm in rebooted state instead of automatically restarting it</tp:docstring></property>
     <property name="boot-sentinel" type="s" access="readwrite"><tp:docstring>Name of xenstore node to wait on before completing vm startup from toolstack PoV. Useful if VM exports services which need to be immediately usable by other vms</tp:docstring></property>
     <property name="hpet" type="b" access="readwrite"><tp:docstring>HPET support</tp:docstring></property>
     <property name="timer-mode" type="s" access="readwrite"><tp:docstring>Domain timer mode</tp:docstring></property>
     <property name="nestedhvm" type="b" access="readwrite"><tp:docstring>Enable nested virtualization</tp:docstring></property>
     <property name="serial" type="s" access="readwrite"><tp:docstring>Serial port specification</tp:docstring></property>
+    <property name="bios" type="s" access="readwrite"><tp:docstring>Bios specification</tp:docstring></property>
 
     <method name="get_db_key">
       <tp:docstring>Get the value of a VM db key.</tp:docstring>
@@ -440,7 +441,7 @@
     <property name="keep-alive" type="b" access="readwrite">
       <tp:docstring>Automatically restart this VM if it shuts down or crashes.</tp:docstring>
     </property>
-    
+
     <property name="provides-network-backend" type="b" access="readwrite">
       <tp:docstring>Whether this domain is a networking backend and handles the physical nic devices.</tp:docstring>
     </property>
@@ -536,13 +537,14 @@
     <property name="download-progress" type="i" access="readwrite"><tp:docstring>VM download progress.</tp:docstring></property>
     <property name="ready" type="b" access="readwrite"><tp:docstring>Is VM ready for use?</tp:docstring></property>
     <property name="restrict-display-depth" type="b" access="readwrite"><tp:docstring>Restrict available display depths. Currently required by emulated VGA in Windows 8.</tp:docstring></property>
-    <property name="restrict-display-res" type="b" access="readwrite"><tp:docstring>Restrict available display resolutions.</tp:docstring></property>   
+    <property name="restrict-display-res" type="b" access="readwrite"><tp:docstring>Restrict available display resolutions.</tp:docstring></property>
     <property name="preserve-on-reboot" type="b" access="readwrite"><tp:docstring>After reboot, keep the vm in rebooted state instead of automatically restarting it</tp:docstring></property>
     <property name="boot-sentinel" type="s" access="readwrite"><tp:docstring>Name of xenstore node to wait on before completing vm startup from toolstack PoV. Useful if VM exports services which need to be immediately usable by other vms</tp:docstring></property>
     <property name="hpet" type="b" access="readwrite"><tp:docstring>HPET support</tp:docstring></property>
     <property name="timer-mode" type="s" access="readwrite"><tp:docstring>Domain timer mode</tp:docstring></property>
     <property name="nestedhvm" type="b" access="readwrite"><tp:docstring>Enable nested virtualization</tp:docstring></property>
     <property name="serial" type="s" access="readwrite"><tp:docstring>Serial port specification</tp:docstring></property>
+    <property name="bios" type="s" access="readwrite"><tp:docstring>Bios specification</tp:docstring></property>
   </interface>
 
   <interface name="com.citrix.xenclient.xenmgr.vm.product">
