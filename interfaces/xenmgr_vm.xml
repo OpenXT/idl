@@ -193,7 +193,7 @@
     <property name="vsnd" type="b" access="readwrite"><tp:docstring>Use PV audio device.</tp:docstring></property>
     <property name="vkbd" type="b" access="readwrite"><tp:docstring>Use PV keyboard and mouse.</tp:docstring></property>
     <property name="vfb" type="b" access="readwrite"><tp:docstring>Use PV framebuffer.</tp:docstring></property>
-    <property name="v4v" type="b" access="readwrite"><tp:docstring>Use V4V.</tp:docstring></property>
+    <property name="argo" type="b" access="readwrite"><tp:docstring>Use Argo.</tp:docstring></property>
     <property name="private-space" type="i" access="read"><tp:docstring>Private space used (in MiB).</tp:docstring></property>
     <property name="realm" type="s" access="readwrite"><tp:docstring>Realm ID.</tp:docstring></property>
     <property name="sync-uuid" type="s" access="readwrite"><tp:docstring>VM UUID in synchroniser space.</tp:docstring></property>
@@ -325,9 +325,9 @@
       <arg name="path" type="o" direction="out"/>
     </method>
 
-    <method name="list_v4v_firewall_rules"> <arg name="rules" type="as" direction="out"/> </method>
-    <method name="add_v4v_firewall_rule"> <arg name="rule" type="s" direction="in"/> </method>
-    <method name="delete_v4v_firewall_rule"> <arg name="rule" type="s" direction="in"/> </method>
+    <method name="list_argo_firewall_rules"> <arg name="rules" type="as" direction="out"/> </method>
+    <method name="add_argo_firewall_rule"> <arg name="rule" type="s" direction="in"/> </method>
+    <method name="delete_argo_firewall_rule"> <arg name="rule" type="s" direction="in"/> </method>
 
     <method name="add_net_firewall_rule">
       <arg name="id" type="i" direction="in"/>
@@ -533,7 +533,7 @@
     <property name="vsnd" type="b" access="readwrite"><tp:docstring>Use PV audio device.</tp:docstring></property>
     <property name="vkbd" type="b" access="readwrite"><tp:docstring>Use PV keyboard and mouse.</tp:docstring></property>
     <property name="vfb" type="b" access="readwrite"><tp:docstring>Use PV framebuffer.</tp:docstring></property>
-    <property name="v4v" type="b" access="readwrite"><tp:docstring>Use V4V.</tp:docstring></property>
+    <property name="argo" type="b" access="readwrite"><tp:docstring>Use Argo.</tp:docstring></property>
     <property name="private-space" type="i" access="read"><tp:docstring>Private space used (in MiB).</tp:docstring></property>
     <property name="realm" type="s" access="readwrite"><tp:docstring>Realm ID.</tp:docstring></property>
     <property name="sync-uuid" type="s" access="readwrite"><tp:docstring>VM UUID in Synchroniser space.</tp:docstring></property>
