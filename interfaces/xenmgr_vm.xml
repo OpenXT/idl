@@ -87,6 +87,8 @@
     <property name="passthrough-mmio" type="s" access="readwrite"/>
     <property name="passthrough-io" type="s" access="readwrite"/>
     <property name="flask-label" type="s" access="readwrite"/>
+    <property name="init-flask-label" type="s" access="readwrite"/>
+    <property name="stubdom-flask-label" type="s" access="readwrite"/>
     <property name="qemu-dm-path" type="s" access="readwrite"/>
     <property name="qemu-dm-timeout" type="i" access="readwrite">
       <tp:docstring>Timeout (in seconds) to wait for qemu response during qemu startup.</tp:docstring>
@@ -422,6 +424,8 @@
     <property name="passthrough-mmio" type="s" access="readwrite"/>
     <property name="passthrough-io" type="s" access="readwrite"/>
     <property name="flask-label" type="s" access="readwrite"/>
+    <property name="init-flask-label" type="s" access="readwrite"/>
+    <property name="stubdom-flask-label" type="s" access="readwrite"/>
     <property name="qemu-dm-path" type="s" access="readwrite"/>
     <property name="qemu-dm-timeout" type="i" access="readwrite">
       <tp:docstring>Timeout (in seconds) to wait for qemu response during its startup.</tp:docstring>
