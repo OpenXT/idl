@@ -197,7 +197,7 @@
     <property name="autostart" type="b" access="readwrite"/>
     <property name="pvm-autostart-delay" type="i" access="readwrite"/>
     <property name="svm-autostart-delay" type="i" access="readwrite"/>
-    <property name="v4v-hosts-file" type="b" access="readwrite"/>
+    <property name="argo-hosts-file" type="b" access="readwrite"/>
     <property name="use-networking-domain" type="b" access="read"/>
     <property name="bypass-sha1sum-checks" type="b" access="read"/>
     <property name="xc-diag-timeout" type="i" access="readwrite"/>
@@ -213,8 +213,8 @@
     <property name="connect-remote-desktop-allowed" type="b" access="readwrite"><tp:docstring>Allow using remote desktop (via icavm).</tp:docstring></property>
 
     <property name="measure-fail-action" type="s" access="readwrite"> <tp:docstring>Action to perform when computing service VM checksum fails: sleep,hibernate,shutdown,reboot,nothing.</tp:docstring></property>
-    <property name="v4v-firewall" type="b" access="readwrite">
-      <tp:docstring>If true, v4v firewall is enabled, rejecting all incoming traffic by default.</tp:docstring>
+    <property name="argo-firewall" type="b" access="readwrite">
+      <tp:docstring>If true, argo firewall is enabled, rejecting all incoming traffic by default.</tp:docstring>
     </property>
 
     <property name="secondary-gpu-pt" type="b" access="read">
@@ -229,7 +229,7 @@
       <tp:docstring>Enable external SSH access to dom0.</tp:docstring>
     </property>
 
-    <property name="enable-v4v-ssh" type="b" access="readwrite">
+    <property name="enable-argo-ssh" type="b" access="readwrite">
       <tp:docstring>Enable internal SSH access to dom0.</tp:docstring>
     </property>
 
