@@ -17,4 +17,4 @@ Executable xc-rpcgen
     HaXml == 1.20.2,
     dbus-core == 0.8.*
   Main-Is: Main.hs
-  GHC-Options: -O2 -fwarn-incomplete-patterns
+  GHC-Options: -O2 -fwarn-incomplete-patterns -optc-no-pie -optl-no-pie -optP-no-pie
