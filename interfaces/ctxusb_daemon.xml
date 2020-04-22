@@ -75,6 +75,141 @@
         <tp:docstring>ID of newly started VM.</tp:docstring>
       </arg>
     </method>
+    <method name="policy_get_rule">
+      <tp:docstring>Get a specific USB rule</tp:docstring>
+      <arg name="rule_id" type="i" direction="in">
+        <tp:docstring>Index position of the rule to get</tp:docstring>
+      </arg>
+      <arg name="command" type="s" direction="out">
+        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+      </arg>
+      <arg name="description" type="s" direction="out">
+        <tp:docstring>Description of the policy rule</tp:docstring>
+      </arg>
+      <arg name="vendor_id" type="s" direction="out">
+        <tp:docstring>USB vendor ID as hexadecimal, parsed by strtol (e.g. 8086)</tp:docstring>
+      </arg>
+      <arg name="device_id" type="s" direction="out">
+        <tp:docstring>USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)</tp:docstring>
+      </arg>
+      <arg name="serial_number" type="s" direction="out">
+        <tp:docstring>Serial number of the device, or an empty string to match any</tp:docstring>
+      </arg>
+      <arg name="sysattrs" type="a{ss}" direction="out">
+        <tp:docstring>Dict of String:String sysattributes</tp:docstring>
+      </arg>
+      <arg name="udev_properties" type="a{ss}" direction="out">
+        <tp:docstring>Dict of String:String udev properties</tp:docstring>
+      </arg>
+      <arg name="vm_uuid" type="s" direction="out">
+        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+      </arg>
+    </method>
+    <method name="policy_get_rules">
+      <tp:docstring>Get a set of all USB rules</tp:docstring>
+      <arg name="rule_set" type="a(isssssa{ss}a{ss}s)" direction="out">
+        <tp:docstring>The set of rules in the format as an array of structs of:<p/>
+          <ol>
+            <li>Rule ID</li>
+            <li>Command</li>
+            <li>Description</li>
+            <li>Vendor ID as a String interpretable by strtol (e.g. 8086). An empty string or 0 indicates to match any device.</li>
+            <li>Device ID/Product ID as a String interpretable by strtol (e.g. 8086). An empty string or 0 indicates to match any device.</li>
+            <li>Serial number of device. An empty string indicates to ignore serial number (match any).</li>
+            <li>Dict of String:String sysattibutes</li>
+            <li>Dict of String:String udev properties</li>
+            <li>VM UUID, or an empty string to match any VM</li>
+          </ol>
+        </tp:docstring>
+      </arg>
+    </method>
+    <method name="policy_list">
+      <tp:docstring>Get all USB rule IDs</tp:docstring>
+      <arg name="rules" type="ai" direction="out">
+        <tp:docstring>Array of the policy IDs for USB rules</tp:docstring>
+      </arg>
+    </method>
+    <method name="policy_remove_rule">
+      <tp:docstring>Remove a specific USB rule</tp:docstring>
+      <arg name="rule_id" type="i" direction="in">
+        <tp:docstring>ID of the rule to remove</tp:docstring>
+      </arg>
+    </method>
+    <method name="policy_set_rule">
+      <tp:docstring>Set or create a specific USB rule</tp:docstring>
+      <arg name="rule_id" type="i" direction="in">
+        <tp:docstring>ID of the rule. If a rule exists with the ID, it will be replaced.</tp:docstring>
+      </arg>
+      <arg name="command" type="s" direction="in">
+        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+      </arg>
+      <arg name="description" type="s" direction="in">
+        <tp:docstring>Description of the policy rule</tp:docstring>
+      </arg>
+      <arg name="vendor_id" type="s" direction="in">
+        <tp:docstring>USB vendor ID as headecimal, parsed by strtol (e.g. 8086)</tp:docstring>
+      </arg>
+      <arg name="device_id" type="s" direction="in">
+        <tp:docstring>USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)</tp:docstring>
+      </arg>
+      <arg name="serial_number" type="s" direction="in">
+        <tp:docstring>Serial number of the device, or an empty string to match any</tp:docstring>
+      </arg>
+      <arg name="sysattrs" type="a{ss}" direction="in">
+        <tp:docstring>Dict of String:String sysattributes</tp:docstring>
+      </arg>
+      <arg name="udev_properties" type="a{ss}" direction="in">
+        <tp:docstring>Dict of String:String udev properties</tp:docstring>
+      </arg>
+      <arg name="vm_uuid" type="s" direction="in">
+        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+      </arg>
+    </method>
+    <method name="policy_set_rule_advanced">
+      <tp:docstring>Set or create a specific USB rule, an advanced interface wrapper around <i>policy_set_rule</i></tp:docstring>
+      <arg name="rule_id" type="i" direction="in">
+        <tp:docstring>ID of the rule. If a rule exists with the ID, it will be replaced.</tp:docstring>
+      </arg>
+      <arg name="command" type="s" direction="in">
+        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+      </arg>
+      <arg name="description" type="s" direction="in">
+        <tp:docstring>Description of the policy rule</tp:docstring>
+      </arg>
+      <arg name="sysattrs" type="a{ss}" direction="in">
+        <tp:docstring>Dict of String:String sysattributes</tp:docstring>
+      </arg>
+      <arg name="udev_properties" type="a{ss}" direction="in">
+        <tp:docstring>Dict of String:String udev properties</tp:docstring>
+      </arg>
+      <arg name="vm_uuid" type="s" direction="in">
+        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+      </arg>
+    </method>
+    <method name="policy_set_rule_basic">
+      <tp:docstring>Set or create a specific USB rule, a simple interface wrapper around <i>policy_set_rule</i></tp:docstring>
+      <arg name="rule_id" type="i" direction="in">
+        <tp:docstring>ID of the rule. If a rule exists with the ID, it will be replaced.</tp:docstring>
+      </arg>
+      <arg name="command" type="s" direction="in">
+        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+      </arg>
+      <arg name="description" type="s" direction="in">
+        <tp:docstring>Description of the policy rule</tp:docstring>
+      </arg>
+      <arg name="vendor_id" type="s" direction="in">
+        <tp:docstring>USB vendor ID as headecimal, parsed by strtol (e.g. 8086)</tp:docstring>
+      </arg>
+      <arg name="device_id" type="s" direction="in">
+        <tp:docstring>USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)</tp:docstring>
+      </arg>
+      <arg name="serial_number" type="s" direction="in">
+        <tp:docstring>Serial number of the device, or an empty string to match any</tp:docstring>
+      </arg>
+      <arg name="vm_uuid" type="s" direction="in">
+        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+      </arg>
+    </method>
     <method name="reload_policy">
       <tp:docstring>Reload the policy rules from the database</tp:docstring>
     </method>
