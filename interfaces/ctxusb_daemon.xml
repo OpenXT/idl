@@ -54,15 +54,6 @@
         <tp:docstring>Name detail, for mouse-over text.</tp:docstring>
       </arg>
     </method>
-    <method name="get_policy_domuuid">
-      <tp:docstring>Query the USB device policy for a specified VM.</tp:docstring>
-      <arg name="uuid" type="s" direction="in">
-        <tp:docstring>UUID of VM to query policy for.</tp:docstring>
-      </arg>
-      <arg name="value" type="s" direction="out">
-        <tp:docstring>Policy for specified VM, as XML.</tp:docstring>
-      </arg>
-    </method>
     <method name="list_devices">
       <tp:docstring>Enumerate the USB devices plugged into the system.</tp:docstring>
       <arg name="devices" type="ai" direction="out">
@@ -86,15 +77,6 @@
     </method>
     <method name="reload_policy">
       <tp:docstring>Reload the policy rules from the database</tp:docstring>
-    </method>
-    <method name="set_policy_domuuid">
-      <tp:docstring>Set the USB device policy for a specified VM.</tp:docstring>
-      <arg name="uuid" type="s" direction="in">
-        <tp:docstring>UUID of VM to query policy for.</tp:docstring>
-      </arg>
-      <arg name="policy" type="s" direction="in">
-        <tp:docstring>Policy for specified VM, as XML.</tp:docstring>
-      </arg>
     </method>
     <method name="set_sticky">
       <tp:docstring>Set or clear the sticky assignment flag for a device.</tp:docstring>
