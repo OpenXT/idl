@@ -85,7 +85,7 @@ gtypeFromDBusType D.DBusByte       = "guchar"
 gtypeFromDBusType D.DBusInt16      = "gint"
 gtypeFromDBusType D.DBusInt32      = "gint"
 gtypeFromDBusType D.DBusInt64      = "gint64"
-gtypeFromDBusType D.DBusWord16     = "guint"
+gtypeFromDBusType D.DBusWord16     = "guint16"
 gtypeFromDBusType D.DBusWord32     = "guint"
 gtypeFromDBusType D.DBusWord64     = "guint64"
 gtypeFromDBusType D.DBusDouble     = "gdouble"
@@ -97,7 +97,7 @@ gtypeFromDBusType (D.DBusArray D.DBusString) = "char**"
 gtypeFromDBusType (D.DBusArray t)
                   | fixedType t = "GArray*"
                   | otherwise   = "GPtrArray*"
-gtypeFromDBusType (D.DBusStructure _ )   = "GValueArray*"
+gtypeFromDBusType (D.DBusStructure _ )   = "GPtrArray*"
 gtypeFromDBusType (D.DBusDictionary _ _) = "GHashTable*"
 
 dbusTypeTag :: D.Type -> String
