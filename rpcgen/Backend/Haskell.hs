@@ -147,8 +147,12 @@ haskellType (D.DBusDictionary k v) =
     HaskellType $ printf "(Map.Map %s %s)" (haskellTypeStr tk) (haskellTypeStr tv)
     where tk = haskellType k
           tv = haskellType v
-haskellType (D.DBusStructure ts) =
-    HaskellType $ printf "(%s)" (join ", " $ map (haskellTypeStr . haskellType) ts)
+-- | FIXME: Commented code below does not compile. Handling as a String to silence
+-- |        compiler warning for unlinked modules. Must be fixed to use structs in
+-- |        a Haskell-based utility
+haskellType (D.DBusStructure ts) = HaskellType "String"
+-- haskellType (D.DBusStructure ts) =
+--    HaskellType $ printf "(%s)" (join ", " $ map (haskellTypeStr . haskellType) ts)
 
 -- to avoid clashes we suffix param names
 suffixParamName :: Parameter -> Parameter
