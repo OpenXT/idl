@@ -222,6 +222,9 @@
 	  0,1:/boot/vmlinuz (/boot/vmlinuz in 1st partitin of disk 0)
       </tp:docstring>
     </property>
+    <property name="display-handler-strict" type="b" access="readwrite">
+      <tp:docstring>Strict checking for information about a VM's domain specific information (color, name, nickname)</tp:docstring>
+    </property>
     <property name="mac" type="s" access="read"/>
     <property name="measured" type="b" access="read">
       <tp:docstring>If the VM is measured, the hash of the disk image is checked before it is allowed to start.</tp:docstring>
@@ -567,6 +570,9 @@
     <property name="hidden-in-ui" type="b" access="readwrite"/>
     <property name="hpet" type="b" access="readwrite">
       <tp:docstring>HPET support</tp:docstring>
+    </property>
+    <property name="display-handler-strict" type="b" access="readwrite">
+      <tp:docstring>Strict checking for information about a VM's domain specific information (color, name, nickname)</tp:docstring>
     </property>
     <property name="icbinn-path" type="s" access="readwrite">
       <tp:docstring>Filesystem path exported to the VM via icbinn server.</tp:docstring>
