@@ -230,13 +230,13 @@
       <tp:docstring>Path to the icon used to represent the VM in the UI.</tp:docstring>
     </property>
     <property name="long_form_vg" type="s" access="readwrite">
-      <tp:docstring>Unused</tp:docstring>
+      <tp:docstring>Label displayed on the overlay to identify the VM. This cannot exceed around 3/5th of the total width of the display or the short version will be used instead.</tp:docstring>
     </property>
     <property name="short_form_vg" type="s" access="readwrite">
-      <tp:docstring>Unused</tp:docstring>
+      <tp:docstring>Abreviated (short) lavel displayed on the overlay to identify the VM. This is only displayed if long_form_vg is too long (its rendered size is close to 3/5th of the display width). If the short format is too long still, it is truncated.</tp:docstring>
     </property>
     <property name="text_color_vg" type="s" access="readwrite">
-      <tp:docstring>Unused</tp:docstring>
+      <tp:docstring>Label text color given in RGB (e.g, #ff0000).</tp:docstring>
     </property>
     <property name="border_width_vg" type="i" access="readwrite">
       <tp:docstring>Unused</tp:docstring>
@@ -263,10 +263,10 @@
       <tp:docstring>Last height of windowed mode (mosaic-windowed only)</tp:docstring>
     </property>
     <property name="primary_domain_color" type="s" access="readwrite">
-      <tp:docstring>Primary Color for decorations</tp:docstring>
+      <tp:docstring>Primary color for decorations, the background of the overlay bar given in RGB (e.g, #ff0000).</tp:docstring>
     </property>
     <property name="secondary_domain_color" type="s" access="readwrite">
-      <tp:docstring>Secondary Color for decorations</tp:docstring>
+      <tp:docstring>Secondary color for decorations, the separators of the overlay bar given in RGB (e.g, #ff0000).</tp:docstring>
     </property>
     <property name="mosaic_vm_enabled" type="b" access="readwrite">
       <tp:docstring>Bool for determining if a vm mosaic mode can change</tp:docstring>
@@ -628,13 +628,13 @@
       <tp:docstring>Path to the icon used to represent the VM in the UI.</tp:docstring>
     </property>
     <property name="long_form_vg" type="s" access="readwrite">
-      <tp:docstring>Unused</tp:docstring>
+      <tp:docstring>Label displayed on the overlay to identify the VM. This cannot exceed around 3/5th of the total width of the display or the short version will be used instead.</tp:docstring>
     </property>
     <property name="short_form_vg" type="s" access="readwrite">
-      <tp:docstring>Unused</tp:docstring>
+      <tp:docstring>Abreviated (short) lavel displayed on the overlay to identify the VM. This is only displayed if long_form_vg is too long (its rendered size is close to 3/5th of the display width). If the short format is too long still, it is truncated.</tp:docstring>
     </property>
     <property name="text_color_vg" type="s" access="readwrite">
-      <tp:docstring>Unused</tp:docstring>
+      <tp:docstring>Label text color given in RGB (e.g, #ff0000).</tp:docstring>
     </property>
     <property name="border_width_vg" type="i" access="readwrite">
       <tp:docstring>Unused</tp:docstring>
