@@ -71,6 +71,7 @@
     </method>
     <method name="list_net_firewall_rules">
       <arg name="rules" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_nics">
       <tp:docstring>List the NIC objects attached to the VM.</tp:docstring>
@@ -506,10 +507,12 @@
     <method name="list_pt_pci_devices">
       <tp:docstring>List PCI devices which match current passthrough rules.</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_pt_rules">
       <tp:docstring>List current passthrough rules in effect.</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
   </interface>
   <!--~~~~~~~~~~~~~~~~~~~~~~
@@ -532,6 +535,7 @@
     <method name="list_product_properties">
       <tp:docstring>List all product properties for this VM.</tp:docstring>
       <arg name="product_properties" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="set_product_property">
       <tp:docstring>Change product property value.</tp:docstring>
