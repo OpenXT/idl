@@ -225,6 +225,51 @@
     <property name="display-handler-strict" type="b" access="readwrite">
       <tp:docstring>Strict checking for information about a VM's domain specific information (color, name, nickname)</tp:docstring>
     </property>
+    <property name="image_path_vg" type="s" access="readwrite">
+      <tp:docstring>Path to the icon used to represent the VM in the UI.</tp:docstring>
+    </property>
+    <property name="long_form_vg" type="s" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="short_form_vg" type="s" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="text_color_vg" type="s" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="border_width_vg" type="i" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="border_height_vg" type="i" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="vglass_enabled" type="b" access="readwrite">
+      <tp:docstring>Bool for vglass to create vm object</tp:docstring>
+    </property>
+    <property name="mosaic_mode" type="i" access="readwrite">
+      <tp:docstring>VM mode for mosaic (seamless = 1, windowed = 2, pinned = 4)</tp:docstring>
+    </property>
+    <property name="windowed_x" type="i" access="readwrite">
+      <tp:docstring>Last x coord of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="windowed_y" type="i" access="readwrite">
+      <tp:docstring>Last y coord of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="windowed_w" type="i" access="readwrite">
+      <tp:docstring>Last width of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="windowed_h" type="i" access="readwrite">
+      <tp:docstring>Last height of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="primary_domain_color" type="s" access="readwrite">
+      <tp:docstring>Primary Color for decorations</tp:docstring>
+    </property>
+    <property name="secondary_domain_color" type="s" access="readwrite">
+      <tp:docstring>Secondary Color for decorations</tp:docstring>
+    </property>
+    <property name="mosaic_vm_enabled" type="b" access="readwrite">
+      <tp:docstring>Bool for determining if a vm mosaic mode can change</tp:docstring>
+    </property>
     <property name="mac" type="s" access="read"/>
     <property name="measured" type="b" access="read">
       <tp:docstring>If the VM is measured, the hash of the disk image is checked before it is allowed to start.</tp:docstring>
@@ -573,6 +618,52 @@
     </property>
     <property name="display-handler-strict" type="b" access="readwrite">
       <tp:docstring>Strict checking for information about a VM's domain specific information (color, name, nickname)</tp:docstring>
+    </property>
+    <property name="stub_domid" type="i" access="read"/>
+    <property name="image_path_vg" type="s" access="readwrite">
+      <tp:docstring>Path to the icon used to represent the VM in the UI.</tp:docstring>
+    </property>
+    <property name="long_form_vg" type="s" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="short_form_vg" type="s" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="text_color_vg" type="s" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="border_width_vg" type="i" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="border_height_vg" type="i" access="readwrite">
+      <tp:docstring>Unused</tp:docstring>
+    </property>
+    <property name="vglass_enabled" type="b" access="readwrite">
+      <tp:docstring>Bool for vglass to create vm object</tp:docstring>
+    </property>
+    <property name="mosaic_mode" type="i" access="readwrite">
+      <tp:docstring>VM mode for mosaic (seamless = 1, windowed = 2, pinned = 4)</tp:docstring>
+    </property>
+    <property name="windowed_x" type="i" access="readwrite">
+      <tp:docstring>Last x coord of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="windowed_y" type="i" access="readwrite">
+      <tp:docstring>Last y coord of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="windowed_w" type="i" access="readwrite">
+      <tp:docstring>Last width of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="windowed_h" type="i" access="readwrite">
+      <tp:docstring>Last height of windowed mode (mosaic-windowed only)</tp:docstring>
+    </property>
+    <property name="primary_domain_color" type="s" access="readwrite">
+      <tp:docstring>Primary Color for decorations</tp:docstring>
+    </property>
+    <property name="secondary_domain_color" type="s" access="readwrite">
+      <tp:docstring>Secondary Color for decorations</tp:docstring>
+    </property>
+    <property name="mosaic_vm_enabled" type="b" access="readwrite">
+      <tp:docstring>Bool for determining if a vm mosaic mode can change</tp:docstring>
     </property>
     <property name="icbinn-path" type="s" access="readwrite">
       <tp:docstring>Filesystem path exported to the VM via icbinn server.</tp:docstring>
