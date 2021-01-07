@@ -439,9 +439,6 @@
     </property>
     <property name="uuid" type="s" access="read"/>
     <property name="vcpus" type="i" access="readwrite"/>
-    <property name="vfb" type="b" access="readwrite">
-      <tp:docstring>Use PV framebuffer.</tp:docstring>
-    </property>
     <property name="videoram" type="i" access="readwrite"/>
     <property name="viridian" type="b" access="readwrite"/>
     <property name="virt-type" type="s" access="readwrite"/>
@@ -869,9 +866,6 @@
     </property>
     <property name="uuid" type="s" access="read"/>
     <property name="vcpus" type="i" access="readwrite"/>
-    <property name="vfb" type="b" access="readwrite">
-      <tp:docstring>Use PV framebuffer.</tp:docstring>
-    </property>
     <property name="videoram" type="i" access="readwrite"/>
     <property name="viridian" type="b" access="readwrite"/>
     <property name="virt-type" type="s" access="readwrite"/>
