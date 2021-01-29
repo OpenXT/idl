@@ -260,9 +260,6 @@
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Properties ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
-    <property name="drm-graphics" type="b" access="readwrite">
-      <tp:docstring>Enable DRM graphics plugin on older hardware (pre-haswell)</tp:docstring>
-    </property>
     <property name="idle-time-threshold" type="i" access="readwrite">
       <tp:docstring>Determines the amount of time the host can be idle after which it goes to sleep.</tp:docstring>
     </property>
