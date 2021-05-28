@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file defines the interfaces and methods. -->
+<node>
+    <interface name="mil.af.secureview.vglass">
+        <method name="show_text">
+            <arg name="on" type="b" direction="in"/>
+            <arg name="text" type="s" direction="in"/>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="clear_text">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+
+        <signal name="render_complete">
+            <arg name="success" type="b"/>
+        </signal>
+
+        <!-- This is used by disman -->
+        <method name="getConfig">
+            <arg name="config" type="s" direction="out"/>
+        </method>
+
+        <!-- These are for use by the UI -->
+        <method name="identify">
+            <arg name="on" type="b" direction="in"/>
+	    <arg name="name" type="s" direction="in">
+              <tp:docstring>Unused</tp:docstring>
+	    </arg>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+            <tp:docstring>Toggles a text box to identify the screen (defaults to the name of the connector the monitor is plugged to)</tp:docstring>
+        </method>
+
+        <!-- These are for use by laptop screen brightness keyboard controls -->
+        <method name="increase_brightness">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="decrease_brightness">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+
+        <!-- These are for use by xcpmd -->
+        <method name="setDpms">
+            <arg name="on" type="b" direction="in"/>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="backlighting">
+            <arg name="level" type="u" direction="out"/>
+        </method>
+        <method name="setBacklighting">
+            <arg name="level" type="u" direction="in"/>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+
+        <!-- Included for testing purposes only -->
+        <method name="exit">
+            <tp:docstring>Exit vglass.</tp:docstring>
+        </method>
+    </interface>
+</node>

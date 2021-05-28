@@ -66,18 +66,22 @@
     <method name="list_capture_devices">
       <tp:docstring>List audio capture devices on system</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_cd_devices">
       <tp:docstring>List cdrom devices on system</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_disk_devices">
       <tp:docstring>List the disk devices on system.</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_gpu_devices">
       <tp:docstring>Like above, with some logic to filter GPU devices.</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_isos">
       <tp:docstring>List the contents of the CD image (ISO) directory.</tp:docstring>
@@ -86,10 +90,12 @@
     <method name="list_pci_devices">
       <tp:docstring>List the PCI devices on the system. Returns a list of mappings, each including at least the device name, pciclass, vendor and ID.</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_playback_devices">
       <tp:docstring>List audio playback devices on system</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_sound_card_controls">
       <tp:docstring>List controlable parameters of a sound card</tp:docstring>
@@ -99,6 +105,7 @@
     <method name="list_sound_cards">
       <tp:docstring>List sound cards on system</tp:docstring>
       <arg name="" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_ui_plugins">
       <tp:docstring>List UI plugins on system.</tp:docstring>
@@ -127,12 +134,32 @@
     <method name="sleep">
       <tp:docstring>Send the host into s3 (sleep).</tp:docstring>
     </method>
+
+    <method name="set_displayhandler_gpu">
+      <tp:docstring>Set the gpu that displayhandler should use.</tp:docstring>
+      <arg name="gpu" type="s" direction="in"/>
+    </method>
+
+    <method name="get_displayhandler_gpu">
+      <tp:docstring>Query xenmgr for the gpu for displayhandler to use.</tp:docstring>
+      <arg name="gpu" type="s" direction="out"/>
+    </method>
+
+    <method name="list_gpus_for_displayhandler">
+      <tp:docstring>Query xenmgr for all potential gpus for displayhandler.</tp:docstring>
+      <arg name="" type="aa{ss}" direction="out"/>
+    </method>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="license_changed">
       <tp:docstring>Notify that licensing evaluation has changed.</tp:docstring>
     </signal>
+
+    <signal name="displayhandler_gpu_changed">
+      <tp:docstring>Notify that displayhandler gpu changed.</tp:docstring>
+    </signal>
+
     <signal name="state_changed">
       <tp:docstring>Notify that the host state has changed (sleeping, hibernating etc).</tp:docstring>
       <arg name="state" type="s"/>
@@ -153,6 +180,7 @@
     <property name="bios-revision" type="s" access="read"/>
     <property name="build-info" type="a{ss}" access="read">
       <tp:docstring>Build number, date and associated information.</tp:docstring>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="QMap&lt;QString,QString&gt;"/>
     </property>
     <property name="capture-pcm" type="s" access="readwrite">
       <tp:docstring>PCM device used for audio capture</tp:docstring>
@@ -204,6 +232,7 @@
     <method name="get_installstate">
       <tp:docstring>Get progress of the installation bits.</tp:docstring>
       <arg name="state" type="a{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QMap&lt;QString,QString&gt;"/>
     </method>
     <method name="progress_installstate">
       <tp:docstring>Set progress of the installation bits.</tp:docstring>
@@ -236,5 +265,6 @@
         <tp:docstring/>
       </arg>
     </method>
+
   </interface>
 </node>

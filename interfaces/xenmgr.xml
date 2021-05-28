@@ -111,12 +111,14 @@
     <method name="list_domids">
       <tp:docstring>List current domain IDs.</tp:docstring>
       <arg name="domids" type="ai" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;int&gt;"/>
     </method>
     <method name="list_extension_packs">
       <tp:docstring>List installed extension packs. Returns array of dictionaries, where each dict contains following keys:
 	vendor, name, description, version, image.
       </tp:docstring>
       <arg name="packs" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_templates">
       <tp:docstring>List the templates for creating new VMa.</tp:docstring>
@@ -125,6 +127,7 @@
     <method name="list_ui_templates">
       <tp:docstring>List the UI-visible VM creation templates.</tp:docstring>
       <arg name="templates" type="aa{ss}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_vms">
       <tp:docstring>List each VM present. Returns a list of dicts with few critical properties filled for each VM, including VM state, domain ID (if running), uuid etc.</tp:docstring>
@@ -257,9 +260,6 @@
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Properties ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
-    <property name="drm-graphics" type="b" access="readwrite">
-      <tp:docstring>Enable DRM graphics plugin on older hardware (pre-haswell)</tp:docstring>
-    </property>
     <property name="idle-time-threshold" type="i" access="readwrite">
       <tp:docstring>Determines the amount of time the host can be idle after which it goes to sleep.</tp:docstring>
     </property>

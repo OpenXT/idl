@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file defines the interfaces and methods. -->
+<node>
+    <interface name="mil.af.secureview.disman">
+        <!-- These are for use by the UI -->
+        <method name="loadConfig">
+            <arg name="disconfig" type="s" direction="out"/>
+        </method>
+        <method name="saveConfig">
+            <arg name="disconfig" type="s" direction="in"/>
+            <arg name="success" type="b" direction="out"/>
+            <arg name="result" type="s" direction="out"/>
+        </method>
+        <method name="getBannerHeight">
+            <arg name="level" type="i" direction="out"/>
+        </method>
+        <method name="setBannerHeight">
+            <arg name="level" type="u" direction="in"/>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="getFrameTime">
+            <arg name="level" type="i" direction="out"/>
+        </method>
+        <method name="setFrameTime">
+            <arg name="level" type="u" direction="in"/>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <signal name="configChanged">
+            <arg name="disconfig" type="s" direction="out"/>
+        </signal>
+
+        <!-- This is used by disman-hotplug.sh -->
+        <method name="hotplug">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+
+        <!-- These are for use by VGlass -->
+        <method name="refresh">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="revertToClonedMode">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="removeSavedConfig">
+            <arg name="hash" type="s" direction="in"/>
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+        <method name="removeAllSavedConfigs">
+            <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
+        </method>
+
+        <!-- Included for testing purposes only -->
+        <method name="exit">
+            <tp:docstring>Exit disman. Default response to this should be monit bringing it back up.</tp:docstring>
+        </method>
+    </interface>
+</node>
