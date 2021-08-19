@@ -225,6 +225,7 @@
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="ac_adapter_state_changed">
       <tp:docstring>Signals change in platform AC adapter status.</tp:docstring>
+      <arg type="u" name="ac_ret" direction="out" />
     </signal>
     <signal name="battery_info_changed">
       <tp:docstring>Signals change in platform battery information.</tp:docstring>
@@ -233,6 +234,7 @@
       <tp:docstring>Signals when battery level changes from normal.</tp:docstring>
     </signal>
     <signal name="battery_status_changed">
+      <arg type="u" name="percentage" direction="out" />
       <tp:docstring>Signals change in platform battery status.</tp:docstring>
     </signal>
     <signal name="bcl_key_pressed">
