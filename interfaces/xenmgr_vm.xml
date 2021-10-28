@@ -139,6 +139,9 @@
     <property name="argo" type="b" access="readwrite">
       <tp:docstring>Use Argo.</tp:docstring>
     </property>
+    <property name="authenforce" type="b" access="readwrite">
+      <tp:docstring>Enable or disable Authentication enforcement mode in UEFI guest VMs.</tp:docstring>
+    </property>
     <property name="auto-s3-wake" type="b" access="readwrite"/>
     <property name="autostart-pending" type="b" access="read"/>
     <property name="bios" type="s" access="readwrite">
@@ -391,6 +394,9 @@
       <tp:docstring>Where to move mouse when it goes over right edge of a surface.</tp:docstring>
     </property>
     <property name="seamless-traffic" type="b" access="readwrite"/>
+    <property name="secureboot" type="b" access="readwrite">
+      <tp:docstring>Enable or disable Secure Boot mode in UEFI guest VMs.</tp:docstring>
+    </property>
     <property name="serial" type="s" access="readwrite">
       <tp:docstring>Serial port specification</tp:docstring>
     </property>
@@ -558,6 +564,9 @@
     <property name="apic" type="b" access="readwrite"/>
     <property name="argo" type="b" access="readwrite">
       <tp:docstring>Use Argo.</tp:docstring>
+    </property>
+    <property name="authenforce" type="b" access="readwrite">
+      <tp:docstring>Enable or disable Authentication enforcement mode in UEFI guest VMs.</tp:docstring>
     </property>
     <property name="auto-s3-wake" type="b" access="readwrite"/>
     <property name="autostart-pending" type="b" access="read"/>
@@ -812,6 +821,9 @@
       <tp:docstring>Where to move mouse when it goes over right edge.</tp:docstring>
     </property>
     <property name="seamless-traffic" type="b" access="readwrite"/>
+    <property name="secureboot" type="b" access="readwrite">
+      <tp:docstring>Enable or disable Secure Boot mode in UEFI guest VMs.</tp:docstring>
+    </property>
     <property name="serial" type="s" access="readwrite">
       <tp:docstring>Serial port specification</tp:docstring>
     </property>
