@@ -131,6 +131,9 @@
     <method name="shutdown">
       <tp:docstring>Shutdown the host device.</tp:docstring>
     </method>
+    <method name="shutdown_idle">
+      <tp:docstring>Shutdown the host device. VMs which fail to shutdown gracefully are forced off. Should be called by the power management subsystem after the system has reached the idle timeout.</tp:docstring>
+    </method>
     <method name="sleep">
       <tp:docstring>Send the host into s3 (sleep).</tp:docstring>
     </method>
