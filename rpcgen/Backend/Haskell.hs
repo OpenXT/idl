@@ -141,6 +141,7 @@ haskellType D.TypeString     = HaskellType "String"
 haskellType D.TypeSignature  = HaskellType "String"
 haskellType D.TypeObjectPath = HaskellType "ObjectPath"
 haskellType D.TypeVariant    = HaskellType "Variant"
+haskellType D.TypeUnixFd     = HaskellType "CInt"
 haskellType (D.TypeArray D.TypeWord8) = HaskellType "B.ByteString"
 haskellType (D.TypeArray t)  = HaskellType $ printf "[%s]" (haskellTypeStr $ haskellType t)
 haskellType (D.TypeDictionary k v) =
