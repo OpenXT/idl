@@ -213,7 +213,7 @@ parseAccess _ = Nothing
 
 parseType :: String -> Maybe D.Type
 parseType s = do
-  typsig <- D.signature (TL.pack s)
+  typsig <- D.parseSignature s
   case D.signatureTypes typsig of
     [t] -> Just t
     _   -> Nothing

@@ -576,14 +576,14 @@ declExportMethod m@(interface,method) =
     outargs    = join "," . map param $ methodOutParams method
     param p | null (parameterName p)   = typecode p
             | otherwise                = parameterName p ++ ":" ++ typecode p
-    typecode p                         = T.unpack $ D.typeCode (parameterType p)
+    typecode p                         = D.typeCode (parameterType p)
 
 declExportProperty :: (Interface,Property) -> Expression
 declExportProperty p@(interface,property) =
     Expression $ printf "rpcProperty %s %s %s" (quote pname) (quote typename) access
   where
     pname         = propertyName property
-    typename      = T.unpack $ D.typeCode (propertyType property)
+    typename      = D.typeCode (propertyType property)
     access        = case propertyAccess property of
                       Read -> "Read"
                       Write -> "Write"

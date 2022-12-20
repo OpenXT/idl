@@ -20,10 +20,11 @@
 module Backend.Camel where
 
 import Data.List
-import qualified Data.Text.Lazy as T
+import qualified Data.Text as T
 import qualified Data.Map as M
 import qualified DBus.Internal.Types as D
-import qualified DBus.Introspection as I
+import qualified DBus.Introspection.Types as I
+import qualified DBus.Introspection.Parse as P
 import Text.Printf
 import Backend
 import Tools
@@ -44,14 +45,14 @@ lookupTemplate name input =
       Nothing -> error $ "No such template: " ++ name
       Just c  -> c
 
-paramType :: I.Parameter -> D.Type
-paramType (I.Parameter _ sig) = head $ D.signatureTypes sig
+paramType :: I.MethodArg -> D.Type
+paramType (I.MethodArg _ typ _) = typ
 
-paramTypes :: [I.Parameter] -> [D.Type]
+paramTypes :: [I.MethodArg] -> [D.Type]
 paramTypes = map paramType
 
-paramName :: I.Parameter -> String
-paramName (I.Parameter n _) = T.unpack n
+paramName :: I.MethodArg -> String
+paramName (I.MethodArg n _ _) = n
 
 typeSig :: D.Type -> String
 typeSig D.TypeBoolean = "DBus.SigBool"
@@ -121,7 +122,7 @@ typeConstructor typ var_name =
     cons t@(D.TypeDictionary keyT elemT)
         = "DBus.Array " ++ "(" ++ arrayConstructor t n ++ ")"
 
-typeConstructor' :: I.Parameter -> String
+typeConstructor' :: I.MethodArg -> String
 typeConstructor' p =  typeConstructor (paramType p) (paramName p)
 
 handlerStubs :: String -> I.Interface -> [String]
@@ -129,7 +130,7 @@ handlerStubs object (I.Interface iname methods _ _) =
     map stub methods
   where
     stub (I.Method name inparams outparams) =
-        let mname       = T.unpack $ D.strMemberName name
+        let mname       = D.formatMemberName name
             call_module = capitalise . decamelise $ object ++ "Methods"
             call_name   = replace "." "_" (interface ++ "_" ++ mname)
             call_args   = concat . intersperse " " . ("msg" :) . map get_pname $ inparams
@@ -153,21 +154,21 @@ handlerStubs object (I.Interface iname methods _ _) =
         where 
           aux _ []      = []
           aux id (p:ps) =
-              let (I.Parameter _ sig) = p in
-              I.Parameter (T.pack $ "out_" ++ show id) sig : aux (id+1) ps
+              let (I.MethodArg _ typ _) = p in
+              I.MethodArg ("out_" ++ show id) typ I.Out : aux (id+1) ps
                                
     reply_appends params = map append params
     append param  = "\t\t\t\tDBus.Message.append reply [" ++ typeConstructor' param ++ "];"
 
-    interface = T.unpack $ D.strInterfaceName iname
-    get_pname (I.Parameter pname _) = T.unpack pname
+    interface = D.formatInterfaceName iname
+    get_pname (I.MethodArg pname _ _) = pname
 
 callStubs :: String -> I.Interface -> [String]
 callStubs object (I.Interface iname methods _ _) =
     map stub methods
   where
     stub (I.Method name inparams outparams) =
-        let mname       = T.unpack $ D.strMemberName name
+        let mname       = D.formatMemberName name
             stub_name   = replace "." "_" (interface ++ "_" ++ mname)
             stub_args   = concat . intersperse " " . map paramName $ inparams
             call_args   = concat . intersperse "; " . map typeConstructor' $ inparams
@@ -188,7 +189,7 @@ callStubs object (I.Interface iname methods _ _) =
     outConstructors pms = map constructor (zip (paramTypes pms) outnames)
                           where constructor (typ,name) = typeConstructor typ name
 
-    interface = T.unpack $ D.strInterfaceName iname
+    interface = D.formatInterfaceName iname
         
 genServer_ :: Input -> IO Output
 genServer_ input =
@@ -204,9 +205,9 @@ genServer_ input =
                    $ lookupTemplate serverMLFileTemplate input
 
     quoted_introspect_xml = replace "\"" "\\\"" (xml input)
-    interface_name (I.Interface n _ _ _) = T.unpack $ D.strInterfaceName n
+    interface_name (I.Interface n _ _ _) = D.formatInterfaceName n
     interface = head interfaces
-    interfaces = let Just intro_obj = I.fromXML "/" (T.pack (xml input))
+    interfaces = let Just intro_obj = P.parseXML "/" (T.pack (xml input))
                      (I.Object _ ifs _) = intro_obj
                  in
                    ifs
@@ -221,7 +222,7 @@ genClient_ input =
         substRules [ ("@STUBS@", stubs) ]
         $ lookupTemplate clientMLFileTemplate input
     stubs = concat . intersperse "\n" . concat . map (callStubs object) $ interfaces
-    interfaces = let Just intro_obj = I.fromXML "/" (T.pack (xml input))
+    interfaces = let Just intro_obj = P.parseXML "/" (T.pack (xml input))
                      (I.Object _ ifs _) = intro_obj
                  in
                    ifs
