@@ -177,7 +177,7 @@ parseMethod e = do
   return $ Method name inps outs
   where
     argelems = childElemsWith (X.tag "arg") e
-    outelems = childElemsWith (X.tag "arg" `o` X.attrval ("direction", X.AttValue [Left "out"])) e
+    outelems = childElemsWith (X.tag "arg" `o` X.attrval ((X.N "direction"), X.AttValue [Left "out"])) e
     inpelems = filter p argelems where
                 p e = case attr "direction" e of
                         Nothing   -> True
@@ -233,4 +233,4 @@ childElemsWith fil (X.Elem _ _ contents) =
       select _ = Nothing
     
 attr :: String -> X.Element i -> Maybe String
-attr name (X.Elem n attrs _) = show <$> lookup name attrs
+attr name (X.Elem n attrs _) = show <$> lookup (X.N name) attrs
