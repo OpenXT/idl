@@ -123,11 +123,11 @@ propertySetter prop =
 
 remotePropertyGetter :: Property -> Method
 remotePropertyGetter prop =
-    Method "Get" [Parameter "interface" D.DBusString, Parameter "property" D.DBusString] [Parameter "value" D.DBusVariant]
+    Method "Get" [Parameter "interface" D.TypeString, Parameter "property" D.TypeString] [Parameter "value" D.TypeVariant]
 
 remotePropertySetter :: Property -> Method
 remotePropertySetter prop = 
-    Method "Set" [Parameter "interface" D.DBusString, Parameter "property" D.DBusString, Parameter "value" D.DBusVariant] []
+    Method "Set" [Parameter "interface" D.TypeString, Parameter "property" D.TypeString, Parameter "value" D.TypeVariant] []
 
 
 orgFreedesktopDBusProperties :: Interface
@@ -136,9 +136,9 @@ orgFreedesktopDBusProperties =
               , interfaceSignals = []
               , interfaceProperties = []
               , interfaceMethods =
-                  [ Method "Get"    [Parameter "interface" D.DBusString, Parameter "property" D.DBusString] [Parameter "value" D.DBusVariant]
-                  , Method "Set"    [Parameter "interface" D.DBusString, Parameter "property" D.DBusString, Parameter "value" D.DBusVariant] []
-                  , Method "GetAll" [Parameter "interface" D.DBusString] [Parameter "properties" (D.DBusDictionary D.DBusString D.DBusVariant)]
+                  [ Method "Get"    [Parameter "interface" D.TypeString, Parameter "property" D.TypeString] [Parameter "value" D.TypeVariant]
+                  , Method "Set"    [Parameter "interface" D.TypeString, Parameter "property" D.TypeString, Parameter "value" D.TypeVariant] []
+                  , Method "GetAll" [Parameter "interface" D.TypeString] [Parameter "properties" (D.TypeDictionary D.TypeString D.TypeVariant)]
                   ]
               }
 
@@ -213,7 +213,7 @@ parseAccess _ = Nothing
 
 parseType :: String -> Maybe D.Type
 parseType s = do
-  typsig <- D.mkSignature (TL.pack s)
+  typsig <- D.signature (TL.pack s)
   case D.signatureTypes typsig of
     [t] -> Just t
     _   -> Nothing
