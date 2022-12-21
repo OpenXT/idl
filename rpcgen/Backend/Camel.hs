@@ -54,6 +54,12 @@ paramTypes = map paramType
 paramName :: I.MethodArg -> String
 paramName (I.MethodArg n _ _) = n
 
+filterInParams :: [I.MethodArg] -> [I.MethodArg]
+filterInParams params = filter (\p -> I.methodArgDirection p == I.In) params
+
+filterOutParams :: [I.MethodArg] -> [I.MethodArg]
+filterOutParams params = filter (\p -> I.methodArgDirection p == I.Out) params
+
 typeSig :: D.Type -> String
 typeSig D.TypeBoolean = "DBus.SigBool"
 typeSig D.TypeWord8 = "DBus.SigByte"
@@ -129,19 +135,19 @@ handlerStubs :: String -> I.Interface -> [String]
 handlerStubs object (I.Interface iname methods _ _) =
     map stub methods
   where
-    stub (I.Method name inparams outparams) =
+    stub (I.Method name params) =
         let mname       = D.formatMemberName name
             call_module = capitalise . decamelise $ object ++ "Methods"
             call_name   = replace "." "_" (interface ++ "_" ++ mname)
-            call_args   = concat . intersperse " " . ("msg" :) . map get_pname $ inparams
+            call_args   = concat . intersperse " " . ("msg" :) . map get_pname $ (filterInParams params)
         in
 
         unlines $ [ printf "\t\t\t| \"%s\", \"%s\", args -> (try " interface mname
-                  , printf "\t\t\t\tlet [%s] = args in" (concat . intersperse "; " . map typeConstructor' $ inparams)
-                  , printf "\t\t\t\tlet (%s) = %s.%s %s in" (outvars outparams) call_module call_name call_args
+                  , printf "\t\t\t\tlet [%s] = args in" (concat . intersperse "; " . map typeConstructor' $ (filterInParams params))
+                  , printf "\t\t\t\tlet (%s) = %s.%s %s in" (outvars (filterOutParams params)) call_module call_name call_args
                   , "\t\t\t\tlet reply = DBus.Message.new_method_return msg in"
                   ]
-                    ++ reply_appends (nameSequence outparams)
+                    ++ reply_appends (nameSequence (filterOutParams params))
                     ++ [ "\t\t\t\treply"
                        , "\t\t\t\t with Match_failure _ -> DBus.Message.new_error msg DBus.ERR_INVALID_SIGNATURE \"invalid arguments\""
                        , "\t\t\t\t    | Failure s -> DBus.Message.new_error msg DBus.ERR_FAILED s"
@@ -167,13 +173,13 @@ callStubs :: String -> I.Interface -> [String]
 callStubs object (I.Interface iname methods _ _) =
     map stub methods
   where
-    stub (I.Method name inparams outparams) =
+    stub (I.Method name params) =
         let mname       = D.formatMemberName name
             stub_name   = replace "." "_" (interface ++ "_" ++ mname)
-            stub_args   = concat . intersperse " " . map paramName $ inparams
-            call_args   = concat . intersperse "; " . map typeConstructor' $ inparams
-            out_cons    = concat . intersperse "; " $ outConstructors outparams
-            out_values  = concat . intersperse ", " $ take (length outparams) outnames
+            stub_args   = concat . intersperse " " . map paramName $ (filterInParams params)
+            call_args   = concat . intersperse "; " . map typeConstructor' $ (filterInParams params)
+            out_cons    = concat . intersperse "; " $ outConstructors (filterOutParams params)
+            out_values  = concat . intersperse ", " $ take (length (filterOutParams params)) outnames
         in
         unlines $ [ printf "let %s ?(timeout=(-1)) service_ obj_path_ %s = " stub_name stub_args
                   , printf "\tlet reply = call_dbus ~timeout ~service:service_ ~obj:obj_path_ ~interface:\"%s\" ~member:\"%s\" ~args:[ %s ] in" interface mname call_args
