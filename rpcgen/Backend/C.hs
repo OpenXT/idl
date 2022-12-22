@@ -28,7 +28,7 @@ import qualified Data.Map as M
 import Control.Monad hiding (join)
 import System.IO
 import System.Exit
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import Text.Printf
 import Backend
 import Template

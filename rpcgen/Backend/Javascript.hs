@@ -22,7 +22,7 @@ module Backend.Javascript where
 import Data.List
 import Data.Maybe
 import qualified Data.Text.Lazy as T
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import Text.Printf
 import Backend
 import Tools

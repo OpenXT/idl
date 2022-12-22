@@ -22,7 +22,7 @@ module Backend.Camel where
 import Data.List
 import qualified Data.Text.Lazy as T
 import qualified Data.Map as M
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import qualified DBus.Introspection as I
 import Text.Printf
 import Backend

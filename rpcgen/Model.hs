@@ -39,7 +39,7 @@ module Model ( fromXML
 
 import Data.Maybe
 import Control.Applicative
-import DBus.Types as D
+import DBus.Internal.Types as D
 import qualified Data.Text.Lazy as TL
 import qualified Text.XML.HaXml as X
 import Text.XML.HaXml (o)
