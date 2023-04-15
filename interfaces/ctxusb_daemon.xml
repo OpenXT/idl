@@ -4,21 +4,21 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.usbdaemon">
-    <tp:docstring>Interface to the USB policy daemon.</tp:docstring>
+    <!--Interface to the USB policy daemon.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="assign_device">
-      <tp:docstring>Assign a device to a VM.</tp:docstring>
+      <!--Assign a device to a VM.-->
       <arg name="dev_id" type="i" direction="in">
-        <tp:docstring>id of device to assign</tp:docstring>
+        <!--id of device to assign-->
       </arg>
       <arg name="vm_uuid" type="s" direction="in">
-        <tp:docstring>UUID of VM to assign device to.</tp:docstring>
+        <!--UUID of VM to assign device to.-->
       </arg>
     </method>
     <method name="get_device_info">
-      <tp:docstring><p>Connection states are defined as follows:</p>
+      <!--<p>Connection states are defined as follows:</p>
 		<ul>
 		<li>-1  Cannot find device</li>
 		<li>0  Device not in use by any VM</li>
@@ -34,81 +34,81 @@
 		<li>10 External CD drive in use by dom0</li>
 		<li>11 External CD drive in use by dom0, but "sticky" assigned to an off VM</li>
 		</ul>
-		</tp:docstring>
+		-->
       <arg name="dev_id" type="i" direction="in">
-        <tp:docstring>ID of device to query.</tp:docstring>
+        <!--ID of device to query.-->
       </arg>
       <arg name="vm_uuid" type="s" direction="in">
-        <tp:docstring>UUID of VM to get information relative to.</tp:docstring>
+        <!--UUID of VM to get information relative to.-->
       </arg>
       <arg name="name" type="s" direction="out">
-        <tp:docstring>Name of device.</tp:docstring>
+        <!--Name of device.-->
       </arg>
       <arg name="state" type="i" direction="out">
-        <tp:docstring>Connection state of device.</tp:docstring>
+        <!--Connection state of device.-->
       </arg>
       <arg name="vm_assigned" type="s" direction="out">
-        <tp:docstring>UUID of VM device is assigned to (if any).</tp:docstring>
+        <!--UUID of VM device is assigned to (if any).-->
       </arg>
       <arg name="detail" type="s" direction="out">
-        <tp:docstring>Name detail, for mouse-over text.</tp:docstring>
+        <!--Name detail, for mouse-over text.-->
       </arg>
     </method>
     <method name="list_devices">
-      <tp:docstring>Enumerate the USB devices plugged into the system.</tp:docstring>
+      <!--Enumerate the USB devices plugged into the system.-->
       <arg name="devices" type="ai" direction="out">
-        <tp:docstring>List of IDs of devices in the system.</tp:docstring>
+        <!--List of IDs of devices in the system.-->
       </arg>
     </method>
     <method name="name_device">
-      <tp:docstring>Set the user visible name for a device.</tp:docstring>
+      <!--Set the user visible name for a device.-->
       <arg name="dev_id" type="i" direction="in">
-        <tp:docstring>ID of device to set name for.</tp:docstring>
+        <!--ID of device to set name for.-->
       </arg>
       <arg name="name" type="s" direction="in">
-        <tp:docstring>name to set for device</tp:docstring>
+        <!--name to set for device-->
       </arg>
     </method>
     <method name="new_vm">
-      <tp:docstring>Tell daemon a new VM has been started.</tp:docstring>
+      <!--Tell daemon a new VM has been started.-->
       <arg name="dom_id" type="i" direction="in">
-        <tp:docstring>ID of newly started VM.</tp:docstring>
+        <!--ID of newly started VM.-->
       </arg>
     </method>
     <method name="policy_get_rule">
-      <tp:docstring>Get a specific USB rule</tp:docstring>
+      <!--Get a specific USB rule-->
       <arg name="rule_id" type="i" direction="in">
-        <tp:docstring>Index position of the rule to get</tp:docstring>
+        <!--Index position of the rule to get-->
       </arg>
       <arg name="command" type="s" direction="out">
-        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+        <!--Command string of {allow, always, default, deny}-->
       </arg>
       <arg name="description" type="s" direction="out">
-        <tp:docstring>Description of the policy rule</tp:docstring>
+        <!--Description of the policy rule-->
       </arg>
       <arg name="vendor_id" type="s" direction="out">
-        <tp:docstring>USB vendor ID as hexadecimal, parsed by strtol (e.g. 8086)</tp:docstring>
+        <!--USB vendor ID as hexadecimal, parsed by strtol (e.g. 8086)-->
       </arg>
       <arg name="device_id" type="s" direction="out">
-        <tp:docstring>USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)</tp:docstring>
+        <!--USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)-->
       </arg>
       <arg name="serial_number" type="s" direction="out">
-        <tp:docstring>Serial number of the device, or an empty string to match any</tp:docstring>
+        <!--Serial number of the device, or an empty string to match any-->
       </arg>
       <arg name="sysattrs" type="a{ss}" direction="out">
-        <tp:docstring>Dict of String:String sysattributes</tp:docstring>
+        <!--Dict of String:String sysattributes-->
       </arg>
       <arg name="udev_properties" type="a{ss}" direction="out">
-        <tp:docstring>Dict of String:String udev properties</tp:docstring>
+        <!--Dict of String:String udev properties-->
       </arg>
       <arg name="vm_uuid" type="s" direction="out">
-        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+        <!--VM UUID, or an empty string to match any VM-->
       </arg>
     </method>
     <method name="policy_get_rules">
-      <tp:docstring>Get a set of all USB rules</tp:docstring>
+      <!--Get a set of all USB rules-->
       <arg name="rule_set" type="a(isssssa{ss}a{ss}s)" direction="out">
-        <tp:docstring>The set of rules in the format as an array of structs of:<p/>
+        <!--The set of rules in the format as an array of structs of:<p/>
           <ol>
             <li>Rule ID</li>
             <li>Command</li>
@@ -120,155 +120,155 @@
             <li>Dict of String:String udev properties</li>
             <li>VM UUID, or an empty string to match any VM</li>
           </ol>
-        </tp:docstring>
+        -->
       </arg>
     </method>
     <method name="policy_list">
-      <tp:docstring>Get all USB rule IDs</tp:docstring>
+      <!--Get all USB rule IDs-->
       <arg name="rules" type="ai" direction="out">
-        <tp:docstring>Array of the policy IDs for USB rules</tp:docstring>
+        <!--Array of the policy IDs for USB rules-->
       </arg>
     </method>
     <method name="policy_remove_rule">
-      <tp:docstring>Remove a specific USB rule</tp:docstring>
+      <!--Remove a specific USB rule-->
       <arg name="rule_id" type="i" direction="in">
-        <tp:docstring>ID of the rule to remove</tp:docstring>
+        <!--ID of the rule to remove-->
       </arg>
     </method>
     <method name="policy_set_rule">
-      <tp:docstring>Set or create a specific USB rule</tp:docstring>
+      <!--Set or create a specific USB rule-->
       <arg name="rule_id" type="i" direction="in">
-        <tp:docstring>ID of the rule. If a rule exists with the ID, it will be replaced.</tp:docstring>
+        <!--ID of the rule. If a rule exists with the ID, it will be replaced.-->
       </arg>
       <arg name="command" type="s" direction="in">
-        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+        <!--Command string of {allow, always, default, deny}-->
       </arg>
       <arg name="description" type="s" direction="in">
-        <tp:docstring>Description of the policy rule</tp:docstring>
+        <!--Description of the policy rule-->
       </arg>
       <arg name="vendor_id" type="s" direction="in">
-        <tp:docstring>USB vendor ID as headecimal, parsed by strtol (e.g. 8086)</tp:docstring>
+        <!--USB vendor ID as headecimal, parsed by strtol (e.g. 8086)-->
       </arg>
       <arg name="device_id" type="s" direction="in">
-        <tp:docstring>USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)</tp:docstring>
+        <!--USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)-->
       </arg>
       <arg name="serial_number" type="s" direction="in">
-        <tp:docstring>Serial number of the device, or an empty string to match any</tp:docstring>
+        <!--Serial number of the device, or an empty string to match any-->
       </arg>
       <arg name="sysattrs" type="a{ss}" direction="in">
-        <tp:docstring>Dict of String:String sysattributes</tp:docstring>
+        <!--Dict of String:String sysattributes-->
       </arg>
       <arg name="udev_properties" type="a{ss}" direction="in">
-        <tp:docstring>Dict of String:String udev properties</tp:docstring>
+        <!--Dict of String:String udev properties-->
       </arg>
       <arg name="vm_uuid" type="s" direction="in">
-        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+        <!--VM UUID, or an empty string to match any VM-->
       </arg>
     </method>
     <method name="policy_set_rule_advanced">
-      <tp:docstring>Set or create a specific USB rule, an advanced interface wrapper around <i>policy_set_rule</i></tp:docstring>
+      <!--Set or create a specific USB rule, an advanced interface wrapper around <i>policy_set_rule</i>-->
       <arg name="rule_id" type="i" direction="in">
-        <tp:docstring>ID of the rule. If a rule exists with the ID, it will be replaced.</tp:docstring>
+        <!--ID of the rule. If a rule exists with the ID, it will be replaced.-->
       </arg>
       <arg name="command" type="s" direction="in">
-        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+        <!--Command string of {allow, always, default, deny}-->
       </arg>
       <arg name="description" type="s" direction="in">
-        <tp:docstring>Description of the policy rule</tp:docstring>
+        <!--Description of the policy rule-->
       </arg>
       <arg name="sysattrs" type="a{ss}" direction="in">
-        <tp:docstring>Dict of String:String sysattributes</tp:docstring>
+        <!--Dict of String:String sysattributes-->
       </arg>
       <arg name="udev_properties" type="a{ss}" direction="in">
-        <tp:docstring>Dict of String:String udev properties</tp:docstring>
+        <!--Dict of String:String udev properties-->
       </arg>
       <arg name="vm_uuid" type="s" direction="in">
-        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+        <!--VM UUID, or an empty string to match any VM-->
       </arg>
     </method>
     <method name="policy_set_rule_basic">
-      <tp:docstring>Set or create a specific USB rule, a simple interface wrapper around <i>policy_set_rule</i></tp:docstring>
+      <!--Set or create a specific USB rule, a simple interface wrapper around <i>policy_set_rule</i>-->
       <arg name="rule_id" type="i" direction="in">
-        <tp:docstring>ID of the rule. If a rule exists with the ID, it will be replaced.</tp:docstring>
+        <!--ID of the rule. If a rule exists with the ID, it will be replaced.-->
       </arg>
       <arg name="command" type="s" direction="in">
-        <tp:docstring>Command string of {allow, always, default, deny}</tp:docstring>
+        <!--Command string of {allow, always, default, deny}-->
       </arg>
       <arg name="description" type="s" direction="in">
-        <tp:docstring>Description of the policy rule</tp:docstring>
+        <!--Description of the policy rule-->
       </arg>
       <arg name="vendor_id" type="s" direction="in">
-        <tp:docstring>USB vendor ID as headecimal, parsed by strtol (e.g. 8086)</tp:docstring>
+        <!--USB vendor ID as headecimal, parsed by strtol (e.g. 8086)-->
       </arg>
       <arg name="device_id" type="s" direction="in">
-        <tp:docstring>USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)</tp:docstring>
+        <!--USB product ID as hexadecimal, parsed by strtol (e.g. 1a2c)-->
       </arg>
       <arg name="serial_number" type="s" direction="in">
-        <tp:docstring>Serial number of the device, or an empty string to match any</tp:docstring>
+        <!--Serial number of the device, or an empty string to match any-->
       </arg>
       <arg name="vm_uuid" type="s" direction="in">
-        <tp:docstring>VM UUID, or an empty string to match any VM</tp:docstring>
+        <!--VM UUID, or an empty string to match any VM-->
       </arg>
     </method>
     <method name="reload_policy">
-      <tp:docstring>Reload the policy rules from the database</tp:docstring>
+      <!--Reload the policy rules from the database-->
     </method>
     <method name="set_sticky">
-      <tp:docstring>Set or clear the sticky assignment flag for a device.</tp:docstring>
+      <!--Set or clear the sticky assignment flag for a device.-->
       <arg name="dev_id" type="i" direction="in">
-        <tp:docstring>ID of device to alter sticky flag for.</tp:docstring>
+        <!--ID of device to alter sticky flag for.-->
       </arg>
       <arg name="sticky" type="i" direction="in">
-        <tp:docstring>Set (1), or clear (0) sticky flag.</tp:docstring>
+        <!--Set (1), or clear (0) sticky flag.-->
       </arg>
     </method>
     <method name="state">
-      <tp:docstring>Dump daemon state, for debugging only.</tp:docstring>
+      <!--Dump daemon state, for debugging only.-->
       <arg name="state" type="s" direction="out">
-        <tp:docstring>Daemon state in human readable form.</tp:docstring>
+        <!--Daemon state in human readable form.-->
       </arg>
     </method>
     <method name="unassign_device">
-      <tp:docstring>Unassign a device from a VM.</tp:docstring>
+      <!--Unassign a device from a VM.-->
       <arg name="dev_id" type="i" direction="in">
-        <tp:docstring>ID of device to unassign.</tp:docstring>
+        <!--ID of device to unassign.-->
       </arg>
     </method>
     <method name="vm_stopped">
-      <tp:docstring>Tell daemon a VM is stopping.</tp:docstring>
+      <!--Tell daemon a VM is stopping.-->
       <arg name="dom_id" type="i" direction="in">
-        <tp:docstring>ID of stopping VM.</tp:docstring>
+        <!--ID of stopping VM.-->
       </arg>
     </method>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="device_added">
-      <tp:docstring>A device was just added to the list</tp:docstring>
+      <!--A device was just added to the list-->
       <arg name="dev_id" type="i">
-        <tp:docstring>ID of the new device</tp:docstring>
+        <!--ID of the new device-->
       </arg>
     </signal>
     <signal name="device_info_changed">
-      <tp:docstring>Information previously given out regarding device may be out of date, re-query.</tp:docstring>
+      <!--Information previously given out regarding device may be out of date, re-query.-->
       <arg name="dev_id" type="i">
-        <tp:docstring>ID of device needing re-query.</tp:docstring>
+        <!--ID of device needing re-query.-->
       </arg>
     </signal>
     <signal name="device_rejected">
-      <tp:docstring>A USB device has been rejected due to a policy.</tp:docstring>
+      <!--A USB device has been rejected due to a policy.-->
       <arg name="device_name" type="s">
-        <tp:docstring>User-friendly name of device rejected</tp:docstring>
+        <!--User-friendly name of device rejected-->
       </arg>
       <arg name="reason" type="s">
-        <tp:docstring>Human-readable description of reason for rejection</tp:docstring>
+        <!--Human-readable description of reason for rejection-->
       </arg>
     </signal>
     <signal name="devices_changed">
-      <tp:docstring>Device list previously given out may be out of date, re-enumerate.</tp:docstring>
+      <!--Device list previously given out may be out of date, re-enumerate.-->
     </signal>
     <signal name="optical_device_detected">
-      <tp:docstring>Signal that we have a new optical device and refresh the host model.</tp:docstring>
+      <!--Signal that we have a new optical device and refresh the host model.-->
     </signal>
   </interface>
 </node>

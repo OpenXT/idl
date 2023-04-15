@@ -8,14 +8,14 @@
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="close_network_menu">
-      <tp:docstring>Signal the NM applet to close the network menu.</tp:docstring>
+      <!--Signal the NM applet to close the network menu.-->
     </method>
     <method name="list_networks">
-      <tp:docstring>Lists networks.</tp:docstring>
+      <!--Lists networks.-->
       <arg type="as" name="networks" direction="out"/>
     </method>
     <method name="popup_network_menu">
-      <tp:docstring>Signal the NM applet to popup the network menu.</tp:docstring>
+      <!--Signal the NM applet to popup the network menu.-->
       <arg type="u" name="x_off" direction="in"/>
       <arg type="u" name="y_off" direction="in"/>
     </method>
@@ -41,7 +41,7 @@
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="backend_state_changed">
-      <tp:docstring>Notifies when a backend starts or stops.</tp:docstring>
+      <!--Notifies when a backend starts or stops.-->
       <arg name="status" type="u"/>
     </signal>
   </interface>

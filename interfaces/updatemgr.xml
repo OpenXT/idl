@@ -4,40 +4,40 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.updatemgr">
-    <tp:docstring>Primary update manager interface.</tp:docstring>
+    <!--Primary update manager interface.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="apply_update_and_reboot">
-      <tp:docstring>Start the process of applying the update (if update pending, otherwise error). After success, reboot.</tp:docstring>
+      <!--Start the process of applying the update (if update pending, otherwise error). After success, reboot.-->
     </method>
     <method name="apply_update_and_shutdown">
-      <tp:docstring>Start the process of applying the update (if update pending, otherwise error). After success, shutdown.</tp:docstring>
+      <!--Start the process of applying the update (if update pending, otherwise error). After success, shutdown.-->
     </method>
     <method name="cancel_update">
-      <tp:docstring>Cancel the update in progress (if possible, otherwise error).</tp:docstring>
+      <!--Cancel the update in progress (if possible, otherwise error).-->
     </method>
     <method name="check_update">
-      <tp:docstring>Download update metadata and check update applicability.</tp:docstring>
+      <!--Download update metadata and check update applicability.-->
       <arg name="url" type="s" direction="in"/>
       <arg name="version" type="s" direction="out">
-        <tp:docstring>XC version on the server (human-readable).</tp:docstring>
+        <!--XC version on the server (human-readable).-->
       </arg>
       <arg name="release" type="s" direction="out">
-        <tp:docstring>XC version on the server (strict format).</tp:docstring>
+        <!--XC version on the server (strict format).-->
       </arg>
       <arg name="status" type="s" direction="out">
-        <tp:docstring><p>Update applicability. Possible values are:</p>
+        <!--<p>Update applicability. Possible values are:</p>
         <ol>
           <li>can-upgrade</li>
           <li>cannot-upgrade</li>
           <li>up-to-date</li>
         </ol>
-        </tp:docstring>
+        -->
       </arg>
     </method>
     <method name="check_update_latest">
-      <tp:docstring>Treat URL as a repository with multiple updates.
+      <!--Treat URL as a repository with multiple updates.
       We expect to find a text file with one URL per line at the given
       URL.  We will treat the lines in reverse order, starting with
       the latest, and do a check_update on each.  We'll report back on
@@ -45,36 +45,36 @@
       'can-upgrade'.  If all are 'cannot-upgrade', we return
       'cannot-upgrade'.
 
-      Report back on latest applicable update, if any.</tp:docstring>
+      Report back on latest applicable update, if any.-->
       <arg name="url" type="s" direction="in"/>
       <arg name="version" type="s" direction="out">
-        <tp:docstring>Latest applicable (or up-to-date)
+        <!--Latest applicable (or up-to-date)
       XC version on the server (human readable), if avaible.  Empty if
-      no version applicable.</tp:docstring>
+      no version applicable.-->
       </arg>
       <arg name="release" type="s" direction="out">
-        <tp:docstring>Latest applicable (or up-to-date)
+        <!--Latest applicable (or up-to-date)
       XC version on the server (strict format), if avaible.  Empty if
-      no version.</tp:docstring>
+      no version.-->
       </arg>
       <arg name="status" type="s" direction="out">
-        <tp:docstring><p>Consolidated update applicability. Possible values are:</p>
+        <!--<p>Consolidated update applicability. Possible values are:</p>
         <ol>
           <li>can-upgrade</li>
           <li>cannot-upgrade</li>
           <li>up-to-date</li>
         </ol>
-        </tp:docstring>
+        -->
       </arg>
     </method>
     <method name="download_update">
-      <tp:docstring>Start the download of the pending update.</tp:docstring>
+      <!--Start the download of the pending update.-->
       <arg name="url" type="s" direction="in"/>
     </method>
     <method name="download_update_latest">
-      <tp:docstring>Start the download of the latest pending update.
+      <!--Start the download of the latest pending update.
       See documenation for 'check_update_latest' for
-      details.</tp:docstring>
+      details.-->
       <arg name="url" type="s" direction="in"/>
     </method>
     <!--~~~~~~~~~~~~~~~~~~~~~~
@@ -85,35 +85,35 @@
       <arg name="speed" type="d"/>
     </signal>
     <signal name="update_state_change">
-      <tp:docstring>Singal that the update state has changed.</tp:docstring>
+      <!--Singal that the update state has changed.-->
       <arg name="state" type="s"/>
     </signal>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Properties ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <property name="update-applicable" type="s" access="read">
-      <tp:docstring><p>Whether currently selected update is applicable or not. Possible values:</p>
+      <!--<p>Whether currently selected update is applicable or not. Possible values:</p>
       <ol>
         <li>can-upgrade</li>
         <li>cannot-upgrade</li>
         <li>up-to-date</li>
       </ol>
-      </tp:docstring>
+      -->
     </property>
     <property name="update-description" type="s" access="read">
-      <tp:docstring>Description of the pending update.</tp:docstring>
+      <!--Description of the pending update.-->
     </property>
     <property name="update-download-percent" type="d" access="read">
-      <tp:docstring>Download percentage complete.</tp:docstring>
+      <!--Download percentage complete.-->
     </property>
     <property name="update-download-speed" type="d" access="read">
-      <tp:docstring>Download speed.</tp:docstring>
+      <!--Download speed.-->
     </property>
     <property name="update-fail-reason" type="s" access="read">
-      <tp:docstring>Reason of failure in case something went wrong, otherwise empty.</tp:docstring>
+      <!--Reason of failure in case something went wrong, otherwise empty.-->
     </property>
     <property name="update-state" type="s" access="read">
-      <tp:docstring><p>State of pending update. Possible states are:</p>
+      <!--<p>State of pending update. Possible states are:</p>
       <ol><li>empty string when no update pending/nothing being done</li>
       <li>downloading-meta</li>
       <li>downloaded-meta</li>
@@ -123,10 +123,10 @@
       <li>failed</li>
       <li>done</li>
       </ol>
-      </tp:docstring>
+      -->
     </property>
     <property name="update-url" type="s" access="read">
-      <tp:docstring>Update's URL.</tp:docstring>
+      <!--Update's URL.-->
     </property>
   </interface>
 </node>

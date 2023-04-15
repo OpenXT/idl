@@ -8,13 +8,13 @@
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="close_network_menu">
-      <tp:docstring>Signal the NM applet to close the network menu.</tp:docstring>
+      <!--Signal the NM applet to close the network menu.-->
     </method>
     <method name="popup_keyboard">
-      <tp:docstring>Pop up the keyboard in the uivm.</tp:docstring>
+      <!--Pop up the keyboard in the uivm.-->
     </method>
     <method name="popup_network_menu">
-      <tp:docstring>Signal the NM applet to popup the network menu.</tp:docstring>
+      <!--Signal the NM applet to popup the network menu.-->
       <arg type="u" name="x_off" direction="in"/>
       <arg type="u" name="y_off" direction="in"/>
     </method>

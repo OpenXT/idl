@@ -1,28 +1,28 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node xmlns:tp="http://telepathy.freedesktop.org/wiki/DbusSpec#extensions-v0" name="/">
   <tp:enum name="MANAGED_DISKTYPE" type="s">
-    <tp:docstring>Managed disk type.</tp:docstring>
+    <!--Managed disk type.-->
     <tp:enumvalue suffix="NONE" value=""/>
     <tp:enumvalue suffix="SYSTEM" value="system"/>
     <tp:enumvalue suffix="APPLICATION" value="application"/>
     <tp:enumvalue suffix="USER" value="user"/>
   </tp:enum>
   <tp:enum name="S3_MODE" type="s">
-    <tp:docstring>S3 mode.</tp:docstring>
+    <!--S3 mode.-->
     <tp:enumvalue suffix="PV" value="pv"/>
     <tp:enumvalue suffix="IGNORE" value="ignore"/>
     <tp:enumvalue suffix="RESTART" value="restart"/>
     <tp:enumvalue suffix="SNAPSHOT" value="snapshot"/>
   </tp:enum>
   <tp:enum name="S4_MODE" type="s">
-    <tp:docstring>S4 mode.</tp:docstring>
+    <!--S4 mode.-->
     <tp:enumvalue suffix="PV" value="pv"/>
     <tp:enumvalue suffix="IGNORE" value="ignore"/>
     <tp:enumvalue suffix="RESTART" value="restart"/>
     <tp:enumvalue suffix="SNAPSHOT" value="snapshot"/>
   </tp:enum>
   <tp:enum name="VM_STATE" type="s">
-    <tp:docstring>VM lifecycle state codes.</tp:docstring>
+    <!--VM lifecycle state codes.-->
     <tp:enumvalue suffix="CREATING" value="creating"/>
     <tp:enumvalue suffix="RUNNING" value="running"/>
     <tp:enumvalue suffix="STOPPING" value="stopping"/>
@@ -39,7 +39,7 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.policy">
-    <tp:docstring>Implements the policy enforce/retrieve.</tp:docstring>
+    <!--Implements the policy enforce/retrieve.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -56,38 +56,38 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr">
-    <tp:docstring>Main xenmgr interface, used for VM creation and enumeration.</tp:docstring>
+    <!--Main xenmgr interface, used for VM creation and enumeration.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="create_vhd">
-      <tp:docstring>Create a new VHD.</tp:docstring>
+      <!--Create a new VHD.-->
       <arg name="size_mb" type="i" direction="in"/>
       <arg name="path" type="s" direction="out"/>
     </method>
     <method name="create_vm">
-      <tp:docstring>Create a new VM.</tp:docstring>
+      <!--Create a new VM.-->
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="create_vm_with_template">
-      <tp:docstring>Create a new VM based on the given template.</tp:docstring>
+      <!--Create a new VM based on the given template.-->
       <arg name="template" type="s" direction="in"/>
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="create_vm_with_template_and_json">
-      <tp:docstring>Create a new VM based on given template file and JSON blob. Template or json can be left empty</tp:docstring>
+      <!--Create a new VM based on given template file and JSON blob. Template or json can be left empty-->
       <arg name="template" type="s" direction="in"/>
       <arg name="json" type="s" direction="in"/>
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="create_vm_with_template_and_uuid">
-      <tp:docstring>Create a new VM based on the given template and UUID.</tp:docstring>
+      <!--Create a new VM based on the given template and UUID.-->
       <arg name="template" type="s" direction="in"/>
       <arg name="uuid" type="s" direction="in"/>
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="create_vm_with_ui">
-      <tp:docstring>Create a new VM based on the given template, with ui properties initially set.</tp:docstring>
+      <!--Create a new VM based on the given template, with ui properties initially set.-->
       <arg name="template" type="s" direction="in"/>
       <arg name="name" type="s" direction="in"/>
       <arg name="description" type="s" direction="in"/>
@@ -95,97 +95,97 @@
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="find_vm_by_domid">
-      <tp:docstring>Returns the object path to the VM of the given domain ID. Fails with an error if no such VM is running.</tp:docstring>
+      <!--Returns the object path to the VM of the given domain ID. Fails with an error if no such VM is running.-->
       <arg name="domid" type="i" direction="in"/>
       <arg name="obj_path" type="o" direction="out"/>
     </method>
     <method name="find_vm_by_uuid">
-      <tp:docstring>Returns the object path to the VM with the given UUID, or raises an error.</tp:docstring>
+      <!--Returns the object path to the VM with the given UUID, or raises an error.-->
       <arg name="uuid" type="s" direction="in"/>
       <arg name="obj_path" type="o" direction="out"/>
     </method>
     <method name="list_child_service_vm_templates">
-      <tp:docstring>List the templates for creating child service VMs.</tp:docstring>
+      <!--List the templates for creating child service VMs.-->
       <arg name="templates" type="as" direction="out"/>
     </method>
     <method name="list_domids">
-      <tp:docstring>List current domain IDs.</tp:docstring>
+      <!--List current domain IDs.-->
       <arg name="domids" type="ai" direction="out"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;int&gt;"/>
     </method>
     <method name="list_extension_packs">
-      <tp:docstring>List installed extension packs. Returns array of dictionaries, where each dict contains following keys:
+      <!--List installed extension packs. Returns array of dictionaries, where each dict contains following keys:
 	vendor, name, description, version, image.
-      </tp:docstring>
+      -->
       <arg name="packs" type="aa{ss}" direction="out"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_templates">
-      <tp:docstring>List the templates for creating new VMa.</tp:docstring>
+      <!--List the templates for creating new VMa.-->
       <arg name="templates" type="as" direction="out"/>
     </method>
     <method name="list_ui_templates">
-      <tp:docstring>List the UI-visible VM creation templates.</tp:docstring>
+      <!--List the UI-visible VM creation templates.-->
       <arg name="templates" type="aa{ss}" direction="out"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;QMap&lt;QString,QString&gt;&gt;"/>
     </method>
     <method name="list_vms">
-      <tp:docstring>List each VM present. Returns a list of dicts with few critical properties filled for each VM, including VM state, domain ID (if running), uuid etc.</tp:docstring>
+      <!--List each VM present. Returns a list of dicts with few critical properties filled for each VM, including VM state, domain ID (if running), uuid etc.-->
       <arg name="paths" type="ao" direction="out"/>
     </method>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="cd_assignment_changed">
-      <tp:docstring>CD device VM assignment has changed.</tp:docstring>
+      <!--CD device VM assignment has changed.-->
       <arg name="dev" type="s"/>
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
     <signal name="config_changed">
-      <tp:docstring>Notify xenmgr that host level configuration has changed.</tp:docstring>
+      <!--Notify xenmgr that host level configuration has changed.-->
     </signal>
     <signal name="language_changed">
-      <tp:docstring>Notify that the language settings have changed.</tp:docstring>
+      <!--Notify that the language settings have changed.-->
     </signal>
     <signal name="network_state_changed">
-      <tp:docstring>Notify when a network becomes available/unavailable.</tp:docstring>
+      <!--Notify when a network becomes available/unavailable.-->
       <arg name="available" type="b"/>
     </signal>
     <signal name="notify">
-      <tp:docstring>Send out generic notification, details inside string arg.</tp:docstring>
+      <!--Send out generic notification, details inside string arg.-->
       <arg name="uuid" type="s"/>
       <arg name="messsage" type="s"/>
     </signal>
     <signal name="vm_config_changed">
-      <tp:docstring>Notify that VM configuration has changed.</tp:docstring>
+      <!--Notify that VM configuration has changed.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
     <signal name="vm_created">
-      <tp:docstring>Notify that a VM was created.</tp:docstring>
+      <!--Notify that a VM was created.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
     <signal name="vm_deleted">
-      <tp:docstring>Notify that a VM was deleted.</tp:docstring>
+      <!--Notify that a VM was deleted.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
     <signal name="vm_name_changed">
-      <tp:docstring>Notify that VM name has changed.</tp:docstring>
+      <!--Notify that VM name has changed.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
     <signal name="vm_state_changed">
-      <tp:docstring>Notify that VM state has changed.</tp:docstring>
+      <!--Notify that VM state has changed.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
       <arg name="state" type="s"/>
       <arg name="acpi_state" type="i"/>
     </signal>
     <signal name="vm_transfer_changed">
-      <tp:docstring>VM download/upload progress has changed.</tp:docstring>
+      <!--VM download/upload progress has changed.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
@@ -194,61 +194,61 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr.config">
-    <tp:docstring>xenmgr configuration information, mostly living in the /xenmgr db tree.</tp:docstring>
+    <!--xenmgr configuration information, mostly living in the /xenmgr db tree.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Properties ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <property name="argo-firewall" type="b" access="readwrite">
-      <tp:docstring>If true, argo firewall is enabled, rejecting all incoming traffic by default.</tp:docstring>
+      <!--If true, argo firewall is enabled, rejecting all incoming traffic by default.-->
     </property>
     <property name="argo-hosts-file" type="b" access="readwrite"/>
     <property name="autolock-cd-drives" type="b" access="readwrite">
-      <tp:docstring>Automatically lock/unlock cd drives to vms on media insert/eject events</tp:docstring>
+      <!--Automatically lock/unlock cd drives to vms on media insert/eject events-->
     </property>
     <property name="autostart" type="b" access="readwrite"/>
     <property name="bypass-sha1sum-checks" type="b" access="read"/>
     <property name="configurable-save-changes-across-reboots" type="b" access="read">
-      <tp:docstring>True if user can opt to not save VHD changes across VM reboot.</tp:docstring>
+      <!--True if user can opt to not save VHD changes across VM reboot.-->
     </property>
     <property name="connect-remote-desktop-allowed" type="b" access="readwrite">
-      <tp:docstring>Allow using remote desktop (via icavm).</tp:docstring>
+      <!--Allow using remote desktop (via icavm).-->
     </property>
     <property name="dom0-mem-target-mib" type="i" access="readwrite">
-      <tp:docstring>Dom0 balloon memory target, in mebibytes. If 0, don't balloon dom0.</tp:docstring>
+      <!--Dom0 balloon memory target, in mebibytes. If 0, don't balloon dom0.-->
     </property>
     <property name="enable-argo-ssh" type="b" access="readwrite">
-      <tp:docstring>Enable internal SSH access to dom0.</tp:docstring>
+      <!--Enable internal SSH access to dom0.-->
     </property>
     <property name="enable-dom0-networking" type="b" access="readwrite">
-      <tp:docstring>Have dom0 connect to external network using DHCP.</tp:docstring>
+      <!--Have dom0 connect to external network using DHCP.-->
     </property>
     <property name="enable-ssh" type="b" access="readwrite">
-      <tp:docstring>Enable external SSH access to dom0.</tp:docstring>
+      <!--Enable external SSH access to dom0.-->
     </property>
     <property name="guest-only-networking" type="b" access="read">
-      <tp:docstring>If true, networking features in dom0/networking VM are disabled.</tp:docstring>
+      <!--If true, networking features in dom0/networking VM are disabled.-->
     </property>
     <property name="iso-path" type="s" access="readwrite"/>
     <property name="measure-fail-action" type="s" access="readwrite">
-      <tp:docstring>Action to perform when computing service VM checksum fails: sleep,hibernate,shutdown,reboot,nothing.</tp:docstring>
+      <!--Action to perform when computing service VM checksum fails: sleep,hibernate,shutdown,reboot,nothing.-->
     </property>
     <property name="ota-upgrades-allowed" type="b" access="readwrite">
-      <tp:docstring>Allow over the air upgrades on this host.</tp:docstring>
+      <!--Allow over the air upgrades on this host.-->
     </property>
     <property name="platform-crypto-key-dirs" type="s" access="readwrite">
-      <tp:docstring>Comma separated list of disk encryption keys directories.</tp:docstring>
+      <!--Comma separated list of disk encryption keys directories.-->
     </property>
     <property name="pvm-autostart-delay" type="i" access="readwrite"/>
     <property name="secondary-gpu-pt" type="b" access="read">
-      <tp:docstring>True if passthrough of secondary GPUs supported.</tp:docstring>
+      <!--True if passthrough of secondary GPUs supported.-->
     </property>
     <property name="svm-autostart-delay" type="i" access="readwrite"/>
     <property name="use-networking-domain" type="b" access="read"/>
     <property name="vm-creation-allowed" type="b" access="readwrite">
-      <tp:docstring>Allow creation of VMs on this host.</tp:docstring>
+      <!--Allow creation of VMs on this host.-->
     </property>
     <property name="vm-deletion-allowed" type="b" access="readwrite">
-      <tp:docstring>Allow deletion of VM on this host.</tp:docstring>
+      <!--Allow deletion of VM on this host.-->
     </property>
     <property name="xc-diag-timeout" type="i" access="readwrite"/>
   </interface>
@@ -256,21 +256,21 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr.config.ui">
-    <tp:docstring>UI configuration information.</tp:docstring>
+    <!--UI configuration information.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Properties ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <property name="idle-time-threshold" type="i" access="readwrite">
-      <tp:docstring>Determines the amount of time the host can be idle after which it goes to sleep.</tp:docstring>
+      <!--Determines the amount of time the host can be idle after which it goes to sleep.-->
     </property>
     <property name="language" type="s" access="readwrite">
-      <tp:docstring>Current language.</tp:docstring>
+      <!--Current language.-->
     </property>
     <property name="modify-advanced-vm-settings" type="b" access="readwrite"/>
     <property name="modify-services" type="b" access="readwrite"/>
     <property name="modify-settings" type="b" access="readwrite"/>
     <property name="modify-usb-settings" type="b" access="readwrite">
-      <tp:docstring>If false, user will be unable to change vUSB device assignment.</tp:docstring>
+      <!--If false, user will be unable to change vUSB device assignment.-->
     </property>
     <property name="pointer-trail-timeout" type="i" access="readwrite"/>
     <property name="show-mboot-warning" type="b" access="readwrite"/>
@@ -279,22 +279,22 @@
     <property name="show-msg-on-vm-start-tools-warning" type="b" access="readwrite"/>
     <property name="show-tools-warning" type="b" access="readwrite"/>
     <property name="supported-languages" type="as" access="read">
-      <tp:docstring>List of supported languages.</tp:docstring>
+      <!--List of supported languages.-->
     </property>
     <property name="switcher-enabled" type="b" access="readwrite">
-      <tp:docstring>True if seamless mouse switching is enabled.</tp:docstring>
+      <!--True if seamless mouse switching is enabled.-->
     </property>
     <property name="switcher-keyboard-follows-mouse" type="b" access="readwrite">
-      <tp:docstring>If false, when mouse-switching, the keyboard stays in it's slot until a mouse click.</tp:docstring>
+      <!--If false, when mouse-switching, the keyboard stays in it's slot until a mouse click.-->
     </property>
     <property name="switcher-resistance" type="i" access="readwrite">
-      <tp:docstring>Determines how hard the edges are for mouse-switching.</tp:docstring>
+      <!--Determines how hard the edges are for mouse-switching.-->
     </property>
     <property name="switcher-self-switch-enabled" type="b" access="readwrite">
-      <tp:docstring>If false, switching to the actual current slot will do nothing.</tp:docstring>
+      <!--If false, switching to the actual current slot will do nothing.-->
     </property>
     <property name="switcher-status-report-enabled" type="b" access="readwrite">
-      <tp:docstring>If false, CTRL+ALT+R to generate a status report in the UI will be disabled.</tp:docstring>
+      <!--If false, CTRL+ALT+R to generate a status report in the UI will be disabled.-->
     </property>
     <property name="view-type" type="s" access="readwrite"/>
     <property name="wallpaper" type="s" access="readwrite"/>
@@ -303,12 +303,12 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr.diag">
-    <tp:docstring>Helpers for gathering diagnostic info from guests, and dom0.</tp:docstring>
+    <!--Helpers for gathering diagnostic info from guests, and dom0.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="create_status_report">
-      <tp:docstring>Create a report using status-tool.</tp:docstring>
+      <!--Create a report using status-tool.-->
       <arg name="screenshots" type="b" direction="in"/>
       <arg name="guest_info" type="b" direction="in"/>
       <arg name="summary" type="s" direction="in"/>
@@ -318,34 +318,34 @@
       <arg name="file" type="s" direction="out"/>
     </method>
     <method name="gather">
-      <tp:docstring>Put a file containing results of xc-diag to dom0.</tp:docstring>
+      <!--Put a file containing results of xc-diag to dom0.-->
       <arg name="name" type="s" direction="in"/>
       <arg name="data_" type="s" direction="in"/>
     </method>
     <method name="save">
-      <tp:docstring>Get diagnostic information for VMs and save to the specified directory.</tp:docstring>
+      <!--Get diagnostic information for VMs and save to the specified directory.-->
       <arg name="mode" type="s" direction="in"/>
       <arg name="dir" type="s" direction="out"/>
     </method>
     <method name="status_report_screen">
-      <tp:docstring>Show or hide the status report screen.</tp:docstring>
+      <!--Show or hide the status report screen.-->
       <arg name="show" type="b" direction="in"/>
     </method>
     <method name="taas_agree_terms">
-      <tp:docstring>TaaS Terms.</tp:docstring>
+      <!--TaaS Terms.-->
       <arg name="username" type="s" direction="in"/>
       <arg name="password" type="s" direction="in"/>
       <arg name="version" type="s" direction="in"/>
       <arg name="result" type="b" direction="out"/>
     </method>
     <method name="taas_authenticate_credentials">
-      <tp:docstring>Validate MyCitrix credentials.</tp:docstring>
+      <!--Validate MyCitrix credentials.-->
       <arg name="username" type="s" direction="in"/>
       <arg name="password" type="s" direction="in"/>
       <arg name="result" type="as" direction="out"/>
     </method>
     <method name="taas_upload">
-      <tp:docstring>Upload file to TaaS.</tp:docstring>
+      <!--Upload file to TaaS.-->
       <arg name="username" type="s" direction="in"/>
       <arg name="password" type="s" direction="in"/>
       <arg name="caseid" type="s" direction="in"/>
@@ -356,7 +356,7 @@
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="gather_request">
-      <tp:docstring>Sent to notify guests to start preparing diagnostics info.</tp:docstring>
+      <!--Sent to notify guests to start preparing diagnostics info.-->
       <arg name="mode" type="s"/>
     </signal>
   </interface>
@@ -364,18 +364,18 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr.guestreq">
-    <tp:docstring>Some well defined requests coming from guests.</tp:docstring>
+    <!--Some well defined requests coming from guests.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="request_attention">
-      <tp:docstring>Guest requests user attention. Executing this method from any guest VM (User VM or Service VM) will cause a dialog box in both the UIVM and Windows guests to alert the user that the VM which sent it requires attention. This is useful for the case where a service VM needs credentials from the user or has an issue which requires user intervention to resolve. Note that the dialog box means a VM wants you to switch to the VM; but it does NOT mean that we recommend that you take any action, including but not limited to giving your attention to any VM that is requesting said attention. A malicious VM can repeatedly call this function and cause this dialog box to appear repeatedly; there is no time delay that limits how often any VM can request attention.</tp:docstring>
+      <!--Guest requests user attention. Executing this method from any guest VM (User VM or Service VM) will cause a dialog box in both the UIVM and Windows guests to alert the user that the VM which sent it requires attention. This is useful for the case where a service VM needs credentials from the user or has an issue which requires user intervention to resolve. Note that the dialog box means a VM wants you to switch to the VM; but it does NOT mean that we recommend that you take any action, including but not limited to giving your attention to any VM that is requesting said attention. A malicious VM can repeatedly call this function and cause this dialog box to appear repeatedly; there is no time delay that limits how often any VM can request attention.-->
     </method>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Signals    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <signal name="requested_attention">
-      <tp:docstring>Notify that VM has requested attention.</tp:docstring>
+      <!--Notify that VM has requested attention.-->
       <arg name="uuid" type="s"/>
       <arg name="obj_path" type="o"/>
     </signal>
@@ -384,16 +384,16 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr.testing">
-    <tp:docstring>Helpers for automated testing.</tp:docstring>
+    <!--Helpers for automated testing.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="script_dequeue">
-      <tp:docstring>Remove and return script.</tp:docstring>
+      <!--Remove and return script.-->
       <arg name="script" type="s" direction="out"/>
     </method>
     <method name="script_queue">
-      <tp:docstring>Add a script to the fifo queue of test scripts to exercise in the UI.</tp:docstring>
+      <!--Add a script to the fifo queue of test scripts to exercise in the UI.-->
       <arg name="script" type="s" direction="in"/>
     </method>
   </interface>
@@ -401,24 +401,24 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.xenmgr.unrestricted">
-    <tp:docstring>Allows xenmgr operation ignoring policy checks so
+    <!--Allows xenmgr operation ignoring policy checks so
     daemons in the control domain (dom0) can easily change
-    settings.</tp:docstring>
+    settings.-->
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="unrestricted_create_vm">
-      <tp:docstring>Create a new VM.</tp:docstring>
+      <!--Create a new VM.-->
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="unrestricted_create_vm_with_template_and_json">
-      <tp:docstring>Create a new VM based on given template file and JSON blob. Template or json can be left empty.</tp:docstring>
+      <!--Create a new VM based on given template file and JSON blob. Template or json can be left empty.-->
       <arg name="template" type="s" direction="in"/>
       <arg name="json" type="s" direction="in"/>
       <arg name="path" type="o" direction="out"/>
     </method>
     <method name="unrestricted_delete_vm">
-      <tp:docstring>Delete existing VM.</tp:docstring>
+      <!--Delete existing VM.-->
       <arg name="uuid" type="s" direction="in"/>
     </method>
   </interface>
