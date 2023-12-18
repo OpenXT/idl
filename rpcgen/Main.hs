@@ -21,7 +21,7 @@ module Main where
 
 import Data.List
 import Data.Char
-import qualified Data.Text.Lazy as T
+import qualified Data.Text as T
 import qualified Data.Map as M
 
 import Control.Applicative
@@ -32,6 +32,7 @@ import System.Console.GetOpt
 import System.Environment
 import System.Directory
 import qualified DBus.Introspection as I
+import qualified DBus.Introspection.Parse as P
 
 import qualified Backend
 import qualified Backend.C
@@ -69,7 +70,7 @@ type Problem = String
 
 checkXML ::String -> Maybe Problem
 checkXML xml =
-    case I.fromXML "/" (T.pack xml) of
+    case P.parseXML "/" (T.pack xml) of
       Nothing  -> Just "failed to parse interface specification XML"
       Just obj -> Nothing
 

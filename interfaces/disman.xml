@@ -51,7 +51,7 @@
 
         <!-- Included for testing purposes only -->
         <method name="exit">
-            <tp:docstring>Exit disman. Default response to this should be monit bringing it back up.</tp:docstring>
+            <!--Exit disman. Default response to this should be monit bringing it back up.-->
         </method>
     </interface>
 </node>

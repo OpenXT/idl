@@ -17,12 +17,12 @@
     </method>
 
     <method name="get_focus_domid">
-      <tp:docstring>Get currently focused domain ID.</tp:docstring>
+      <!--Get currently focused domain ID.-->
       <arg name="domid" type="i" direction="out"></arg>
     </method>
 
     <method name="switch_focus">
-      <tp:docstring>Move focus to different domain.</tp:docstring>
+      <!--Move focus to different domain.-->
       <arg name="domid" type="i" direction="in"></arg>
       <arg name="force" type="b" direction="in"></arg>
       <arg name="success" type="b" direction="out"></arg>
@@ -47,41 +47,41 @@
     </method>
 
     <method name="update_idle_timer">
-      <tp:docstring>Update the timer with a given name.</tp:docstring>
+      <!--Update the timer with a given name.-->
       <arg type="s" name="timer_name" direction="in" />
       <arg type="i" name="timeout_value" direction="in" />
     </method>
 
     <method name="get_seamless_mousing">
-      <tp:docstring>Get current status of seamless mouse</tp:docstring>
+      <!--Get current status of seamless mouse-->
       <arg name="enabled" type="b" direction="out"/>
     </method>
 
     <method name="set_seamless_mousing">
-      <tp:docstring>Enable/Disable seamless mouse</tp:docstring>
+      <!--Enable/Disable seamless mouse-->
       <arg name="enabled" type="b" direction="in"/>
       <arg name="rv" type="b" direction="out"/>
     </method>
 
     <method name="reload_config_from_disk">
-      <tp:docstring>Reload configuration from disk</tp:docstring>
+      <!--Reload configuration from disk-->
       <arg name="rv" type="b" direction="out"/>
     </method>
 
     <signal name="idle_timeout">
-      <tp:docstring>Emitted when the configured idle timer is hit.</tp:docstring>
+      <!--Emitted when the configured idle timer is hit.-->
       <arg type="s" name="timer_id" />
     </signal>
 
     <signal name="keyboard_focus_change">
-      <tp:docstring>This allows the monitoring of the keyboard focus, by signaling the UUID of the VM gaining focus.</tp:docstring>
+      <!--This allows the monitoring of the keyboard focus, by signaling the UUID of the VM gaining focus.-->
       <arg type="s" name="uuid" />
     </signal>
 
     <!-- DBus Legacy - not supported anymore, but too integrated with xenmgr to easily remove -->
 
     <method name="auth_begin">
-      <tp:docstring>Start authentication process.</tp:docstring>
+      <!--Start authentication process.-->
       <arg name="started" type="b" direction="out"></arg>
     </method>
 
@@ -121,7 +121,7 @@
     </method>
 
     <method name="auth_rm_platform_user">
-      <tp:docstring>Used to recover access to platform when user has forgotten local password.</tp:docstring>
+      <!--Used to recover access to platform when user has forgotten local password.-->
       <arg name="success" type="b" direction="out"></arg>
       <arg name="error_msg" type="s" direction="out"></arg>
     </method>
@@ -142,16 +142,16 @@
     </method>
 
     <method name="divert_keyboard_focus">
-      <tp:docstring>Diverts the keyboard focus to the provided VM, filtering provided key strokes, which continue to go to the original VM.
-                    Key_filter is a null terminated array of key value sets, each of which is itself null terminated.</tp:docstring>
+      <!--Diverts the keyboard focus to the provided VM, filtering provided key strokes, which continue to go to the original VM.
+                    Key_filter is a null terminated array of key value sets, each of which is itself null terminated.-->
       <arg type="s" name="uuid" direction="in" />
     </method>
 
     <method name="divert_mouse_focus">
-      <tp:docstring>Diverts the mouse focus to the provided VM, for mouse events occurring within the given source frame. Events outside of
+      <!--Diverts the mouse focus to the provided VM, for mouse events occurring within the given source frame. Events outside of
                     this frame continue go to the calling VM. Mouse events are scaled to fit within the destination frame. Any area outside
                     of the destination frame will not be accessible with the mouse.
-                    Coordinates:  0 is always left/top most, 0x1FFF right/bottom most, regardless of screen resolution.</tp:docstring>
+                    Coordinates:  0 is always left/top most, 0x1FFF right/bottom most, regardless of screen resolution.-->
       <arg type="s" name="uuid" direction="in" />
 
       <arg type="u" name="sframe_x1" direction="in" />
@@ -166,9 +166,9 @@
     </method>
 
     <method name="focus_mode">
-      <tp:docstring>This bitfield allows the keyboard/mouse focus behaviour to be tweeked.  Bit 1 =KEYFOLLOWMOUSE, Bit 2 = CLICKHOLDFOCUS, Bit 3 = CLONEEVENTS.
+      <!--This bitfield allows the keyboard/mouse focus behaviour to be tweeked.  Bit 1 =KEYFOLLOWMOUSE, Bit 2 = CLICKHOLDFOCUS, Bit 3 = CLONEEVENTS.
                     The default mode is 0.
-      </tp:docstring>
+      -->
       <arg type="i" name="mode" direction="in" />
     </method>
 
@@ -177,17 +177,17 @@
     </method>
 
     <method name="get_idle_time">
-      <tp:docstring>Get Idle Time of the Host.</tp:docstring>
+      <!--Get Idle Time of the Host.-->
       <arg name="idle_time" type="i" direction="out"></arg>
     </method>
 
     <method name="get_last_input_time">
-      <tp:docstring>Returns the number of seconds since the most recent input activity or from start of input server.</tp:docstring>
+      <!--Returns the number of seconds since the most recent input activity or from start of input server.-->
       <arg name="idle_time" type="i" direction="out"></arg>
     </method>
 
     <method name="get_lid_state">
-      <tp:docstring>Returns lid state.  A value of one indicates lid is open otherwise closed.</tp:docstring>
+      <!--Returns lid state.  A value of one indicates lid is open otherwise closed.-->
       <arg type="u" name="lid_ret" direction="out" />
     </method>
 
@@ -197,13 +197,13 @@
     </method>
 
     <method name="get_remote_user_hash">
-      <tp:docstring>Get the remote user hash of the specified userid.</tp:docstring>
+      <!--Get the remote user hash of the specified userid.-->
       <arg name="userid" type="s" direction="in"></arg>
       <arg name="hashed_userid" type="s" direction="out"></arg>
     </method>
 
     <method name="get_user_keydir">
-      <tp:docstring>Get the user crypto keys directory, or empty string if not mounted.</tp:docstring>
+      <!--Get the user crypto keys directory, or empty string if not mounted.-->
       <arg name="user" type="s" direction="in"></arg>
       <arg name="dir" type="s" direction="out"></arg>
     </method>
@@ -230,15 +230,15 @@
     </method>
 
     <method name="stop_keyboard_divert">
-      <tp:docstring>This method stops a keyboard focus divert, which was created using divert_keyboard_focus.</tp:docstring>
+      <!--This method stops a keyboard focus divert, which was created using divert_keyboard_focus.-->
     </method>
 
     <method name="stop_mouse_divert">
-      <tp:docstring>This method stops a mouse focus divert, which was created using divert_mouse_focus.</tp:docstring>
+      <!--This method stops a mouse focus divert, which was created using divert_mouse_focus.-->
     </method>
 
     <method name="touch">
-      <tp:docstring>Introduce an input event, into the given VM, to defer it from sleeping. </tp:docstring>
+      <!--Introduce an input event, into the given VM, to defer it from sleeping. -->
       <arg type="s" name="uuid" direction="in" />
     </method>
 
@@ -249,38 +249,38 @@
     <!-- These aren't even in our code at all -->
 
     <property name="numlock-restore-on-switch" type="b" access="readwrite">
-      <tp:docstring>Restore NumLock status on switch to VM.</tp:docstring>
+      <!--Restore NumLock status on switch to VM.-->
     </property>
 
     <signal name="focus_auth_field">
-      <tp:docstring>Sent to notify UI to focus the text field in secure mode.</tp:docstring>
+      <!--Sent to notify UI to focus the text field in secure mode.-->
       <arg name="field_id" type="i"></arg>
     </signal>
 
     <signal name="sync_auth_username">
-      <tp:docstring>Sent to set the username in the UI in secure mode.</tp:docstring>
+      <!--Sent to set the username in the UI in secure mode.-->
       <arg name="username" type="s"></arg>
     </signal>
 
     <signal name="auth_status">
-      <tp:docstring>Sent to change the status in the UI in secure mode.</tp:docstring>
+      <!--Sent to change the status in the UI in secure mode.-->
       <arg name="status" type="s"></arg>
       <arg name="flags" type="i"></arg>
     </signal>
 
     <signal name="secure_mode">
-      <tp:docstring>Sent to the UI to enter secure mode.</tp:docstring>
+      <!--Sent to the UI to enter secure mode.-->
       <arg name="show" type="i"></arg>
     </signal>
 
     <signal name="auth_remote_start_login">
-      <tp:docstring>Sent to the BED to kick off Synchronizer auth.</tp:docstring>
+      <!--Sent to the BED to kick off Synchronizer auth.-->
       <arg name="username" type="s"/>
       <arg name="ctx_flags" type="u"/>
     </signal>
 
     <signal name="auth_remote_start_recovery">
-      <tp:docstring>Sent to the BED to get recovery key.</tp:docstring>
+      <!--Sent to the BED to get recovery key.-->
       <arg name="auto_started" type="b"/>
       <arg name="id" type="s"/>
       <arg name="username" type="s"/>
@@ -288,7 +288,7 @@
     </signal>
 
     <signal name="lid_state_changed">
-      <tp:docstring>Signals when a laptop lid is opened or closed.</tp:docstring>
+      <!--Signals when a laptop lid is opened or closed.-->
     </signal>
 
   </interface>

@@ -21,7 +21,7 @@ module Backend.C2 (backend) where
 import Data.List
 import Data.Maybe
 import qualified Data.Text.Lazy as T
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import Text.Printf
 import Backend
 import Tools
@@ -81,7 +81,7 @@ methodGenerate z@(intf, m) = unlines (
 			[ "dbus_loop_handle *_dconn", "const char *_dservice", "const char *_dobjpath" ] ++
 			(map (mkCType "IN" "") $ methodInParams m) ++
 			(map (mkCType "OUT" "*") $ methodOutParams m)
-		mkCType "IN" _ (Parameter name ty@(D.DBusArray _)) = printf "%s *%s" (cTypeOfDbus ty) (mkCParameterName "IN" name)
+		mkCType "IN" _ (Parameter name ty@(D.TypeArray _)) = printf "%s *%s" (cTypeOfDbus ty) (mkCParameterName "IN" name)
 		mkCType pre afterty (Parameter name ty) = printf "%s%s %s" (cTypeOfDbus ty) afterty (mkCParameterName pre name)
 
 		mkCParameterName :: String -> String -> String
@@ -95,7 +95,7 @@ methodGenerate z@(intf, m) = unlines (
 		-- BODY
 		dbusInBodyStr = concatMap mkInBodyFill $ methodInParams m
 
-		mkInBodyFill (Parameter name (D.DBusArray ty)) =
+		mkInBodyFill (Parameter name (D.TypeArray ty)) =
 			let cname = mkCParameterName "IN" name in
 			let element = head $ sigTypeOfDBus ty in
 			[ printf "\tdbus_msg_body_add_array_begin(msg, %s, &arraywriter);" element
@@ -113,7 +113,7 @@ methodGenerate z@(intf, m) = unlines (
 		-- BODY OUT
 		dbusOutBodyStr = concatMap mkOutBodyUnFill $ methodOutParams m
 
-		mkOutBodyUnFill (Parameter name (D.DBusArray ty)) =
+		mkOutBodyUnFill (Parameter name (D.TypeArray ty)) =
 			let cname = mkCParameterName "OUT" name in
 			let element = head $ sigTypeOfDBus ty in
 			[ printf "\tdbus_msg_body_get_array(rmsg, %s, &arrayreader);" element
@@ -135,36 +135,36 @@ methodGenerate z@(intf, m) = unlines (
 
 cMethodName (intf, m) = replace "." "_" (interfaceName intf) ++ "_" ++ methodName m
 
-cTypeOfDbus (D.DBusInt32)   = "int32_t"
-cTypeOfDbus (D.DBusInt64)   = "int64_t"
-cTypeOfDbus (D.DBusWord32)  = "uint32_t"
-cTypeOfDbus (D.DBusWord64)  = "uint64_t"
-cTypeOfDbus (D.DBusBoolean) = "bool"
-cTypeOfDbus (D.DBusString)  = "char *"
-cTypeOfDbus (D.DBusArray _) = "dbus_array"
+cTypeOfDbus (D.TypeInt32)   = "int32_t"
+cTypeOfDbus (D.TypeInt64)   = "int64_t"
+cTypeOfDbus (D.TypeWord32)  = "uint32_t"
+cTypeOfDbus (D.TypeWord64)  = "uint64_t"
+cTypeOfDbus (D.TypeBoolean) = "bool"
+cTypeOfDbus (D.TypeString)  = "char *"
+cTypeOfDbus (D.TypeArray _) = "dbus_array"
 cTypeOfDbus o               = show o
 
-sigTypeOfDBus (D.DBusArray a) = "DBUS_ARRAY" : sigTypeOfDBus a
-sigTypeOfDBus (D.DBusBoolean) = ["DBUS_BOOLEAN"]
-sigTypeOfDBus (D.DBusByte) = ["DBUS_BYTE"]
-sigTypeOfDBus (D.DBusString) = ["DBUS_STRING"]
-sigTypeOfDBus (D.DBusInt16) = ["DBUS_INT16"]
-sigTypeOfDBus (D.DBusInt32) = ["DBUS_INT32"]
-sigTypeOfDBus (D.DBusInt64) = ["DBUS_INT64"]
-sigTypeOfDBus (D.DBusWord16) = ["DBUS_UINT16"]
-sigTypeOfDBus (D.DBusWord32) = ["DBUS_UINT32"]
-sigTypeOfDBus (D.DBusWord64) = ["DBUS_UINT64"]
+sigTypeOfDBus (D.TypeArray a) = "DBUS_ARRAY" : sigTypeOfDBus a
+sigTypeOfDBus (D.TypeBoolean) = ["DBUS_BOOLEAN"]
+sigTypeOfDBus (D.TypeWord8) = ["DBUS_BYTE"]
+sigTypeOfDBus (D.TypeString) = ["DBUS_STRING"]
+sigTypeOfDBus (D.TypeInt16) = ["DBUS_INT16"]
+sigTypeOfDBus (D.TypeInt32) = ["DBUS_INT32"]
+sigTypeOfDBus (D.TypeInt64) = ["DBUS_INT64"]
+sigTypeOfDBus (D.TypeWord16) = ["DBUS_UINT16"]
+sigTypeOfDBus (D.TypeWord32) = ["DBUS_UINT32"]
+sigTypeOfDBus (D.TypeWord64) = ["DBUS_UINT64"]
 
---sigTypeOfDBus (D.DBusArray a) = "DBUS_ARRAY" : sigTypeOfDBus a
-fctTypeOfDBus (D.DBusBoolean) = "boolean"
-fctTypeOfDBus (D.DBusByte) = "byte"
-fctTypeOfDBus (D.DBusString) = "string"
-fctTypeOfDBus (D.DBusInt16) = "int16"
-fctTypeOfDBus (D.DBusInt32) = "int32"
-fctTypeOfDBus (D.DBusInt64) = "int64"
-fctTypeOfDBus (D.DBusWord16) = "uint16"
-fctTypeOfDBus (D.DBusWord32) = "uint32"
-fctTypeOfDBus (D.DBusWord64) = "uint64"
+--sigTypeOfDBus (D.TypeArray a) = "DBUS_ARRAY" : sigTypeOfDBus a
+fctTypeOfDBus (D.TypeBoolean) = "boolean"
+fctTypeOfDBus (D.TypeWord8) = "byte"
+fctTypeOfDBus (D.TypeString) = "string"
+fctTypeOfDBus (D.TypeInt16) = "int16"
+fctTypeOfDBus (D.TypeInt32) = "int32"
+fctTypeOfDBus (D.TypeInt64) = "int64"
+fctTypeOfDBus (D.TypeWord16) = "uint16"
+fctTypeOfDBus (D.TypeWord32) = "uint32"
+fctTypeOfDBus (D.TypeWord64) = "uint64"
 
-isArrayType (D.DBusArray _) = True
+isArrayType (D.TypeArray _) = True
 isArrayType _               = False

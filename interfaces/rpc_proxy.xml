@@ -4,7 +4,6 @@
   ~~~~  DBus Interface  ~~~~
   ~~~~~~~~~~~~~~~~~~~~~~~-->
   <interface name="com.citrix.xenclient.rpc_proxy">
-    <tp:docstring/>
     <!--~~~~~~~~~~~~~~~~~~~~~~
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -19,49 +18,34 @@
     </method>
     <method name="validate_call">
       <arg name="domain" type="i" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="destination" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="interface" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="member" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="r" type="b" direction="out">
-        <tp:docstring/>
       </arg>
     </method>
     <method name="validate_recv_signal">
-      <tp:docstring/>
       <arg name="domain" type="i" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="interface" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="member" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="r" type="b" direction="out">
-        <tp:docstring/>
       </arg>
     </method>
     <method name="validate_send_signal">
-      <tp:docstring/>
       <arg name="domain" type="i" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="interface" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="member" type="s" direction="in">
-        <tp:docstring/>
       </arg>
       <arg name="r" type="b" direction="out">
-        <tp:docstring/>
       </arg>
     </method>
   </interface>

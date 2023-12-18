@@ -28,7 +28,7 @@ import qualified Data.Map as M
 import Control.Monad hiding (join)
 import System.IO
 import System.Exit
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import Text.Printf
 import Backend
 import Template
@@ -68,47 +68,47 @@ lookupTemplate name input =
       Just c  -> c
 
 fixedType :: D.Type -> Bool
-fixedType D.DBusBoolean = True
-fixedType D.DBusByte    = True
-fixedType D.DBusInt16   = True
-fixedType D.DBusInt32   = True
-fixedType D.DBusInt64   = True
-fixedType D.DBusWord16  = True
-fixedType D.DBusWord32  = True
-fixedType D.DBusWord64  = True
-fixedType D.DBusDouble  = True
+fixedType D.TypeBoolean = True
+fixedType D.TypeWord8    = True
+fixedType D.TypeInt16   = True
+fixedType D.TypeInt32   = True
+fixedType D.TypeInt64   = True
+fixedType D.TypeWord16  = True
+fixedType D.TypeWord32  = True
+fixedType D.TypeWord64  = True
+fixedType D.TypeDouble  = True
 fixedType _             = False
 
 gtypeFromDBusType :: D.Type -> String
-gtypeFromDBusType D.DBusBoolean    = "gboolean"
-gtypeFromDBusType D.DBusByte       = "guchar"
-gtypeFromDBusType D.DBusInt16      = "gint"
-gtypeFromDBusType D.DBusInt32      = "gint"
-gtypeFromDBusType D.DBusInt64      = "gint64"
-gtypeFromDBusType D.DBusWord16     = "guint16"
-gtypeFromDBusType D.DBusWord32     = "guint"
-gtypeFromDBusType D.DBusWord64     = "guint64"
-gtypeFromDBusType D.DBusDouble     = "gdouble"
-gtypeFromDBusType D.DBusString     = "char*"
-gtypeFromDBusType D.DBusSignature  = "char*"
-gtypeFromDBusType D.DBusObjectPath = "char*"
-gtypeFromDBusType D.DBusVariant    = "GValue*"
-gtypeFromDBusType (D.DBusArray D.DBusString) = "char**"
-gtypeFromDBusType (D.DBusArray t)
+gtypeFromDBusType D.TypeBoolean    = "gboolean"
+gtypeFromDBusType D.TypeWord8       = "guchar"
+gtypeFromDBusType D.TypeInt16      = "gint"
+gtypeFromDBusType D.TypeInt32      = "gint"
+gtypeFromDBusType D.TypeInt64      = "gint64"
+gtypeFromDBusType D.TypeWord16     = "guint16"
+gtypeFromDBusType D.TypeWord32     = "guint"
+gtypeFromDBusType D.TypeWord64     = "guint64"
+gtypeFromDBusType D.TypeDouble     = "gdouble"
+gtypeFromDBusType D.TypeString     = "char*"
+gtypeFromDBusType D.TypeSignature  = "char*"
+gtypeFromDBusType D.TypeObjectPath = "char*"
+gtypeFromDBusType D.TypeVariant    = "GValue*"
+gtypeFromDBusType (D.TypeArray D.TypeString) = "char**"
+gtypeFromDBusType (D.TypeArray t)
                   | fixedType t = "GArray*"
                   | otherwise   = "GPtrArray*"
-gtypeFromDBusType (D.DBusStructure _ )   = "GPtrArray*"
-gtypeFromDBusType (D.DBusDictionary _ _) = "GHashTable*"
+gtypeFromDBusType (D.TypeStructure _ )   = "GPtrArray*"
+gtypeFromDBusType (D.TypeDictionary _ _) = "GHashTable*"
 
 dbusTypeTag :: D.Type -> String
-dbusTypeTag D.DBusBoolean = "DBUS_TYPE_BOOLEAN"
-dbusTypeTag D.DBusString = "DBUS_TYPE_STRING"
-dbusTypeTag D.DBusInt32  = "DBUS_TYPE_INT32"
-dbusTypeTag D.DBusInt64  = "DBUS_TYPE_INT64"
-dbusTypeTag D.DBusWord32 = "DBUS_TYPE_UINT32"
-dbusTypeTag D.DBusWord64 = "DBUS_TYPE_UINT64"
-dbusTypeTag D.DBusDouble = "DBUS_TYPE_DOUBLE"
-dbusTypeTag D.DBusByte   = "DBUS_TYPE_BYTE"
+dbusTypeTag D.TypeBoolean = "DBUS_TYPE_BOOLEAN"
+dbusTypeTag D.TypeString = "DBUS_TYPE_STRING"
+dbusTypeTag D.TypeInt32  = "DBUS_TYPE_INT32"
+dbusTypeTag D.TypeInt64  = "DBUS_TYPE_INT64"
+dbusTypeTag D.TypeWord32 = "DBUS_TYPE_UINT32"
+dbusTypeTag D.TypeWord64 = "DBUS_TYPE_UINT64"
+dbusTypeTag D.TypeDouble = "DBUS_TYPE_DOUBLE"
+dbusTypeTag D.TypeWord8   = "DBUS_TYPE_BYTE"
 dbusTypeTag t            = error $ "not supporting dbus type " ++ show t
 
 cargsFromDBusMethod :: Method -> String
@@ -144,10 +144,10 @@ data GParamSpec = GPS { gpsFunType :: String
 
 gParamSpec :: D.Type -> GParamSpec
 gParamSpec = g where
-  g D.DBusBoolean = GPS "boolean" "FALSE" []
-  g D.DBusInt32 = GPS "int" "INT_MIN, INT_MAX, 0" []
-  g D.DBusWord32 = GPS "uint" "0, UINT_MAX, 0" []
-  g D.DBusString = GPS "string" "\"\"" [FreeRequired]
+  g D.TypeBoolean = GPS "boolean" "FALSE" []
+  g D.TypeInt32 = GPS "int" "INT_MIN, INT_MAX, 0" []
+  g D.TypeWord32 = GPS "uint" "0, UINT_MAX, 0" []
+  g D.TypeString = GPS "string" "\"\"" [FreeRequired]
   g _ = error "unsupported property type"
 
 gParamAccess :: Access -> String
@@ -330,18 +330,18 @@ genServer_ input =
     this = camelise object ++ "Object *this"
 
 enumValueStr :: D.Type -> String -> String
-enumValueStr D.DBusBoolean "true"  = "1"
-enumValueStr D.DBusBoolean "false" = "0"
-enumValueStr D.DBusBoolean s  = error $ "bad boolean enum string: " ++ show s
-enumValueStr D.DBusByte    s  = s
-enumValueStr D.DBusInt16   s  = s
-enumValueStr D.DBusInt32   s  = s
-enumValueStr D.DBusInt64   s  = s
-enumValueStr D.DBusWord16  s  = s
-enumValueStr D.DBusWord32  s  = s
-enumValueStr D.DBusWord64  s  = s
-enumValueStr D.DBusDouble  s  = s
-enumValueStr D.DBusString  s  = (quote s)
+enumValueStr D.TypeBoolean "true"  = "1"
+enumValueStr D.TypeBoolean "false" = "0"
+enumValueStr D.TypeBoolean s  = error $ "bad boolean enum string: " ++ show s
+enumValueStr D.TypeWord8    s  = s
+enumValueStr D.TypeInt16   s  = s
+enumValueStr D.TypeInt32   s  = s
+enumValueStr D.TypeInt64   s  = s
+enumValueStr D.TypeWord16  s  = s
+enumValueStr D.TypeWord32  s  = s
+enumValueStr D.TypeWord64  s  = s
+enumValueStr D.TypeDouble  s  = s
+enumValueStr D.TypeString  s  = (quote s)
 enumValueStr t _ = error $ "unsupported enum type: " ++ show t
 
 declareEnum :: Enumeration -> String
@@ -349,44 +349,44 @@ declareEnum e = values where
       values = join "\n" . map value $ enumValues e
       value v = printf "#define ENUM_%s_%s %s" (enumName e) (enumSuffix v) (enumValueStr (enumType e) (enumValue v))
 
-getter_method D.DBusBoolean = Just "xcdbus_get_property_bool"
-getter_method D.DBusByte    = Just "xcdbus_get_property_byte"
-getter_method D.DBusString  = Just "xcdbus_get_property_string"
-getter_method D.DBusInt32   = Just "xcdbus_get_property_int"
-getter_method D.DBusWord32  = Just "xcdbus_get_property_uint"
-getter_method D.DBusInt64   = Just "xcdbus_get_property_int64"
-getter_method D.DBusWord64  = Just "xcdbus_get_property_uint64"
-getter_method D.DBusDouble  = Just "xcdbus_get_property_double"
+getter_method D.TypeBoolean = Just "xcdbus_get_property_bool"
+getter_method D.TypeWord8    = Just "xcdbus_get_property_byte"
+getter_method D.TypeString  = Just "xcdbus_get_property_string"
+getter_method D.TypeInt32   = Just "xcdbus_get_property_int"
+getter_method D.TypeWord32  = Just "xcdbus_get_property_uint"
+getter_method D.TypeInt64   = Just "xcdbus_get_property_int64"
+getter_method D.TypeWord64  = Just "xcdbus_get_property_uint64"
+getter_method D.TypeDouble  = Just "xcdbus_get_property_double"
 getter_method _ = Nothing -- other types unsupported
 
-setter_method D.DBusBoolean = Just "xcdbus_set_property_bool"
-setter_method D.DBusByte    = Just "xcdbus_set_property_byte"
-setter_method D.DBusString  = Just "xcdbus_set_property_string"
-setter_method D.DBusInt32   = Just "xcdbus_set_property_int"
-setter_method D.DBusWord32  = Just "xcdbus_set_property_uint"
-setter_method D.DBusInt64   = Just "xcdbus_set_property_int64"
-setter_method D.DBusWord64  = Just "xcdbus_set_property_uint64"
-setter_method D.DBusDouble  = Just "xcdbus_set_property_double"
+setter_method D.TypeBoolean = Just "xcdbus_set_property_bool"
+setter_method D.TypeWord8    = Just "xcdbus_set_property_byte"
+setter_method D.TypeString  = Just "xcdbus_set_property_string"
+setter_method D.TypeInt32   = Just "xcdbus_set_property_int"
+setter_method D.TypeWord32  = Just "xcdbus_set_property_uint"
+setter_method D.TypeInt64   = Just "xcdbus_set_property_int64"
+setter_method D.TypeWord64  = Just "xcdbus_set_property_uint64"
+setter_method D.TypeDouble  = Just "xcdbus_set_property_double"
 setter_method _ = Nothing -- other types unsupported
 
-glib_getter_type D.DBusBoolean = Just "gboolean"
-glib_getter_type D.DBusByte    = Just "unsigned char"
-glib_getter_type D.DBusString  = Just "char*"
-glib_getter_type D.DBusInt32   = Just "gint"
-glib_getter_type D.DBusWord32  = Just "guint"
-glib_getter_type D.DBusInt64   = Just "gint64"
-glib_getter_type D.DBusWord64  = Just "guint64"
-glib_getter_type D.DBusDouble  = Just "double"
+glib_getter_type D.TypeBoolean = Just "gboolean"
+glib_getter_type D.TypeWord8    = Just "unsigned char"
+glib_getter_type D.TypeString  = Just "char*"
+glib_getter_type D.TypeInt32   = Just "gint"
+glib_getter_type D.TypeWord32  = Just "guint"
+glib_getter_type D.TypeInt64   = Just "gint64"
+glib_getter_type D.TypeWord64  = Just "guint64"
+glib_getter_type D.TypeDouble  = Just "double"
 glib_getter_type _ = Nothing -- other types unsupported
 
-glib_setter_type D.DBusBoolean = Just "gboolean"
-glib_setter_type D.DBusByte    = Just "unsigned char"
-glib_setter_type D.DBusString  = Just "const char*"
-glib_setter_type D.DBusInt32   = Just "gint"
-glib_setter_type D.DBusWord32  = Just "guint"
-glib_setter_type D.DBusInt64   = Just "gint64"
-glib_setter_type D.DBusWord64  = Just "guint64"
-glib_setter_type D.DBusDouble  = Just "double"
+glib_setter_type D.TypeBoolean = Just "gboolean"
+glib_setter_type D.TypeWord8    = Just "unsigned char"
+glib_setter_type D.TypeString  = Just "const char*"
+glib_setter_type D.TypeInt32   = Just "gint"
+glib_setter_type D.TypeWord32  = Just "guint"
+glib_setter_type D.TypeInt64   = Just "gint64"
+glib_setter_type D.TypeWord64  = Just "guint64"
+glib_setter_type D.TypeDouble  = Just "double"
 glib_setter_type _ = Nothing -- other types unsupported
 
 -- generate client bindings from given xml

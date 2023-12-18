@@ -24,10 +24,10 @@
         <method name="identify">
             <arg name="on" type="b" direction="in"/>
 	    <arg name="name" type="s" direction="in">
-              <tp:docstring>Unused</tp:docstring>
+              <!--Unused-->
 	    </arg>
             <!-- annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/ -->
-            <tp:docstring>Toggles a text box to identify the screen (defaults to the name of the connector the monitor is plugged to)</tp:docstring>
+            <!--Toggles a text box to identify the screen (defaults to the name of the connector the monitor is plugged to)-->
         </method>
 
         <!-- These are for use by laptop screen brightness keyboard controls -->
@@ -53,7 +53,7 @@
 
         <!-- Included for testing purposes only -->
         <method name="exit">
-            <tp:docstring>Exit vglass.</tp:docstring>
+            <!--Exit vglass.-->
         </method>
     </interface>
 </node>

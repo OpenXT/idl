@@ -22,7 +22,7 @@ module Backend.Haskell where
 import Data.List
 import Data.Maybe
 import qualified Data.Text.Lazy as T
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import Text.Printf
 import Backend
 import Tools
@@ -128,30 +128,31 @@ data RmiArg = ArgVariable VariableName
 
 -- | dbus type mapping
 haskellType :: D.Type -> HaskellType
-haskellType D.DBusBoolean    = HaskellType "Bool"
-haskellType D.DBusByte       = HaskellType "Word8"
-haskellType D.DBusInt16      = HaskellType "Int16"
-haskellType D.DBusInt32      = HaskellType "Int32"
-haskellType D.DBusInt64      = HaskellType "Int64"
-haskellType D.DBusWord16     = HaskellType "Word16"
-haskellType D.DBusWord32     = HaskellType "Word32"
-haskellType D.DBusWord64     = HaskellType "Word64"
-haskellType D.DBusDouble     = HaskellType "Double"
-haskellType D.DBusString     = HaskellType "String"
-haskellType D.DBusSignature  = HaskellType "String"
-haskellType D.DBusObjectPath = HaskellType "ObjectPath"
-haskellType D.DBusVariant    = HaskellType "Variant"
-haskellType (D.DBusArray D.DBusByte) = HaskellType "B.ByteString"
-haskellType (D.DBusArray t)  = HaskellType $ printf "[%s]" (haskellTypeStr $ haskellType t)
-haskellType (D.DBusDictionary k v) =
+haskellType D.TypeBoolean    = HaskellType "Bool"
+haskellType D.TypeWord8       = HaskellType "Word8"
+haskellType D.TypeInt16      = HaskellType "Int16"
+haskellType D.TypeInt32      = HaskellType "Int32"
+haskellType D.TypeInt64      = HaskellType "Int64"
+haskellType D.TypeWord16     = HaskellType "Word16"
+haskellType D.TypeWord32     = HaskellType "Word32"
+haskellType D.TypeWord64     = HaskellType "Word64"
+haskellType D.TypeDouble     = HaskellType "Double"
+haskellType D.TypeString     = HaskellType "String"
+haskellType D.TypeSignature  = HaskellType "String"
+haskellType D.TypeObjectPath = HaskellType "ObjectPath"
+haskellType D.TypeVariant    = HaskellType "Variant"
+haskellType D.TypeUnixFd     = HaskellType "CInt"
+haskellType (D.TypeArray D.TypeWord8) = HaskellType "B.ByteString"
+haskellType (D.TypeArray t)  = HaskellType $ printf "[%s]" (haskellTypeStr $ haskellType t)
+haskellType (D.TypeDictionary k v) =
     HaskellType $ printf "(Map.Map %s %s)" (haskellTypeStr tk) (haskellTypeStr tv)
     where tk = haskellType k
           tv = haskellType v
 -- | FIXME: Commented code below does not compile. Handling as a String to silence
 -- |        compiler warning for unlinked modules. Must be fixed to use structs in
 -- |        a Haskell-based utility
-haskellType (D.DBusStructure ts) = HaskellType "String"
--- haskellType (D.DBusStructure ts) =
+haskellType (D.TypeStructure ts) = HaskellType "String"
+-- haskellType (D.TypeStructure ts) =
 --    HaskellType $ printf "(%s)" (join ", " $ map (haskellTypeStr . haskellType) ts)
 
 -- to avoid clashes we suffix param names
@@ -230,8 +231,8 @@ getterInvocation i p =
             [ ArgExp . Expression $ printf "toVariant %s" (quote (interfaceNameStr interface_name))
             , ArgExp . Expression $ printf "toVariant %s" (quote $ propertyName p) ]
         , rmiArgTypes =
-            [ DBusType D.DBusString
-            , DBusType D.DBusString ]
+            [ DBusType D.TypeString
+            , DBusType D.TypeString ]
         , rmiReturnTypes =
             [ VariantBoxedDBusType . propertyType $ p ]
         }
@@ -246,8 +247,8 @@ setterInvocation i p =
             , ArgExp . Expression $ printf "toVariant %s" (quote $ propertyName p)
             , ArgVariable . VariableName $ "value" ]
         , rmiArgTypes =
-            [ DBusType D.DBusString
-            , DBusType D.DBusString
+            [ DBusType D.TypeString
+            , DBusType D.TypeString
             , VariantBoxedDBusType (propertyType p) ]
         , rmiReturnTypes = [ ]
         }
@@ -333,18 +334,18 @@ enumValueFun e ev = Function hdr (enumValueExp (enumType e) (enumValue ev)) wher
           }
 
 enumValueExp :: D.Type -> String -> Expression
-enumValueExp D.DBusBoolean "true"  = Expression "True"
-enumValueExp D.DBusBoolean "false" = Expression "False"
-enumValueExp D.DBusBoolean s  = error $ "bad boolean enum string: " ++ show s
-enumValueExp D.DBusByte    s  = Expression s
-enumValueExp D.DBusInt16   s  = Expression s
-enumValueExp D.DBusInt32   s  = Expression s
-enumValueExp D.DBusInt64   s  = Expression s
-enumValueExp D.DBusWord16  s  = Expression s
-enumValueExp D.DBusWord32  s  = Expression s
-enumValueExp D.DBusWord64  s  = Expression s
-enumValueExp D.DBusDouble  s  = Expression s
-enumValueExp D.DBusString  s  = Expression (quote s)
+enumValueExp D.TypeBoolean "true"  = Expression "True"
+enumValueExp D.TypeBoolean "false" = Expression "False"
+enumValueExp D.TypeBoolean s  = error $ "bad boolean enum string: " ++ show s
+enumValueExp D.TypeWord8    s  = Expression s
+enumValueExp D.TypeInt16   s  = Expression s
+enumValueExp D.TypeInt32   s  = Expression s
+enumValueExp D.TypeInt64   s  = Expression s
+enumValueExp D.TypeWord16  s  = Expression s
+enumValueExp D.TypeWord32  s  = Expression s
+enumValueExp D.TypeWord64  s  = Expression s
+enumValueExp D.TypeDouble  s  = Expression s
+enumValueExp D.TypeString  s  = Expression (quote s)
 enumValueExp t _ = error $ "unsupported enum type: " ++ show t
 
 enumValueFuns :: [Enumeration] -> [Function]
@@ -575,14 +576,14 @@ declExportMethod m@(interface,method) =
     outargs    = join "," . map param $ methodOutParams method
     param p | null (parameterName p)   = typecode p
             | otherwise                = parameterName p ++ ":" ++ typecode p
-    typecode p                         = T.unpack $ D.typeCode (parameterType p)
+    typecode p                         = D.typeCode (parameterType p)
 
 declExportProperty :: (Interface,Property) -> Expression
 declExportProperty p@(interface,property) =
     Expression $ printf "rpcProperty %s %s %s" (quote pname) (quote typename) access
   where
     pname         = propertyName property
-    typename      = T.unpack $ D.typeCode (propertyType property)
+    typename      = D.typeCode (propertyType property)
     access        = case propertyAccess property of
                       Read -> "Read"
                       Write -> "Write"

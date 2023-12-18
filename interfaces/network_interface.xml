@@ -8,19 +8,19 @@
     ~~~~  DBus Methods    ~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~-->
     <method name="is_wireless">
-      <tp:docstring>Returns true if the interface is wireless.</tp:docstring>
+      <!--Returns true if the interface is wireless.-->
       <arg type="b" name="is_wireless" direction="out"/>
     </method>
     <method name="list_bridges">
-      <tp:docstring>Lists the bridges to connect to use this interface.</tp:docstring>
+      <!--Lists the bridges to connect to use this interface.-->
       <arg type="a{ss}" name="bridges" direction="out"/>
     </method>
     <method name="mac_address">
-      <tp:docstring>Returns the MAC address of the interface.</tp:docstring>
+      <!--Returns the MAC address of the interface.-->
       <arg type="s" name="mac" direction="out"/>
     </method>
     <method name="name">
-      <tp:docstring>Returns the name of the inteface.</tp:docstring>
+      <!--Returns the name of the inteface.-->
       <arg type="s" name="name" direction="out"/>
     </method>
   </interface>

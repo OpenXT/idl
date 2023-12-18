@@ -22,7 +22,7 @@ module Backend.Javascript where
 import Data.List
 import Data.Maybe
 import qualified Data.Text.Lazy as T
-import qualified DBus.Types as D
+import qualified DBus.Internal.Types as D
 import Text.Printf
 import Backend
 import Tools
@@ -147,18 +147,18 @@ interfaceRefs intfs = join ", " . map ref $ intfs where
     ref intf = ("this."++) . replace "." "_" $ interfaceName intf
 
 enumValueStr :: D.Type -> String -> String
-enumValueStr D.DBusBoolean "true"  = "true"
-enumValueStr D.DBusBoolean "false" = "false"
-enumValueStr D.DBusBoolean s  = error $ "bad boolean enum string: " ++ show s
-enumValueStr D.DBusByte    s  = s
-enumValueStr D.DBusInt16   s  = s
-enumValueStr D.DBusInt32   s  = s
-enumValueStr D.DBusInt64   s  = s
-enumValueStr D.DBusWord16  s  = s
-enumValueStr D.DBusWord32  s  = s
-enumValueStr D.DBusWord64  s  = s
-enumValueStr D.DBusDouble  s  = s
-enumValueStr D.DBusString  s  = (quote s)
+enumValueStr D.TypeBoolean "true"  = "true"
+enumValueStr D.TypeBoolean "false" = "false"
+enumValueStr D.TypeBoolean s  = error $ "bad boolean enum string: " ++ show s
+enumValueStr D.TypeWord8    s  = s
+enumValueStr D.TypeInt16   s  = s
+enumValueStr D.TypeInt32   s  = s
+enumValueStr D.TypeInt64   s  = s
+enumValueStr D.TypeWord16  s  = s
+enumValueStr D.TypeWord32  s  = s
+enumValueStr D.TypeWord64  s  = s
+enumValueStr D.TypeDouble  s  = s
+enumValueStr D.TypeString  s  = (quote s)
 enumValueStr t _ = error $ "unsupported enum type: " ++ show t
 
 declareEnum :: String -> Enumeration -> String
